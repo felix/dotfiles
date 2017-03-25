@@ -1,0 +1,37 @@
+[user]
+    name = Felix Hanley
+    email = felix@userspace.com.au
+[core]
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    excludesfile = /home/felix/.gitignore.global
+[alias]
+    st = status --short
+    ci = commit
+    br = branch
+    co = checkout
+    df = diff
+    lg = log -p
+    stl = !"git log | grep git-subtree-dir | awk '{ print $2 }'"
+    sta = !"f() { git subtree add --squash --prefix=$2 $1 master; }; f"
+    stu = "!f() { git subtree pull --squash --prefix=$2 $1 master; }; f"
+[color]
+    ui = true
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[branch]
+    autosetupmerge = true
+[github]
+    user = felix
+[gui]
+    spellingdictionary = none
+[mergetool "gvimdiff3"]
+    cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[mergetool "vimdiff3"]
+    cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[merge]
+    #tool = vimdiff3
+    tool = meld
+[push]
+    default = simple

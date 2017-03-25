@@ -1,0 +1,42 @@
+music_directory     "/home/felix/Music"
+#music_directory    "smb://zappa.yelnah/music"
+#music_directory    "nfs://zappa.yelnah/mnt/music"
+playlist_directory  "/home/felix/Music/playlists"
+db_file             "/home/felix/.mpd/mpd.db"
+log_file            "/home/felix/.mpd/mpd.log"
+pid_file            "/home/felix/.mpd/mpd.pid"
+state_file          "/home/felix/.mpd/mpdstate"
+sticker_file        "/home/felix/.mpd/sticker.db"
+#user               "felix"
+#group              "users"
+bind_to_address     "127.0.0.1"
+#bind_to_address    "/home/felix/.mpd/mpd.sock"
+replaygain          "track"
+mixer_type          "software"
+#log_level          "verbose"
+
+audio_output {
+    type            "httpd"
+    name            "Radio Felix"
+    encoder         "vorbis"
+    port            "8000"
+    quality         "5.0"
+    format          "44100:16:1"
+    always_on       "yes"
+    tags            "yes"
+}
+#audio_output {
+#    type            "fifo"
+#    name            "my_fifo"
+#    path            "/tmp/mpd.fifo"
+#    format          "44100:16:2"
+#}
+audio_output {
+    type "oss"
+#    type "alsa"
+    name "default"
+}
+#database {
+#    plugin "proxy"
+#    host "music.yelnah"
+#}

@@ -1,0 +1,4 @@
+set ssl:verify-certificate no
+set ftp:list-options "-a"
+#set ftp:ssl-allow no
+set ftp:passive-mode no

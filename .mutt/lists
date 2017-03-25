@@ -1,0 +1,38 @@
+set followup_to
+set honor_followup_to=yes
+
+lists misc@openbsd.org \
+dev-crypto@bouncycastle.org \
+debian-announce \
+debian-isp \
+debian-security-announce \
+debian-stable-announce \
+debian-backports-announce \
+debian-security \
+announce@openbsd.org \
+ports@openbsd.org \
+discuss@lists.opennicproject.org \
+dns-operations@lists.opennicproject.org \
+freebsd-x11@freebsd.org \
+freebsd-current@freebsd.org \
+x11@FreeBSD.org \
+reports@lists.opennicproject.org
+
+subscribe misc@openbsd.org \
+dev-crypto@bouncycastle.org \
+debian-isp \
+debian-security-announce \
+debian-announce \
+debian-stable-announce \
+debian-backports-announce \
+debian-security \
+announce@openbsd.org \
+ports@openbsd.org \
+discuss@lists.opennicproject.org \
+dns-operations@lists.opennicproject.org \
+freebsd-x11@freebsd.org \
+freebsd-current@freebsd.org \
+x11@FreeBSD.org \
+reports@lists.opennicproject.org
+
+#  vim: set ts=4 sw=2 tw=80 ft=muttrc fdm=syntax:

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+cache="$HOME/.cache/dmenu_cache"
+recent="$HOME/.cache/dmenu_recent"
+
+touch $recent
+most_used=`sort $recent 2>/dev/null | uniq -c | sort -rn | awk '{print $2}'`
+
+# prime the executable cache if older than a day
+if [ ! -f "$cache" ] || test `find "$cache" -mtime +1`; then
+    find -L $(echo $PATH |sed -e 's/\:/\ /g') -maxdepth 1 -perm -o+x -type f -print |xargs basename -a |sort -u >$cache
+fi
+
+# combine the recent with cache and pass to dmenu
+run=`(echo "$most_used"; cat "$cache" | grep -vxF "$most_used") | dmenu -l 10 -p Run: "$@"` || exit
+# clean recent
+(echo $run; head -n 99 $recent 2>/dev/null) > $recent.$$ && mv $recent.$$ $recent
+
+# run with shell if terminated with semi-colon
+case $run in
+    *\;) ${SHELL:-"/bin/sh"} ${run/;/} &
+        ;;
+    *)   $run &
+        ;;
+esac
+
+exit 0

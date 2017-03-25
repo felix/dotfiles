@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "Cleaning..."
+metaflac --remove --block-type=PICTURE --dont-use-padding *.flac
+echo "Defragmenting..."
+metaflac --sort-padding *.flac
+echo "Adding replay-gain and re-compressing..."
+flac --best --replay-gain --force --no-preserve-modtime *.flac

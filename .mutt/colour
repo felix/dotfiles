@@ -1,0 +1,88 @@
+# basic colors
+#                   fg              bg
+color normal        white           default
+color error         red             default
+color tilde         black           default
+color message       cyan            default
+color markers       red             white
+color attachment    white           default
+color search        brightmagenta   default
+color status        brightyellow    black
+color indicator     black           yellow
+color tree          yellow          default                                     # arrow in threads
+
+# basic monocolor screen
+
+mono  bold          bold
+mono  underline     underline
+mono  indicator     reverse
+mono  error         bold
+
+# index
+# see http://www.mutt.org/doc/manual/manual-4.html#ss4.2 for filters
+
+color index         blue            default         "~U"                        # unread messages
+color index         yellow          default         "~P"                        # messages from me
+color index         cyan            default         "~F"                        # flagged messages
+color index         cyan            default         "~F~p"                      # flagged messages to me
+color index         red             default         "~D"                        # deleted messages
+#color index         green           default         "~g"                        # gpg signed
+#color index         green           default         "~G"                        # gpg encrypted
+color index         default         yellow          "~T"                        # tagged messages
+# messages which mention my name in the body
+#color index         yellow          default         "~b \"felix([_. ]hanley)?|fhanley|xilef|yelnah\" !~N !~T !~F !~p !~P"
+
+# message headers
+
+color hdrdefault    brightgreen     default
+color header        brightyellow    default         "^From"
+color header        red             default         "^To"
+color header        blue            default         "^Subject"
+color header        green           default         "^Date"
+color header        brightgreen     default         "^Reply-to"
+color header        green           default         "^(X-Mailer|User-Agent)"
+color header        red             default         "^Received-spf: unknown"
+
+# body
+
+color quoted        blue            default
+color quoted1       cyan            default
+color quoted2       yellow          default
+color quoted3       red             default
+color quoted4       brightred       default
+
+color signature     brightgreen     default
+color bold          black           default
+color underline     black           default
+color normal        default         default
+# highlight my name and other personally relevant strings
+color body          yellow          default         "(felix|hanley|xilef|yelnah)"
+# markdownish
+color body          brightcyan      default         "[ ][*_]{1,2}[a-zA-Z0-9]+[ ]?[a-zA-Z0-9][*_]{1,2}[ ]"
+# diffs
+color body          green           default         "^diff \-.*"
+color body          green           default         "^index [a-f0-9].*"
+color body          green           default         "^\-\-\- .*"
+color body          green           default         "^[\+]{3} .*"
+color body          cyan            default         "^[\+][^\+]+.*"
+color body          red             default         "^\-[^\-]+.*"
+color body          brightblue      default         "^@@ .*"
+# money
+color body          brightcyan      default         "[$][0-9]+(\.[0-9]+)?"
+# emoticons
+color body          brightcyan      default         "[;:][-o][)/(|]"
+color body          brightcyan      default         "[;:][)(|]"
+color body          brightcyan      default         "[ ][*][^*]*[*][ ]?"
+color body          brightcyan      default         "[ ]?[*][^*]*[*][ ]"
+# gpg
+color body          red             default         "(BAD signature)"
+color body          cyan            default         "(Good signature)"
+color body          brightblack     default         "^gpg: Good signature .*"
+color body          brightyellow    default         "^gpg: "
+color body          brightyellow    red             "^gpg: BAD signature from.*"
+mono  body          bold                            "^gpg: Good signature"
+mono  body          bold                            "^gpg: BAD signature from.*"
+# tenshi
+color body          brightcyan      default         "[DS]PT=([0-9]+)"
+
+#  vim: set ts=4 sw=4 tw=80 ft=muttrc fdm=manual et fen :

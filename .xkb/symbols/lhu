@@ -1,0 +1,16 @@
+partial default alphanumeric_keys
+xkb_symbols "basic" {
+
+    // adds the Lahu tone characters to the basic keyboard
+
+    include "latin"
+
+    name[Group1]= "Lahu";
+
+    // key <AD11> { [ UF1E7,  U02C6,  bracketleft,   braceleft  ] };
+    key <AD11> { [ U02F0,  U02C6,  bracketleft,   braceleft  ] };
+    key <AD12> { [ U02EC,  U02C7,  bracketright,  braceright ] };
+    key <BKSL> { [ U02CD,  U02C9,  backslash,     brokenbar  ] };
+
+    include "level3(ralt_switch_multikey)"
+};
