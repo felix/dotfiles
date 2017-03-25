@@ -1,0 +1,9 @@
+#!/usr/bin/ruby -w
+
+puts "sendmail called with these arguments:"
+puts ARGV.join(' ')
+data = $stdin.read
+
+outfile = File.new("/tmp/sendmail-#{Time.now.to_s.gsub(' ','_')}.txt", 'w+')
+outfile.write(data)
+outfile.close

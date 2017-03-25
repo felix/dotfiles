@@ -1,0 +1,4 @@
+#!/bin/sh
+
+#i3lock -e -d -c 000000
+xlock -mode rain
