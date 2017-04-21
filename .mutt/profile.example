@@ -1,0 +1,32 @@
+# Source these first
+source ~/.mutt/profile.common
+
+# IMAP
+set imap_user=felix@example
+set imap_pass=`pass example/mail.example`
+set folder=imap://mail.example
+set spoolfile='=INBOX'
+set trash='=Trash'
+mailboxes
+
+# Local
+set folder='~/Mail/example/'
+set spoolfile='=Inbox'
+set trash="=Deleted\ Items"
+mailboxes `find ~/Mail/example/ -mindepth 1 -maxdepth 1 -type d -name "Trash" -prune -o -name "*" -exec basename '{}' \; |xargs printf "+%s "`
+
+set signature=~/.mutt/signature.example
+set postponed='=Drafts'
+set record='=Sent'
+set my_gpg_key='AAAAAA'
+set from='Felix Hanley <fhanley@example>'
+
+my_hdr Reply-To: fhanley@example
+my_hdr Organization: example, http://example
+set status_format = "-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-example%>-(%P)---"
+color status red black
+
+# Source these last
+source ~/.mutt/gpg
+
+# vim: set ft=muttrc:

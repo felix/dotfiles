@@ -1,10 +1,8 @@
-#unset preconnect imap_user imap_pass imap_authenticators
+unset preconnect imap_user imap_pass imap_authenticators
 unset folder
-unset from
-unset record
+unset from trash spoolfile record postponed
 unset signature
-unset postponed
-unset pgp_sign_as
+unset crypt_autosign pgp_sign_as
 unmy_hdr Organization
 unmy_hdr X-PGP-Key
 color status green black

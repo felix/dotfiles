@@ -1,22 +1,11 @@
 set pgp_sign_as=$my_gpg_key
 
 set crypt_use_gpgme = yes
-set crypt_autosign=yes
+#set crypt_autosign=yes
 set crypt_replysign = yes
 set crypt_replyencrypt = yes
 set crypt_replysignencrypted = yes
 
 set pgp_good_sign="^\\[GNUPG:\\] GOODSIG"
-
-# need patch for this
-#set pgp_mime_signature_filename="signature.asc"
-#set pgp_mime_signature_description="Digital Signature"
-
-# http://www.phildev.net/pgp/pgp_clear_vs_mime.html
-#set pgp_create_traditional=yes
-#set pgp_autoinline
-
-# move inline message into pgp-mime
-# message-hook '!~g !~G ~b "^-----BEGIN PGP (SIGNED )?MESSAGE"' "exec check-traditional-pgp"
 
 #  vim: set ts=4 sw=2 tw=80 ft=muttrc fdm=manual:
