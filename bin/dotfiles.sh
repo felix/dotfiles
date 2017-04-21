@@ -75,6 +75,47 @@ get_diff() {
     fi
 }
 
+realpath() {
+    canonicalize_path "$(resolve_symlinks "$1")"
+}
+
+resolve_symlinks() {
+    local dir_context path
+    path=$(readlink -- "$1")
+    if [ $? -eq 0 ]; then
+        dir_context=$(dirname -- "$1")
+        resolve_symlinks "$(_prepend_path_if_relative "$dir_context" "$path")"
+    else
+        printf '%s\n' "$1"
+    fi
+}
+
+_prepend_path_if_relative() {
+    case "$2" in
+        /* ) printf '%s\n' "$2" ;;
+         * ) printf '%s\n' "$1/$2" ;;
+    esac 
+}
+
+canonicalize_path() {
+    if [ -d "$1" ]; then
+        _canonicalize_dir_path "$1"
+    else
+        _canonicalize_file_path "$1"
+    fi
+}   
+
+_canonicalize_dir_path() {
+    (cd "$1" 2>/dev/null && pwd -P) 
+}           
+
+_canonicalize_file_path() {
+    local dir file
+    dir=$(dirname -- "$1")
+    file=$(basename -- "$1")
+    (cd "$dir" 2>/dev/null && printf '%s/%s\n' "$(pwd -P)" "$file")
+}
+
 # updates a link from the dotfiles src
 # to the home directory
 # $1 the file within the dotfile directory
@@ -120,7 +161,7 @@ scan() {
                 # if src is also a link, don't dereference it
                 local srclink=$HOME/$(readlink -n "$src")
             else
-                local destlink=$(readlink -f $destlink) 
+                local destlink=$(realpath "$destlink")
                 local srclink="$src"
             fi
             if [ "$destlink" == "$srclink" ]; then
@@ -160,7 +201,7 @@ cleanup() {
     # each directory in dotfiles
     for directory in `find . \( -name .git -o -name .hg \) -prune -o -type d -print`; do
         if [[ $directory != '.' && $directory != '..' ]]; then
-            local dir=$(realpath $HOME/$directory)
+            local dir=$(realpath "$HOME/$directory")
             # note depth and confirmation!
             [[ -z $DRYRUN ]] && find $dir -maxdepth 1 -type l -xtype l -ok rm '{}' \;
         fi
@@ -202,7 +243,7 @@ main() {
     if [ -z $DOTFILES ]; then 
         DOTFILES=$HOME/src/dotfiles
     fi
-    DOTFILES=$(readlink -nf ${DOTFILES%/})
+    DOTFILES=$(realpath "${DOTFILES%/}")
 
     # collect output
     declare STATUS=""
