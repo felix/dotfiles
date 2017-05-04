@@ -2,6 +2,13 @@
 
 # Author: Felix Hanley <felix@userspace.com.au>
 
+readlink=$(which readlink)
+[[ -z $readlink ]] && echo "Missing readlink, cannot continue."
+dirname=$(which dirname)
+[[ -z $dirname ]] && echo "Missing dirname, cannot continue."
+realpath=$(which realpath)
+[[ -z $realpath ]] && echo "Missing realpath, cannot continue."
+
 # show usage
 #
 usage() {
@@ -39,7 +46,7 @@ create_link() {
     STATUS+=": linking"
     if [ -h $src ]; then
         # the dotfile itself is a link, copy it
-        src="$HOME/$(readlink -n "$src")"
+        src="$HOME/$($readlink -n "$src")"
     fi
     [[ -z $DRYRUN ]] && ln -s -f "$src" "$dest"
 }
@@ -81,9 +88,9 @@ realpath() {
 
 resolve_symlinks() {
     local dir_context path
-    path=$(readlink -- "$1")
+    path=$($readlink -- "$1")
     if [ $? -eq 0 ]; then
-        dir_context=$(dirname -- "$1")
+        dir_context=$($dirname -- "$1")
         resolve_symlinks "$(_prepend_path_if_relative "$dir_context" "$path")"
     else
         printf '%s\n' "$1"
@@ -94,7 +101,7 @@ _prepend_path_if_relative() {
     case "$2" in
         /* ) printf '%s\n' "$2" ;;
          * ) printf '%s\n' "$1/$2" ;;
-    esac 
+    esac
 }
 
 canonicalize_path() {
@@ -103,15 +110,15 @@ canonicalize_path() {
     else
         _canonicalize_file_path "$1"
     fi
-}   
+}
 
 _canonicalize_dir_path() {
-    (cd "$1" 2>/dev/null && pwd -P) 
-}           
+    (cd "$1" 2>/dev/null && pwd -P)
+}
 
 _canonicalize_file_path() {
     local dir file
-    dir=$(dirname -- "$1")
+    dir=$($dirname -- "$1")
     file=$(basename -- "$1")
     (cd "$dir" 2>/dev/null && printf '%s/%s\n' "$(pwd -P)" "$file")
 }
@@ -156,12 +163,12 @@ scan() {
         if [ -h "$dest" ]; then
             # symlink
 
-            local destlink=$(readlink -n "$dest")
+            local destlink=$($readlink -n "$dest")
             if [ -h $src ]; then
                 # if src is also a link, don't dereference it
-                local srclink=$HOME/$(readlink -n "$src")
+                local srclink=$HOME/$($readlink -n "$src")
             else
-                local destlink=$(realpath "$destlink")
+                local destlink=$($realpath "$destlink")
                 local srclink="$src"
             fi
             if [ "$destlink" == "$srclink" ]; then
@@ -184,8 +191,8 @@ scan() {
 
     else
         # missing, create path maybe
-        local directory=`dirname $dest`
-        [[ -z $DRYRUN ]] && [ ! -d $directory ] && mkdir -p $(dirname $dest) > /dev/null
+        local directory=$($dirname $dest)
+        [[ -z $DRYRUN ]] && [ ! -d $directory ] && mkdir -p $($dirname $dest) > /dev/null
         STATUS+=": missing -> "
         # continue
     fi
@@ -201,7 +208,7 @@ cleanup() {
     # each directory in dotfiles
     for directory in `find . \( -name .git -o -name .hg \) -prune -o -type d -print`; do
         if [[ $directory != '.' && $directory != '..' ]]; then
-            local dir=$(realpath "$HOME/$directory")
+            local dir=$($realpath "$HOME/$directory")
             # note depth and confirmation!
             [[ -z $DRYRUN ]] && find $dir -maxdepth 1 -type l -xtype l -ok rm '{}' \;
         fi
@@ -240,10 +247,10 @@ main() {
 
     # default dotfiles path
     declare DOTFILES=$1
-    if [ -z $DOTFILES ]; then 
+    if [ -z $DOTFILES ]; then
         DOTFILES=$HOME/src/dotfiles
     fi
-    DOTFILES=$(realpath "${DOTFILES%/}")
+    DOTFILES=$($realpath "${DOTFILES%/}")
 
     # collect output
     declare STATUS=""
