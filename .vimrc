@@ -38,19 +38,19 @@ call plug#begin('~/.vim/plugged')
 Plug 'jlanzarotta/bufexplorer'
 Plug 'altercation/vim-colors-solarized'
 Plug 'godlygeek/tabular'
+Plug 'ervandew/supertab'
+Plug 'scrooloose/syntastic'
 Plug 'jamessan/vim-gnupg'
+Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go'
 Plug 'pangloss/vim-javascript'
-Plug 'ervandew/supertab'
 Plug 'plasticboy/vim-markdown'
 Plug 'pearofducks/ansible-vim'
-Plug 'scrooloose/syntastic'
-Plug 'slim-template/vim-slim'
 Plug 'tmatilai/gitolite.vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'tpope/vim-fugitive'
-Plug 'rust-lang/rust.vim'
 Plug 'cmcaine/vim-uci'
+Plug 'lervag/vimtex'
+Plug 'slim-template/vim-slim'
 call plug#end()
 
 
@@ -139,3 +139,4 @@ autocmd Filetype mail setlocal nohlsearch spell spelllang=en_au
 autocmd Filetype markdown setlocal spell spelllang=en_au
 autocmd Filetype ruby setlocal ts=2 sw=2
 autocmd BufRead,BufNewFile *.deface setlocal ft=html
+autocmd BufRead,BufNewFile *.pug setlocal ft=slim
