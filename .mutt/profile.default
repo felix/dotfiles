@@ -1,18 +1,22 @@
 source ~/.mutt/profile.common
 
+# IMAP
 set imap_user=felix@userspace.com.au
 set imap_pass=`pass userspace/mail.userspace.com.au`
-
-# Local
-#set folder='~/Mail/userspace/'
-#set spoolfile='=Inbox'
 set folder=imap://mail.userspace.com.au/
 set spoolfile='=INBOX'
 set trash='=Trash'
 mailboxes
+
+# Local
+#set folder='~/Mail/userspace/'
+#set spoolfile='=Inbox'
 #mailboxes `find ~/Mail/userspace/ -mindepth 1 -maxdepth 1 -type d -name "Trash" -prune -o -name "*" -exec basename '{}' \; |xargs printf "+%s "`
 
-set signature=~/.mutt/signature.userspace
+send-hook . 'set signature=~/.mutt/signature.userspace'
+send-hook . 'set crypt_autosign=yes'
+send-hook ~l 'unset signature'
+send-hook ~l 'unset crypt_autosign'
 set postponed='=Drafts'
 set record='=Sent'
 set my_gpg_key='7E20D10B'
