@@ -84,7 +84,8 @@ xterm*scrollKey:            true
 xterm*scrollTtyOutput:      false
 xterm*scrollBar:            false
 xterm*loginShell:           true
-xterm*locale:               true
+!xterm*locale:               true
+xterm*locale:               utf8
 xterm*jumpScroll:           true
 xterm*multiScroll:          true
 !xterm*toolBar:             false
