@@ -8,7 +8,7 @@ most_used=`sort $recent 2>/dev/null | uniq -c | sort -rn | awk '{print $2}'`
 
 # prime the executable cache if older than a day
 if [ ! -f "$cache" ] || test `find "$cache" -mtime +1`; then
-    find -L $(echo $PATH |sed -e 's/\:/\ /g') -maxdepth 1 -perm -o+x -type f -print |xargs basename -a |sort -u >$cache
+    find -L $(echo $PATH |sed -e 's/\:/\ /g') -maxdepth 1 -perm -o+x -type f -exec basename '{}' \; |sort -u >$cache
 fi
 
 # combine the recent with cache and pass to dmenu
