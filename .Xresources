@@ -13,12 +13,12 @@
 #define S_base2         #eee8d5
 #define S_base3         #fdf6e3
 
-xterm*background:            S_base03
-xterm*foreground:            S_base0
-xterm*fadeColor:             S_base03
-xterm*cursorColor:           S_base1
-xterm*pointerColorBackground:S_base01
-xterm*pointerColorForeground:S_base1
+*background:            S_base03
+*foreground:            S_base0
+*fadeColor:             S_base03
+*cursorColor:           S_base1
+*pointerColorBackground:S_base01
+*pointerColorForeground:S_base1
 
 #define S_yellow        #b58900
 #define S_orange        #cb4b16
@@ -30,44 +30,44 @@ xterm*pointerColorForeground:S_base1
 #define S_green         #859900
 
 !! black dark/light
-xterm*color0:                S_base02
+*color0:                S_base02
 !xterm*color8:                S_base03
-xterm*color8:                S_base01
+*color8:                S_base01
 
 !! red dark/light
-xterm*color1:                S_red
-xterm*color9:                S_orange
+*color1:                S_red
+*color9:                S_orange
 
 !! green dark/light
-xterm*color2:                S_green
-xterm*color10:               S_base01
+*color2:                S_green
+*color10:               S_base01
 
 !! yellow dark/light
-xterm*color3:                S_yellow
-xterm*color11:               S_base00
+*color3:                S_yellow
+*color11:               S_base00
 
 !! blue dark/light
-xterm*color4:                S_blue
-xterm*color12:               S_base0
+*color4:                S_blue
+*color12:               S_base0
 
 !! magenta dark/light
-xterm*color5:                S_magenta
-xterm*color13:               S_violet
+*color5:                S_magenta
+*color13:               S_violet
 
 !! cyan dark/light
-xterm*color6:                S_cyan
-xterm*color14:               S_base1
+*color6:                S_cyan
+*color14:               S_base1
 
 !! white dark/light
-xterm*color7:                S_base2
-xterm*color15:               S_base3
+*color7:                S_base2
+*color15:               S_base3
 
 
 ! xterm ----------------------------------------------------------------------
 
 xterm*termName:             xterm-256color
 !xterm*font:                -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
-xterm*font:                 -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1
+*font:                 -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1
 xterm*boldFont:             -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1
 xterm*wideFont:             -misc-fixed-medium-r-normal-ja-*-*-*-*-*-*-iso10646-1
 !xterm*faceName:            Free Mono:size=12
