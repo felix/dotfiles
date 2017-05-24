@@ -1,22 +1,4 @@
 
-#export JAVA_HOME="/usr/lib/jvm/openjdk"
-#export JAVA_HOME="/usr/lib/jvm/jdk1.8.0_101"
-export JAVA_HOME="/usr/local/openjdk8"
-#export JAVA_HOME="/usr/local/openjdk7"
-export PATH="$HOME/bin:$HOME/.node/bin:$PATH"
-export GOPATH=$HOME
-export XML_CATALOG_FILES=/home/felix/src/XMLCatalog/catalog.xml
-export LC_ALL=en_AU.UTF-8
-
-export VISUAL=vim
-export EDITOR=$VISUAL
-export PAGER=less
-export BROWSER=firefox
-GIT_EDITOR=vim
-GZIP=-9
-GREP_OPTIONS='-d skip'
-#export XDG_RUNTIME_DIR=/run/user/$(id -u)
-
 
 ## Options
 
@@ -192,5 +174,3 @@ if [ -e /usr/local/share/chruby/chruby.sh ]; then
     source /usr/local/share/chruby/chruby.sh
     source /usr/local/share/chruby/auto.sh
 fi
-
-export PATH="$HOME/.yarn/bin:$PATH"
