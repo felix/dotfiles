@@ -3,38 +3,31 @@ hostname=`hostname -s`
 # load resources, to be sure
 xrdb -merge $HOME/.Xresources
 
-# screen standby
 xset dpms 300 1800 3600
-# no screen saver
 xset s off
-# turn off bell
 xset -b
-
-# set background
 xsetroot -solid "#000000"
 
-# source local fonts too
+# Source local fonts too
 [ -d ~/.fonts ] && xset +fp ~/.fonts/
 
-# add thai and lahu keyboards
+# Add thai and lahu keyboards
 setxkbmap -I$HOME/.xkb -option grp:shifts_toggle,grp_led:scroll "us,th,lhu" -print | xkbcomp -I$HOME/.xkb - $DISPLAY
 #setxkbmap -I$HOME/.xkb -option grp:shifts_toggle,grp_led:scroll "us,th" -print | xkbcomp -I$HOME/.xkb - $DISPLAY
 
-# second screen
+# Second screen
 if [ -x `which xrandr` ]; then
     xrandr --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output LVDS1 --mode 1366x768 --pos 232x1080 --rotate normal --output DP1 --off --output VGA1 --off &
 fi
 
-# screen locker
+# Screen
 [ -x `which xautolock` ] && xautolock -time 5 -locker '$HOME/bin/lockscreen' &
+[ -x `which xdimmer` ] && xdimmer -t 120 &
+[ -x `which redshift-gtk` ] && redshift-gtk &
 
 # synergy
 #[ -x `which synergy` ] && synergy &
-
-# colour shifter
-[ -x `which redshift-gtk` ] && redshift-gtk &
-
-[ -x `which synclient` ] && synclient CoastingSpeed=0 TapButton3=2
-[ -x `which syndaemon` ] && syndaemon -R -K -i 0.5 -d &
+#[ -x `which synclient` ] && synclient CoastingSpeed=0 TapButton3=2
+#[ -x `which syndaemon` ] && syndaemon -R -K -i 0.5 -d &
 
 # vim: set ft=sh :
