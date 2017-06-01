@@ -3,9 +3,10 @@ green='\[\e[0;32m\]'     # Green
 white='\[\e[0;37m\]'     # White
 yellow='\[\e[0;33m\]'    # Yellow
 red='\[\e[0;31m\]'       # Red
+cyan='\[\e[0;36m\]'      # Cyan
 reset='\[\e[m\]'
 
-PS1="${green}(${white}\A${green})[${u_colour}\u${green}@${h_colour}\h${green}]${red} ${errcode}${white}\w\n${reset}$ "
+PS1="${green}(${white}\A${green})[${yellow}\u${green}@${cyan}\h${green}]${red} ${errcode}${white}\w\n${reset}$ "
 
 alias ll='ls -l'
 alias la='ls -A'
