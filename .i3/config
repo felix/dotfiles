@@ -15,7 +15,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec "$HOME/bin/dmenu-recent"
 bindsym $mod+p exec "$HOME/bin/passdmenu.py --copy --pw -l 10"
 
-bindcode $mod+Ctrl+119 exec "$HOME/bin/lockscreen"
+bindcode $mod+Ctrl+107 exec "$HOME/bin/lockscreen"
 
 # change focus
 bindsym $mod+j focus left
