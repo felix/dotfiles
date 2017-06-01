@@ -1,27 +1,28 @@
 #!/bin/sh
 
-cache="$HOME/.cache/dmenu_cache"
-recent="$HOME/.cache/dmenu_recent"
+cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
+[ ! -d "$cachedir" ] && mkdir $cachedir
+cache=$cachedir/dmenu_cache
+recent="$cachedir/dmenu_recent"
+most_used=$(sort $recent 2>/dev/null |uniq -c |sort -rn |awk '{print $2}')
 
-touch $recent
-most_used=`sort $recent 2>/dev/null | uniq -c | sort -rn | awk '{print $2}'`
-
-# prime the executable cache if older than a day
-if [ ! -f "$cache" ] || test `find "$cache" -mtime +1`; then
-    find -L $(echo $PATH |sed -e 's/\:/\ /g') -maxdepth 1 -perm -o+x -type f -exec basename '{}' \; |sort -u >$cache
+IFS=:
+if stest -dqr -n "$cache" $PATH; then
+    stest -flx $PATH | sort -u >"$cache"
 fi
 
-# combine the recent with cache and pass to dmenu
-run=`(echo "$most_used"; cat "$cache" | grep -vxF "$most_used") | dmenu -l 10 -p Run: "$@"` || exit
-# clean recent
-(echo $run; head -n 99 $recent 2>/dev/null) > $recent.$$ && mv $recent.$$ $recent
+# Combine the recent with cache and pass to dmenu
+run=$((echo "$most_used" "\n---"; cat "$cache") |dmenu -l 10 -p Run: "$@") || exit
 
-# run with shell if terminated with semi-colon
+# Run with shell if terminated with semi-colon
 case $run in
-    *\;) ${SHELL:-"/bin/sh"} ${run/;/} &
+    *\;) ${SHELL:-"/bin/sh"} ${run%%;} &
         ;;
     *)   $run &
         ;;
 esac
+
+# Clean recent keeping last 20 entries
+(echo $run; head -n 20 $recent 2>/dev/null) > $recent.$$ && mv $recent.$$ $recent
 
 exit 0
