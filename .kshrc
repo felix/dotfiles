@@ -44,8 +44,8 @@ if [ $? = 0 ]; then
     set -A complete_mpc -- ls play pause toggle prev random shuffle stop update
     set -A complete_mpc_2 -- $(mpc lsplaylists | sort)
 fi
-if [ -d ~/.password-store ]; then
-    PASS_LIST=$(find .password-store -type f -name \*.gpg | sed 's/^\.password-store\///' | sed 's/\.gpg$//g')
+if [ -d "$HOME/.password-store" ]; then
+    PASS_LIST=$(find "$HOME/.password-store" -type f -name \*.gpg | sed 's/^.*\.password-store\///' | sed 's/\.gpg$//g')
     set -A complete_pass -- $PASS_LIST -c generate edit insert git
     set -A complete_pass_2 -- $PASS_LIST push
 
