@@ -5,10 +5,10 @@ text/html                                                               ; w3m -I
 text/htm                                                                ; w3m -I %{charset} -T text/html             ; copiousoutput
 message/html                                                            ; w3m -I %{charset} -T text/html             ; copiousoutput
 message/htm                                                             ; w3m -I %{charset} -T text/html             ; copiousoutput
-image/svg+xml                                                           ; inkscape %s                                ;
-image/*                                                                 ; mutt_bgrun feh --fullscreen --auto-zoom %s ; copiousoutput
+image/svg+xml                                                           ; mutt_bgrun inkscape %s                     ;
+image/*                                                                 ; mutt_bgrun feh --fullscreen --auto-rotate --auto-zoom %s ;
 application/x-gunzip                                                    ; gzcat                                      ; copiousoutput
 application/x-tar-gz                                                    ; gunzip -c %s | tar -tf -                   ; copiousoutput
 application/postscript                                                  ; ps2ascii %s                                ; copiousoutput
-application/pdf                                                         ; zathura '%s'
+application/pdf                                                         ; mutt_bgrun zathura '%s'
 application/vnd.openxmlformats-officedocument.wordprocessingml.document ; mutt_bgrun soffice '%s'
