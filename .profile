@@ -24,6 +24,27 @@ if [ -n "$KSH_VERSION" ]; then
     export ENV=${HOME}/.kshrc
 fi
 
-[ -z "$SSH_AUTH_SOCK" ] && eval `ssh-agent -s` && ssh-add
+# SSH agent startup
+SSH_ENV="$HOME/.ssh/environment"
+function start_agent {
+     /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+     chmod 600 "${SSH_ENV}"
+     . "${SSH_ENV}" >/dev/null
+     /usr/bin/ssh-add
+}
+if [ -f "${SSH_ENV}" ]; then
+     . "${SSH_ENV}" >/dev/null
+     pid=$(pgrep -U $(id -u) ssh-agent)
+     [ "$pid" != "$SSH_AGENT_PID" ] && start_agent
+else
+     start_agent
+fi
+
+# GPG agent startup
+if ! gpg-connect-agent --quiet /bye > /dev/null 2> /dev/null; then
+    echo "Starting gpg-agent"
+    gpg-agent --quiet --daemon
+fi
+export GPG_TTY=$(tty)
 
 #umask 022

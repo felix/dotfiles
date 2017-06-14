@@ -16,17 +16,7 @@ alias wget="wget --timeout 10 -c"
 # maths in the CLI
 calc(){ echo "scale=2;$@" | bc;}
 
-if [ -e /usr/local/share/chruby/chruby.sh ]; then
-    source /usr/local/share/chruby/chruby.sh
-    source /usr/local/share/chruby/auto.sh
-fi
-
-# check if another agent is running
-if ! gpg-connect-agent --quiet /bye > /dev/null 2> /dev/null; then
-    echo "Starting gpg-agent"
-    gpg-agent --quiet --daemon
-fi
-export GPG_TTY=$(tty)
+[ -e "$HOME/bin/chruby.sh" ] && . "$HOME/bin/chruby.sh"
 
 # Completion
 set -A complete_ssh_1 -- $(awk '{split($1,a,","); print a[1]}' ~/.ssh/known_hosts)
