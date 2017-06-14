@@ -3,7 +3,6 @@ set encoding=utf-8
 set nocompatible
 filetype indent plugin on
 syntax enable sync minlines=200
-"set listchars=tab:•\ ,trail:~,extends:>,precedes:<,nbsp:␣
 set cinoptions=b1
 set colorcolumn=80
 set cursorline
@@ -28,6 +27,8 @@ set tabstop=4
 set viminfo='1000,f1,:100,@100,/20,h
 set visualbell
 set whichwrap+=<,>,h,l,[,]
+set ttyfast
+set lazyredraw
 
 
 "
