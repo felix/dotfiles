@@ -25,10 +25,11 @@ set -A complete_kill_1 -- -9 -HUP -INFO -KILL -TERM
 PKG_LIST=$(ls -1 /var/db/pkg)
 set -A complete_pkg_delete -- $PKG_LIST
 set -A complete_pkg_info -- $PKG_LIST
-set -A complete_rcctl_1 -- disable enable get ls order set
+set -A complete_rcctl_1 -- disable enable get ls order set start stop restart
 set -A complete_rcctl_2 -- $(ls /etc/rc.d)
 set -A complete_gpg2 -- --refresh --receive-keys --armor --clearsign --sign --list-key --decrypt --verify --detach-sig
-set -A complete_git -- pull push mpull mpush clone checkout status
+set -A complete_git -- pull push mpull mpush clone checkout status log
+set -A complete_dm_1 -- sync check add
 pgrep -q mpd
 if [ $? = 0 ]; then
     set -A complete_mpc -- ls play pause toggle prev random shuffle stop update
@@ -37,6 +38,6 @@ fi
 if [ -d "$HOME/.password-store" ]; then
     PASS_LIST=$(find "$HOME/.password-store" -type f -name \*.gpg | sed 's/^.*\.password-store\///' | sed 's/\.gpg$//g')
     set -A complete_pass -- $PASS_LIST -c generate edit insert git
-    set -A complete_pass_2 -- $PASS_LIST push
+    #set -A complete_pass_2 -- $PASS_LIST push
 
 fi
