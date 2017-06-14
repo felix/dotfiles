@@ -5,6 +5,7 @@ export JAVA_HOME="/usr/local/openjdk8"
 #export JAVA_HOME="/usr/local/openjdk7"
 #export PATH="$HOME/.yarn/bin:$PATH"
 [ -d "${HOME}/.node/bin" ] && PATH=${HOME}/.node/bin:$PATH
+[ -d "${HOME}/.cabal/bin" ] && PATH=${HOME}/.cabal/bin:$PATH
 [ -d "${HOME}/bin" ] && PATH=${HOME}/bin:$PATH
 export PATH
 export GOPATH=$HOME
