@@ -1,4 +1,7 @@
 
+HISTFILE=~/.history
+HISTSIZE=9000
+
 green='\[\e[0;32m\]'     # Green
 white='\[\e[0;37m\]'     # White
 yellow='\[\e[0;33m\]'    # Yellow
