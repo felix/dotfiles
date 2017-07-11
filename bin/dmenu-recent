@@ -4,7 +4,6 @@ cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
 [ ! -d "$cachedir" ] && mkdir $cachedir
 cache=$cachedir/dmenu_cache
 recent="$cachedir/dmenu_recent"
-most_used=$(sort $recent 2>/dev/null |uniq -c |sort -rn |awk '{print $2}')
 
 IFS=:
 if stest -dqr -n "$cache" $PATH; then
@@ -12,7 +11,7 @@ if stest -dqr -n "$cache" $PATH; then
 fi
 
 # Combine the recent with cache and pass to dmenu
-run=$((echo "$most_used" "\n---"; cat "$cache") |dmenu -l 10 -p Run: "$@") || exit
+run=$(cat "$recent" "$cache" |dmenu -l 10 -p Run: "$@") || exit
 
 # Run with shell if terminated with semi-colon
 case $run in
@@ -23,6 +22,6 @@ case $run in
 esac
 
 # Clean recent keeping last 20 entries
-(echo $run; head -n 20 $recent 2>/dev/null) > $recent.$$ && mv $recent.$$ $recent
+(echo $run; head -n 20 $recent |uniq -c |sort -rn |awk '{print $2}' 2>/dev/null) > $recent.$$ && mv $recent.$$ $recent
 
 exit 0
