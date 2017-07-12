@@ -1,6 +1,6 @@
 [user]
     name = Felix Hanley
-    email = felix@userspace.com.au
+    #email = felix@userspace.com.au
 [core]
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
     excludesfile = /home/felix/.gitignore.global
@@ -9,11 +9,24 @@
     ci = commit
     br = branch
     co = checkout
-    df = diff
+    diff = diff --word-diff
+    cp = cherry-pick
+    cp = clone
     lg = log -p
+    sl = stash list
+    sp = stash pop
+    filelog = log -u
+    fl = log -u
+    # With dates
+    ls = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    #ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    # With changed files
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
     stl = !"git log | grep git-subtree-dir | awk '{ print $2 }'"
     sta = !"f() { git subtree add --squash --prefix=$2 $1 master; }; f"
     stu = "!f() { git subtree pull --squash --prefix=$2 $1 master; }; f"
+
 [color]
     ui = true
 [color "status"]
