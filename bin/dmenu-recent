@@ -22,6 +22,6 @@ case $run in
 esac
 
 # Clean recent keeping last 10 entries
-(echo $run; cat $recent |uniq |head -n 10 2>/dev/null) > $recent.$$ && mv $recent.$$ $recent
+(echo $run; cat $recent |sort -u |head -n 10 2>/dev/null) > $recent.$$ && mv $recent.$$ $recent
 
 exit 0
