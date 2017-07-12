@@ -17,7 +17,8 @@ setxkbmap -I$HOME/.xkb -option grp:shifts_toggle,grp_led:scroll "us,th,lhu" -pri
 
 # Second screen
 if [ -x `which xrandr` ]; then
-    xrandr --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output LVDS1 --mode 1366x768 --pos 232x1080 --rotate normal --output DP1 --off --output VGA1 --off &
+    [ "$hostname" = "monk" ] && xrandr --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output LVDS1 --mode 1366x768 --pos 232x1080 --rotate normal --output DP1 --off --output VGA1 --off &
+    [ "$hostname" = "beastie" ] && xrandr --output DisplayPort-0 --mode 1920x1080 --pos 1920x0 --rotate normal --output DVI-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal &
 fi
 
 # Screen
