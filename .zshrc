@@ -170,7 +170,8 @@ alias wget="wget --timeout 10 -c"
 # maths in the CLI
 calc(){ echo "scale=2;$@" | bc;}
 
-if [ -e /usr/local/share/chruby/chruby.sh ]; then
-    source /usr/local/share/chruby/chruby.sh
-    source /usr/local/share/chruby/auto.sh
+if [ -e $HOME/bin/chruby.sh ]; then
+    source $HOME/bin/chruby.sh
+    #source /usr/local/share/chruby/auto.sh
+    chruby 2.4.1
 fi
