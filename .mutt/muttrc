@@ -1,5 +1,4 @@
 push <show-version>      # display version on startup
-set alias_file=~/.mutt/aliases
 set allow_ansi
 set attribution="On %d, %n wrote:"
 set beep_new
@@ -66,7 +65,7 @@ set honor_followup_to=yes
 
 source ~/.mutt/colour
 source ~/.mutt/lists
-source ~/.mutt/aliases
+source "gpg --decrypt --quiet ~/.mutt/aliases.gpg |"
 
 
 #
@@ -111,13 +110,8 @@ bind  browser <left>   exit
 #bind  editor  <Tab>    complete-query
 # urlview
 #macro index \cb |urlview<enter> 'call urlview to extract URLs out of a message'
-macro index \cB |w3m<enter> "call w3m to extract URLs out of a message"
-macro pager \cB |w3m<enter> "call w3m to extract URLs out of a message"
-# address book
-#macro index,pager a "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
-#macro index   \ea     "!vim ~/.mutt/aliases.txt\n:source =aliases.txt\n"
-#macro generic,index,pager \ca "<shell-escape>abook<return>" "launch abook"
-#macro index,pager a "<pipe-message>abook --add-email-quiet<return>" "add the sender address to abook"
+macro index,pager \cB |w3m<enter> "call w3m to extract URLs out of a message"
+macro index \ea "!vim ~/.mutt/aliases.gpg\n:source 'gpg --decrypt --quiet ~/.mutt/aliases.gpg |'\n"
 # performs a notmuch query, showing only the results
 macro index <F8> "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
 # shows all messages again (supersedes default <alias> binding)
