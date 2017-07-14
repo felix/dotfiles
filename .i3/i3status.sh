@@ -1,6 +1,8 @@
 #!/bin/sh
 
-i3status -c ~/.i3/i3status.conf | (read line && echo $line && read line && echo $line && read line && echo $line && while :
+hostname=`hostname -s`
+
+i3status -c ~/.i3/i3status-${hostname}.conf | (read line && echo $line && read line && echo $line && read line && echo $line && while :
 do
     read line
     dat=$(mpc current)
