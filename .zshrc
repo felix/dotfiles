@@ -34,6 +34,7 @@ HISTSIZE=9000
 SAVEHIST=9000
 HISTFILE=~/.history
 bindkey "^R" history-incremental-search-backward
+bindkey -v
 
 autoload -U colors
 colors
