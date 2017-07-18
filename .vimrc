@@ -40,7 +40,8 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'altercation/vim-colors-solarized'
 Plug 'godlygeek/tabular'
 Plug 'ervandew/supertab'
-Plug 'scrooloose/syntastic'
+Plug 'itchyny/lightline.vim'
+Plug 'w0rp/ale'
 Plug 'jamessan/vim-gnupg'
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go'
@@ -54,6 +55,11 @@ Plug 'lervag/vimtex'
 Plug 'slim-template/vim-slim'
 call plug#end()
 
+" Auto-install plugins
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
 
 "
 " Plugin config
@@ -68,24 +74,15 @@ let g:vim_markdown_frontmatter=1
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_ignore_files = ['\msrc/vendor','\mnode_modules','\masn1.js']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['standard']
-
+let g:ale_sign_column_always = 1
+let g:ale_linters = { 'javascript': ['standard'], }
+let g:ale_javascript_standard_executable = 'semistandard'
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-
-" Force tsc to find tsconfig.json
-let g:syntastic_typescript_tsc_fname = ''
 
 let g:GPGExecutable = 'gpg2 --trust-model always'
 
