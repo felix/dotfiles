@@ -21,7 +21,6 @@ set showbreak=>\
 set showmatch
 set smartcase
 set spelllang=en
-set statusline=%<%f%h%m%r%=%b\ 0x%B\ \ %l,%c%V\ %P
 set synmaxcol=200
 set tabstop=4
 set viminfo='1000,f1,:100,@100,/20,h
@@ -29,7 +28,21 @@ set visualbell
 set whichwrap+=<,>,h,l,[,]
 set ttyfast
 set lazyredraw
+set background=dark
+set noshowmode
+set laststatus=2
 
+"set statusline=
+"set statusline+=%<\                           " cut at start
+"set statusline+=[%n%H%M%R%W]\                 " flags and buf no
+"set statusline+=%f\                           " path
+"set statusline+=%1*%{ShowFileFormatFlag(&fileformat)}%*
+"set statusline+=%y\                           " file type
+"set statusline+=%=                            " right align
+"set statusline+=%{strlen(&fenc)?&fenc:&enc}\  " encoding
+"set statusline+=%b:%B\  " encoding
+"set statusline+=%10((%l,%c)%)\                " line and column
+"set statusline+=%P                            " percentage of file
 
 "
 " Plugins
@@ -65,15 +78,14 @@ autocmd VimEnter *
 " Plugin config
 "
 
-set background=dark
 let g:solarized_termtrans=1
 let g:solarized_visibility='low'
-colorscheme solarized
+let g:solarized_bold=0
+let g:solarized_underline=0
+"let g:solarized_italic=1
+"let g:solarized_termcolors=256
+let g:lightline = { 'colorscheme': '16color', }
 let g:vim_markdown_frontmatter=1
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 let g:ale_sign_column_always = 1
 let g:ale_linters = { 'javascript': ['standard'], }
 let g:ale_javascript_standard_executable = 'semistandard'
@@ -83,8 +95,8 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-
 let g:GPGExecutable = 'gpg2 --trust-model always'
+colorscheme solarized
 
 
 "
