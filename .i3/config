@@ -145,9 +145,9 @@ bindsym $mod+Return exec xterm
 
 # Volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id mixer +10
-bindsym Mod4+Up exec --no-startup-id mixer +10
+bindsym Mod4+Up exec --no-startup-id mixer vol +10
 bindsym XF86AudioLowerVolume exec --no-startup-id mixer -10
-bindsym Mod4+Down exec --no-startup-id mixer -10
+bindsym Mod4+Down exec --no-startup-id mixer vol -10
 bindsym XF86AudioMute exec --no-startup-id mixer pcm toggle
 # ALSA
 #bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set 'Master' 5%+
