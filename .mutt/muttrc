@@ -9,12 +9,11 @@ set maildir_trash=yes    # set trash flag on delete
 set edit_headers=yes
 set editor="vim '+/^$'"  # moves to the first empty line
 set fast_reply           # don't ask for sbj and to
+set reply_to
 set forward_format="Fwd: %s"
 set imap_check_subscribed
 set imap_list_subscribed
 unset imap_passive
-#set index_format="%4C %Z |%{%d %b %Y %R}| %-20.20F %?M?(#%03M)&(%5c)? %?X?%2X&  ? %s"
-# with no attachments to speed up index view
 set index_format="%4C %Z |%{%d %b %Y %R}| %-20.20F %?M?(#%03M)&(%5c)? %s"
 set mail_check=30
 set nomarkers
@@ -22,10 +21,7 @@ set mailcap_path="~/.mailcap"  # mime types and apps
 set mbox_type=Maildir
 set menu_context=5       # lines of context
 set menu_scroll          # scroll line by line when reaching end of page.
-# only for IMAP
-set message_cachedir=~/.cache/mutt
-set header_cache=~/.cache/mutt
-set certificate_file=~/.mutt/certificates
+#set certificate_file=~/.mutt/certificates
 set net_inc=5
 set noaskbcc
 set noaskcc
@@ -39,14 +35,12 @@ set nowait_key           # don't prompt for a key press
 set pager_context=1      # lines of context
 set pager_index_lines=8  # split the screen
 set pager_stop           # don't skip messages on next page
-#set query_command="abook --mutt-query '%s'"
-#set query_command="goobook query '%s'"
 set read_inc=100
 set realname='Felix Hanley'
 set reverse_alias
 set reverse_name         # reply from recipient
 set reverse_realname=no  # always use my name
-set sendmail="/usr/local/bin/msmtp"  # send with what
+set sendmail=msmtp       # send with what
 set use_envelope_from=yes      # needed for msmtp
 set use_from=yes
 #set sendmail_wait=2      # wait around for sendmail
@@ -66,11 +60,6 @@ set honor_followup_to=yes
 source ~/.mutt/colour
 source ~/.mutt/lists
 source "gpg --decrypt --quiet ~/.mutt/aliases.gpg |"
-
-
-#
-# headers
-#
 
 ignore *
 unignore From:
@@ -93,36 +82,21 @@ attachments -I message/external-body
 alternative_order text/plain text text/html application/postscript image/*
 auto_view text/html application/x-gunzip application/postscript application/x-tar-gz application/x-pgp-message
 
-
-#
-# Key bindings
-#
-
 bind  index,pager <space> next-unread-mailbox
 bind  index   <right>  display-message
-macro index   <left>   "c?"
+#macro index   <left>   "c?"
 #bind  index,pager <F5> sync-mailbox
 #macro index,pager $    <change-folder>!<enter>
 bind  index   <up>     previous-entry
 bind  index   <down>   next-entry
 bind  browser <right>  select-entry
 bind  browser <left>   exit
+macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
 #bind  editor  <Tab>    complete-query
-# urlview
-#macro index \cb |urlview<enter> 'call urlview to extract URLs out of a message'
 macro index,pager \cB |w3m<enter> "call w3m to extract URLs out of a message"
 macro index \ea "!vim ~/.mutt/aliases.gpg\n:source 'gpg --decrypt --quiet ~/.mutt/aliases.gpg |'\n"
-# performs a notmuch query, showing only the results
-macro index <F8> "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
 # shows all messages again (supersedes default <alias> binding)
 macro index <F9> "<limit>all\n" "show all messages (undo limit)"
-
-message-hook '!(~g|~G) ~b"^-----BEGIN\ PGP\ (SIGNED\ )?MESSAGE"' "exec check-traditional-pgp"
-
-
-#
-# profiles
-#
 
 macro index,pager S "<save-message>=Spam<enter>y" "Mark as spam"
 macro index,pager H "<save-message>=Inbox<enter>y" "Mark as ham"

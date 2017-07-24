@@ -85,4 +85,4 @@ mono  body          bold                            "^gpg: BAD signature from.*"
 # tenshi
 color body          brightcyan      default         "[DS]PT=([0-9]+)"
 
-#  vim: set ts=4 sw=4 tw=80 ft=muttrc fdm=manual et fen :
+# vim: set ft=muttrc :
