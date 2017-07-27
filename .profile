@@ -17,6 +17,7 @@ export EDITOR=$VISUAL
 export PAGER=less
 export BROWSER=firefox
 export GIT_EDITOR=vim
+export PASSWORD_STORE_X_SELECTION=primary
 #GZIP=-9
 #GREP_OPTIONS='-d skip'
 #export XDG_RUNTIME_DIR=/run/user/$(id -u)
