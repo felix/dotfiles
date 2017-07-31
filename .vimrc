@@ -67,11 +67,6 @@ Plug 'lervag/vimtex'
 Plug 'slim-template/vim-slim'
 call plug#end()
 
-" Auto-install plugins
-autocmd VimEnter *
-  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \|   PlugInstall --sync | q
-  \| endif
 
 "
 " Plugin config
