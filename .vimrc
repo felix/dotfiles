@@ -20,7 +20,7 @@ set shiftwidth=4
 set showbreak=>\
 set showmatch
 set smartcase
-set spelllang=en
+set spelllang=en_au
 set synmaxcol=200
 set tabstop=4
 set viminfo='1000,f1,:100,@100,/20,h
@@ -31,18 +31,6 @@ set lazyredraw
 set background=dark
 set noshowmode
 set laststatus=2
-
-"set statusline=
-"set statusline+=%<\                           " cut at start
-"set statusline+=[%n%H%M%R%W]\                 " flags and buf no
-"set statusline+=%f\                           " path
-"set statusline+=%1*%{ShowFileFormatFlag(&fileformat)}%*
-"set statusline+=%y\                           " file type
-"set statusline+=%=                            " right align
-"set statusline+=%{strlen(&fenc)?&fenc:&enc}\  " encoding
-"set statusline+=%b:%B\  " encoding
-"set statusline+=%10((%l,%c)%)\                " line and column
-"set statusline+=%P                            " percentage of file
 
 "
 " Plugins
@@ -88,6 +76,7 @@ let g:vim_markdown_frontmatter=1
 let g:ale_sign_column_always = 1
 let g:ale_linters = { 'javascript': ['standard'], }
 let g:ale_javascript_standard_executable = 'semistandard'
+let g:ale_maximum_file_size=100000
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
@@ -96,6 +85,8 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:GPGExecutable = 'gpg2 --trust-model always'
 colorscheme solarized
+
+hi SpellBad ctermfg=white
 
 
 "
@@ -144,8 +135,8 @@ autocmd Filetype javascript setlocal ts=2 sw=2 nowrap
 autocmd Filetype html setlocal ts=2 sw=2
 autocmd BufRead,BufNewFile package.json setlocal ts=2 sw=2
 autocmd BufRead,BufNewFile *.tag setlocal ft=html
-autocmd Filetype mail setlocal nohlsearch spell spelllang=en_au
-autocmd Filetype markdown setlocal spell spelllang=en_au
+autocmd Filetype mail setlocal nohlsearch spell
+autocmd Filetype markdown setlocal spell
 autocmd Filetype ruby setlocal ts=2 sw=2
 autocmd BufRead,BufNewFile *.deface setlocal ft=html
 autocmd BufRead,BufNewFile *.pug setlocal ft=slim
