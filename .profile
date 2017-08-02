@@ -21,6 +21,7 @@ export PASSWORD_STORE_X_SELECTION=primary
 export HISTSIZE=9000
 export HISTFILE=~/.history
 export CLICOLOR=true
+export SAVEHIST=9000
 #export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
 if [ -n "$KSH_VERSION" ]; then

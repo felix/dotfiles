@@ -3,7 +3,8 @@ hostname=`hostname -s`
 # load resources, to be sure
 xrdb -merge $HOME/.Xresources
 
-xset dpms 300 1800 3600
+[ "$hostname" = "monk" ] && xset dpms 300 1800 3600
+[ "$hostname" = "beastie" ] && xset dpms 1800 3600 7200
 xset s off
 xset -b
 xsetroot -solid "#000000"

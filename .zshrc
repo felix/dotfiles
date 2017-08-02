@@ -29,7 +29,6 @@ setopt HIST_IGNORE_SPACE
 setopt INC_APPEND_HISTORY
 setopt EXTENDED_HISTORY
 
-SAVEHIST=9000
 bindkey "^R" history-incremental-search-backward
 bindkey -v
 
