@@ -31,27 +31,29 @@ start_ssh_agent() {
     $SSH_ADD
 }
 
-if [ -x "$GPG_AGENT" ]; then
-    gpg-connect-agent /bye
-    $SSH_ADD
-    unset SSH_AGENT_PID
-    if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-        export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-    fi
-    echo UPDATESTARTUPTTY |gpg-connect-agent >/dev/null 2>&1
-else
-    SSH_ENV="$HOME/.ssh/environment"
-    SSH_AGENT=`which ssh-agent`
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    if [ -x "$GPG_AGENT" ]; then
+        gpg-connect-agent /bye
+        unset SSH_AGENT_PID
+        if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+            export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+        fi
+        echo UPDATESTARTUPTTY |gpg-connect-agent >/dev/null 2>&1
+    else
+        SSH_ENV="$HOME/.ssh/environment"
+        SSH_AGENT=`which ssh-agent`
 
-    if [ -x "$SSH_AGENT" ]; then
-        # source SSH settings, if applicable
-        if [ -f "${SSH_ENV}" ]; then
-            source "${SSH_ENV}" > /dev/null
-            ps -x | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || { really_start_ssh_agent; }
-        else
-            really_start_ssh_agent;
+        if [ -x "$SSH_AGENT" ]; then
+            # source SSH settings, if applicable
+            if [ -f "${SSH_ENV}" ]; then
+                source "${SSH_ENV}" > /dev/null
+                ps -x | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || { really_start_ssh_agent; }
+            else
+                really_start_ssh_agent;
+            fi
         fi
     fi
+    $SSH_ADD
 fi
 
 export GPG_TTY=$(tty)
