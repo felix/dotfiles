@@ -50,8 +50,8 @@ chruby_auto() {
     until [ -z "$dir" ]; do
         dir="${dir%/*}"
 
-        if { read -r version <"$dir/.ruby-version"; } 2>/dev/null || [[ -n "$version" ]]; then
-            if [ "$version" == "$RUBY_VERSION" ]; then return
+        if { read -r version <"$dir/.ruby-version"; } 2>/dev/null || [ -n "$version" ]; then
+            if [ "$version" = "$RUBY_VERSION" ]; then return
             else
                 chruby "$version"
                 return $?
@@ -74,7 +74,7 @@ chruby() {
             for dir in "${RUBIES[@]}"; do
                 dir="${dir%%/}"
                 star=" "
-                [ "$dir" == "$RUBY_ROOT" ] && star="*"
+                [ "$dir" = "$RUBY_ROOT" ] && star="*"
 
                 echo " $star ${dir##*/}"
             done
@@ -92,7 +92,7 @@ chruby() {
                 esac
             done
 
-            if [[ -z "$match" ]]; then
+            if [ -z "$match" ]; then
                 echo "chruby: unknown Ruby: $1" >&2
                 return 1
             fi
