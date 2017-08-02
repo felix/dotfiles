@@ -1,51 +1,11 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-#
-# bash environment
-#
-
-# get platform type
-case "$OSTYPE" in
-    linux*)
-        platform="linux"
-        ;;
-    openbsd*)
-        platform="bsd"
-        ;;
-    *)
-        platform="unknown"
-        ;;
-esac
-export $platform
-
-# a mix of BSD and Linux
-PATH=$HOME/bin:/bin:/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/games:.
-export PATH
-
-export VISUAL=vim
-export EDITOR=$VISUAL
-export PAGER=less
-export BROWSER=firefox
-export GIT_EDITOR=vim
-export INPUTRC=~/.inputrc
-export GZIP=-9
-export GREP_OPTIONS='-d skip'
 export HISTCONTROL="ignorespace:ignoredups:erasedups"
 export HISTIGNORE="&:ls:la:cd:exit:clear:fg"
 export HISTTIMEFORMAT="[%Y-%m-%d - %H:%M:%S] "
 shopt -s histappend
 PROMPT_COMMAND='history -a'
-
-if [ "${platform}" == "linux" ]; then
-    export LANG='en_AU.UTF-8'
-    export LC_ALL='en_AU.UTF-8'
-    export LC_COLLATE='posix'
-    export LC_CTYPE='en_AU.UTF-8'
-else
-    export LC_CTYPE='en_US.UTF-8'
-    export PKG_PATH=http://mirror.internode.on.net/pub/OpenBSD/snapshots/packages/amd64
-fi
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -77,41 +37,8 @@ if [ "${platform}" == 'linux' ]; then
     eval $(dircolors -b ~/.dircolors)
 fi
 
-#
-# Alias definitions.
-#
 
-# enable color support of ls
-if [ "${platform}" == 'linux' ]; then
-    alias ls="ls --color=auto"
-    alias rm="rm -v"
-    alias mv="mv -v --backup=existing"
-    alias cp="cp -v"
-    alias grep="grep --color=auto"
-    alias pac="sudo packer"
-fi
-
-alias ll='ls -l'
-alias la='ls -A'
-alias lh='ls -lh'
-alias l='ls -CF'
-alias h='history |grep'
-alias wget="wget --timeout 10 -c"
-alias tt="timetrackr"
-# for debian quilt
-alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
-alias vlc1="vlc --play-and-exit"
-# maths in the CLI
-calc(){ echo "scale=2;$@" | bc;}
-
-getpass() {
-    gpg --quiet --no-tty --decrypt $HOME/Documents/passwords.gpg |grep "^$1" |awk '{print $2}' |tr -d '\n' |xclip -i
-}
-
-
-#
 # completion
-#
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     source /etc/bash_completion
 fi
@@ -188,73 +115,6 @@ prompt_command () {
 }
 PROMPT_COMMAND=prompt_command
 
-
-#
-# start agents
-#
-
-SSH_ENV="$HOME/.ssh/environment"
-GPG_AGENT=`which gpg-agent`
-SSH_AGENT=`which ssh-agent`
-SSH_ADD=`which ssh-add`
-
-function start_ssh_agent
-{
-    echo "Initializing new SSH agent..."
-    $SSH_AGENT | sed 's/^echo/#echo/' > "${SSH_ENV}"
-    echo succeeded
-    chmod 600 "${SSH_ENV}"
-    source "${SSH_ENV}" > /dev/null
-    $SSH_ADD;
-}
-
-if [ -x "$SSH_AGENT" ]; then
-    # source SSH settings, if applicable
-    if [ -f "${SSH_ENV}" ]; then
-        source "${SSH_ENV}" > /dev/null
-        ps -x | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || { start_ssh_agent; }
-    else
-        start_ssh_agent;
-    fi
+if [ -e $HOME/bin/common.sh ]; then
+    source $HOME/bin/common.sh
 fi
-
-if [ -x "$GPG_AGENT" ]; then
-    # does `~/.gpg-agent-info' exist and point to a gpg-agent process accepting signals?
-    if test -f $HOME/.gpg-agent-info && kill -0 `cut -d: -f 2 $HOME/.gpg-agent-info` 2>/dev/null; then
-        GPG_AGENT_INFO=`cat $HOME/.gpg-agent-info | cut -c 16-`
-    else
-        # gpg-agent not available, start it
-        eval `$GPG_AGENT --daemon --no-grab --write-env-file`
-    fi
-    export GPG_TTY=$(tty)
-    export GPG_AGENT_INFO
-fi
-
-#
-# screen Login greeting
-#
-if [ "$SHOWED_SCREEN_MESSAGE" != "true" ]; then
-    if [ -x /usr/bin/screen ]; then
-        detached_screens=`screen -list | grep Detached`
-        if [ ! -z "$detached_screens" ]; then
-            echo "The following screens sessions are available:"
-            echo -e "$detached_screens\n"
-        fi
-    fi
-    if [ -x /usr/bin/tmux ]; then
-        detached_tmux=`tmux ls 2> /dev/null`
-        if [ ! -z "$detached_tmux" ]; then
-            echo "The following tmux sessions are available:"
-            echo -e "$detached_tmux\n"
-        fi
-    fi
-    export SHOWED_SCREEN_MESSAGE="true"
-fi
-
-#
-# other environment variables
-#
-
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-chruby ruby-2.0.0

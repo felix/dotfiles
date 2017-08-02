@@ -1,7 +1,4 @@
 
-HISTFILE=~/.history
-HISTSIZE=9000
-
 green='\[\e[0;32m\]'     # Green
 white='\[\e[0;37m\]'     # White
 yellow='\[\e[0;33m\]'    # Yellow
@@ -10,16 +7,6 @@ cyan='\[\e[0;36m\]'      # Cyan
 reset='\[\e[m\]'
 
 PS1="${green}(${white}\A${green})[${yellow}\u${green}@${cyan}\h${green}]${red} ${errcode}${white}\w\n${reset}$ "
-
-alias ll='ls -l'
-alias la='ls -A'
-alias lh='ls -lh'
-alias l='ls -CF'
-alias wget="wget --timeout 10 -c"
-# maths in the CLI
-calc(){ echo "scale=2;$@" | bc;}
-
-[ -e "$HOME/bin/chruby.sh" ] && . "$HOME/bin/chruby.sh"
 
 # Completion
 set -A complete_ssh_1 -- $(awk '{split($1,a,","); print a[1]}' ~/.ssh/known_hosts)
@@ -43,4 +30,8 @@ if [ -d "$HOME/.password-store" ]; then
     set -A complete_pass -- $PASS_LIST -c generate edit insert git
     #set -A complete_pass_2 -- $PASS_LIST push
 
+fi
+
+if [ -e $HOME/bin/common.sh ]; then
+    source $HOME/bin/common.sh
 fi

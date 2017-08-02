@@ -1,5 +1,4 @@
 
-
 ## Options
 
 setopt NO_BEEP
@@ -30,9 +29,7 @@ setopt HIST_IGNORE_SPACE
 setopt INC_APPEND_HISTORY
 setopt EXTENDED_HISTORY
 
-HISTSIZE=9000
 SAVEHIST=9000
-HISTFILE=~/.history
 bindkey "^R" history-incremental-search-backward
 bindkey -v
 
@@ -124,55 +121,6 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-finish
 fi
 
-virtualenv_info() {
-    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
-}
-
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-    echo "Starting ssh-agent"
-    eval `ssh-agent -s`
-    ssh-add
-fi
-
-# check if another agent is running
-if ! gpg-connect-agent --quiet /bye > /dev/null 2> /dev/null; then
-    echo "Starting gpg-agent"
-    gpg-agent --quiet --daemon
-fi
-export GPG_TTY=$(tty)
-
-
-#
-# screen Login greeting
-#
-if [ "$SHOWED_MUX_MESSAGE" != "true" ]; then
-    if [ -x /usr/bin/screen ]; then
-        detached_screens=`screen -list | grep Detached`
-    fi
-    if [ -x /usr/bin/tmux ]; then
-        detached_tmux=`tmux ls 2> /dev/null`
-    fi
-    if [ -n "$detached_screens" -o -n "$detached_tmux" ]; then
-        echo "The following sessions are available:"
-        echo -e "$detached_tmux"
-        echo -e "$detached_screens"
-    fi
-    export SHOWED_SCREEN_MESSAGE="true"
-fi
-
-
-## Aliases
-
-alias ll='ls -l'
-alias la='ls -A'
-alias lh='ls -lh'
-alias l='ls -CF'
-alias wget="wget --timeout 10 -c"
-# maths in the CLI
-calc(){ echo "scale=2;$@" | bc;}
-
-if [ -e $HOME/bin/chruby.sh ]; then
-    source $HOME/bin/chruby.sh
-    #source /usr/local/share/chruby/auto.sh
-    chruby 2.4.1
+if [ -e $HOME/bin/common.sh ]; then
+    source $HOME/bin/common.sh
 fi
