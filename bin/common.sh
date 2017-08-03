@@ -19,41 +19,29 @@ case "$OSTYPE" in
     alias grep="grep --color=auto"
 esac
 
-GPG_AGENT=`which gpg-agent`
-SSH_ADD=`which ssh-add`
-
 start_ssh_agent() {
     echo "Initializing new SSH agent..."
     $SSH_AGENT | sed 's/^echo/#echo/' > "${SSH_ENV}"
     echo succeeded
     chmod 600 "${SSH_ENV}"
     source "${SSH_ENV}" > /dev/null
-    $SSH_ADD
 }
 
 if [ -z "$SSH_AUTH_SOCK" ]; then
-    if [ -x "$GPG_AGENT" ]; then
-        gpg-connect-agent /bye
-        unset SSH_AGENT_PID
-        if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-            export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-        fi
-        echo UPDATESTARTUPTTY |gpg-connect-agent >/dev/null 2>&1
-    else
-        SSH_ENV="$HOME/.ssh/environment"
-        SSH_AGENT=`which ssh-agent`
+    SSH_ENV="$HOME/.ssh/environment"
+    SSH_AGENT=`which ssh-agent`
+    SSH_ADD=`which ssh-add`
 
-        if [ -x "$SSH_AGENT" ]; then
-            # source SSH settings, if applicable
-            if [ -f "${SSH_ENV}" ]; then
-                source "${SSH_ENV}" > /dev/null
-                ps -x | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || { really_start_ssh_agent; }
-            else
-                really_start_ssh_agent;
-            fi
+    if [ -x "$SSH_AGENT" ]; then
+        # source SSH settings, if applicable
+        if [ -f "${SSH_ENV}" ]; then
+            source "${SSH_ENV}" > /dev/null
+            ps -x | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || { start_ssh_agent; }
+        else
+            start_ssh_agent;
         fi
+        $SSH_ADD
     fi
-    $SSH_ADD
 fi
 
 export GPG_TTY=$(tty)
