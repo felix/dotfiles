@@ -7,8 +7,8 @@ alias rm='rm -v'
 alias cp='cp -v'
 alias mv='mv -v'
 alias wget="wget --timeout 10 -c"
-alias mutt-freestyle='mutt -F ~/.mutt/muttrc-freestyle'
-alias mutt-userspace='mutt -F ~/.mutt/muttrc-userspace'
+alias mutt-freestyle='mutt -F ~/.mutt/muttrc.freestyle'
+alias mutt-userspace='mutt -F ~/.mutt/muttrc.userspace'
 # maths in the CLI
 calc(){ echo "scale=2;$@" | bc;}
 

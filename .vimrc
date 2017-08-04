@@ -130,7 +130,7 @@ autocmd Filetype javascript setlocal ts=2 sw=2 nowrap
 autocmd Filetype html setlocal ts=2 sw=2
 autocmd BufRead,BufNewFile package.json setlocal ts=2 sw=2
 autocmd BufRead,BufNewFile *.tag setlocal ft=html
-autocmd Filetype mail setlocal nohlsearch spell
+autocmd Filetype mail setlocal nohlsearch spell nobackup noswapfile nowritebackup noautoindent
 autocmd Filetype markdown setlocal spell
 autocmd Filetype ruby setlocal ts=2 sw=2
 autocmd BufRead,BufNewFile *.deface setlocal ft=html

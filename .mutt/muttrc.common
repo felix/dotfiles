@@ -21,7 +21,8 @@ set mailcap_path="~/.mailcap"  # mime types and apps
 set mbox_type=Maildir
 set menu_context=5       # lines of context
 set menu_scroll          # scroll line by line when reaching end of page.
-#set certificate_file=~/.mutt/certificates
+unset ssl_usesystemcerts
+set certificate_file=~/.mutt/certificates
 set net_inc=5
 set noaskbcc
 set noaskcc
@@ -40,7 +41,7 @@ set realname='Felix Hanley'
 set reverse_alias
 set reverse_name         # reply from recipient
 set reverse_realname=no  # always use my name
-set sendmail=msmtp       # send with what
+#set sendmail=msmtp       # send with what
 set use_envelope_from=yes      # needed for msmtp
 set use_from=yes
 #set sendmail_wait=2      # wait around for sendmail
@@ -91,7 +92,7 @@ bind  index   <up>     previous-entry
 bind  index   <down>   next-entry
 bind  browser <right>  select-entry
 bind  browser <left>   exit
-macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
+#macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
 #bind  editor  <Tab>    complete-query
 macro index,pager \cB |w3m<enter> "call w3m to extract URLs out of a message"
 macro index \ea "!vim ~/.mutt/aliases.gpg\n:source 'gpg --decrypt --quiet ~/.mutt/aliases.gpg |'\n"
@@ -100,11 +101,5 @@ macro index <F9> "<limit>all\n" "show all messages (undo limit)"
 
 macro index,pager S "<save-message>=Spam<enter>y" "Mark as spam"
 macro index,pager H "<save-message>=Inbox<enter>y" "Mark as ham"
-
-macro index,pager <f2> '<enter-command>source ~/.mutt/profile.default<enter><change-folder>!<enter>'
-#macro index,pager <f3> '<enter-command>source ~/.mutt/profile.example<enter><change-folder>!<enter>'
-
-# default account
-source ~/.mutt/profile.default
 
 #  vim: set ft=muttrc:
