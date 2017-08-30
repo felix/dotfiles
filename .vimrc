@@ -135,3 +135,4 @@ autocmd Filetype markdown setlocal spell
 autocmd Filetype ruby setlocal ts=2 sw=2
 autocmd BufRead,BufNewFile *.deface setlocal ft=html
 autocmd BufRead,BufNewFile *.pug setlocal ft=slim
+autocmd BufRead,BufNewFile Jenkinsfile setlocal ft=groovy
