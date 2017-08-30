@@ -7,6 +7,8 @@ alias rm='rm -v'
 alias cp='cp -v'
 alias mv='mv -v'
 alias wget="wget --timeout 10 -c"
+alias setclip="xclip -selection c"
+alias getclip="xclip -selection c -o"
 alias mutt-freestyle='mutt -F ~/.mutt/muttrc.freestyle'
 alias mutt-userspace='mutt -F ~/.mutt/muttrc.userspace'
 # maths in the CLI
@@ -72,3 +74,4 @@ if [ -e $HOME/bin/chruby.sh ]; then
     #source /usr/local/share/chruby/auto.sh
     chruby 2.4.1
 fi
+[ -e /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
