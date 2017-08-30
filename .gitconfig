@@ -43,3 +43,5 @@
     tool = meld
 [push]
     default = simple
+    followTags = true
+
