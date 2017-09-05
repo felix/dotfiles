@@ -12,7 +12,7 @@ set fast_reply           # don't ask for sbj and to
 set reply_to
 set forward_format="Fwd: %s"
 set imap_check_subscribed
-set imap_list_subscribed
+#set imap_list_subscribed
 unset imap_passive
 set index_format="%4C %Z |%{%d %b %Y %R}| %-20.20F %?M?(#%03M)&(%5c)? %s"
 set mail_check=30
@@ -21,9 +21,22 @@ set mailcap_path="~/.mailcap"  # mime types and apps
 set mbox_type=Maildir
 set menu_context=5       # lines of context
 set menu_scroll          # scroll line by line when reaching end of page.
+
 unset ssl_usesystemcerts
 set certificate_file=~/.mutt/certificates
+set ssl_force_tls=yes
+set ssl_starttls=yes
+set ssl_use_sslv2=no
+set ssl_use_sslv3=no
+set ssl_use_tlsv1=no
+set ssl_use_tlsv1_1=no
+set ssl_use_tlsv1_2=yes
+set ssl_verify_dates=yes
+set ssl_verify_host=yes
+
 set net_inc=5
+#set new_mail_command="notify-send 'F: %F S: %s' &"
+set new_mail_command="notify-send 'New email' '%n new messages, %u unread.' &"
 set noaskbcc
 set noaskcc
 set nobeep
@@ -49,8 +62,6 @@ set sort=threads
 set sort_alias=alias
 set sort_aux=reverse-last-date # thread sort
 set sort_browser=alpha
-set ssl_force_tls=yes
-set ssl_starttls=yes
 set tilde                # pad with tildes
 set time_inc=100
 set timeout=10
