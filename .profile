@@ -7,6 +7,13 @@ export JAVA_HOME="/usr/local/openjdk8"
 [ -d "${HOME}/.node/bin" ] && PATH=${HOME}/.node/bin:$PATH
 [ -d "${HOME}/.cabal/bin" ] && PATH=${HOME}/.cabal/bin:$PATH
 [ -d "${HOME}/bin" ] && PATH=${HOME}/bin:$PATH
+if [ -d "${HOME}/perl5/bin" ]; then
+    PATH=${HOME}/perl5/bin:$PATH
+    export PERL5LIB="{$HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+    export PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+    export PERL_MB_OPT="--install_base \"${HOME}/perl5\""
+    export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
+fi
 export PATH
 export GOPATH=$HOME
 export XML_CATALOG_FILES="${HOME}/src/XMLCatalog/catalog.xml"
@@ -23,6 +30,8 @@ export HISTFILE=~/.history
 export CLICOLOR=true
 export SAVEHIST=9000
 #export XDG_RUNTIME_DIR=/run/user/$(id -u)
+export VIRTUALENV_PYTHON=/usr/local/bin/python3
+
 
 if [ -n "$KSH_VERSION" ]; then
     export ENV=${HOME}/.kshrc
