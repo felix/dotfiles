@@ -53,6 +53,8 @@ Plug 'leafgarland/typescript-vim'
 Plug 'cmcaine/vim-uci'
 Plug 'lervag/vimtex'
 Plug 'slim-template/vim-slim'
+Plug 'lifepillar/pgsql.vim'
+Plug 'cespare/vim-toml'
 call plug#end()
 
 

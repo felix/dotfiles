@@ -1,5 +1,5 @@
 #!/bin/sh
 
 #i3lock -e -d -c 000000
-xlock -mode rain
-#xlock -mode strange
+#xlock -mode rain
+xlock -mode random
