@@ -1,14 +1,13 @@
-application/msword                                                      ; mutt_bgrun soffice '%s'
-application/vnd.ms-excel                                                ; mutt_bgrun soffice '%s'
-application/msword                                                      ; mugg_bgrun soffice %s                      ; copiousoutput
-text/html                                                               ; w3m -I %{charset} -T text/html             ; copiousoutput
-text/htm                                                                ; w3m -I %{charset} -T text/html             ; copiousoutput
-message/html                                                            ; w3m -I %{charset} -T text/html             ; copiousoutput
-message/htm                                                             ; w3m -I %{charset} -T text/html             ; copiousoutput
-image/svg+xml                                                           ; mutt_bgrun inkscape %s                     ;
-image/*                                                                 ; mutt_bgrun feh --fullscreen --auto-rotate --auto-zoom %s ;
-application/x-gunzip                                                    ; gzcat                                      ; copiousoutput
-application/x-tar-gz                                                    ; gunzip -c %s | tar -tf -                   ; copiousoutput
-application/postscript                                                  ; ps2ascii %s                                ; copiousoutput
-application/pdf                                                         ; mutt_bgrun zathura '%s'
-application/vnd.openxmlformats-officedocument.wordprocessingml.document ; mutt_bgrun soffice '%s'
+application/msword     ; mutt_bgrun soffice '%s'
+application/vnd.*      ; mutt_bgrun soffice '%s'
+text/html              ; w3m -o color=1 -I %{charset} -T text/html                ; copiousoutput
+text/htm               ; w3m -o color=1 -I %{charset} -T text/html                ; copiousoutput
+text/calendar          ; ~/bin/icalview.rb                                        ; copiousoutput
+message/html           ; w3m -o color=1 -I %{charset} -T text/html                ; copiousoutput
+message/htm            ; w3m -o color=1 -I %{charset} -T text/html                ; copiousoutput
+image/svg+xml          ; mutt_bgrun inkscape %s                                   ;
+image/*                ; mutt_bgrun feh --fullscreen --auto-rotate --auto-zoom %s ;
+application/x-gunzip   ; gzcat                                                    ; copiousoutput
+application/x-tar-gz   ; gunzip -c %s | tar -tf -                                 ; copiousoutput
+application/postscript ; ps2ascii %s                                              ; copiousoutput
+application/pdf        ; mutt_bgrun zathura '%s'

@@ -92,7 +92,7 @@ attachments -A message/external-body
 attachments -A text/x-vcard
 attachments -I message/external-body
 alternative_order text/plain text text/html application/postscript image/*
-auto_view text/html application/x-gunzip application/postscript application/x-tar-gz application/x-pgp-message
+auto_view text/html application/x-gunzip application/postscript application/x-tar-gz application/x-pgp-message text/calendar
 
 bind  index,pager <space> next-unread-mailbox
 bind  index   <right>  display-message
