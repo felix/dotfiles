@@ -9,8 +9,8 @@ alias mv='mv -v'
 alias wget="wget --timeout 10 -c"
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
-alias mutt-freestyle='mutt -F ~/.mutt/muttrc.freestyle'
-alias mutt-userspace='mutt -F ~/.mutt/muttrc.userspace'
+alias mutt-freestyle='neomutt -F ~/.mutt/muttrc.freestyle'
+alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
 # maths in the CLI
 calc(){ echo "scale=2;$@" | bc;}
 
