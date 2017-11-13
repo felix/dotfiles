@@ -13,8 +13,6 @@ ui:
     color: yes
 import:
     resume: ask
-    default_action: asis
-    none_rec_action: asis
     log: ~/Music/meta/beets-import.log
 replace:
     '[\\/]': _
@@ -25,6 +23,7 @@ replace:
     '\s+$': ''
     '^\s+': ''
     '\s+': _
+    '[“”]': '"'
 plugins: inline missing chroma mbsync scrub zero fetchart lastgenre acousticbrainz lyrics smartplaylist info
 item_fields:
     multidisc: 1 if disctotal > 1 else 0
@@ -54,3 +53,6 @@ zero:
     fields: images
     comments: [EAC, LAME, from.+collection, 'ripped by']
     update_database: true
+acousticbrainz:
+    auto: yes
+    force: no
