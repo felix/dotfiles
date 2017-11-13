@@ -72,6 +72,6 @@ fi
 if [ -e $HOME/bin/chruby.sh ]; then
     source $HOME/bin/chruby.sh
     #source /usr/local/share/chruby/auto.sh
-    chruby 2.4.1
+    chruby system
 fi
 [ -e /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
