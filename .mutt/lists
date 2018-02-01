@@ -8,6 +8,7 @@ mailman.powerdns.com \
 @freebsd.org \
 @dragonflybsd.org \
 .github.com \
+misc.opensmtpd.org \
 pgpool.net
 
 #  vim: set ft=muttrc:
