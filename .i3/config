@@ -1,7 +1,9 @@
 
 set $mod Mod1
 
-font -*-fixed-medium-r-normal-*-12-*-*-*-*-*-iso10646-1
+font pango:monospace 8
+#font pango:DejaVu Sans Mono 8
+#font -*-fixed-medium-r-normal-*-12-*-*-*-*-*-iso10646-1
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -46,7 +48,7 @@ bindsym $mod+Ctrl+h split h
 bindsym $mod+Ctrl+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
+bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
