@@ -14,19 +14,18 @@
     sl = stash list
     sp = stash pop
     ls = ls-files
-    tls = tag --sort=v:refname -n1
     # log
     lg = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
     # log diff
     lgd = log -u
     # log files
     lgf = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    # log tags
+    lgt = tag --sort=-v:refname -n1
     # subtrees
-    stlg = !"git log | grep git-subtree-dir | awk '{ print $2 }'"
-    stad = !"f() { git subtree add --squash --prefix=$2 $1 master; }; f"
-    stup = !"f() { git subtree pull --squash --prefix=$2 $1 master; }; f"
-    # submodules
-    smup = submodule update --init
+    stl = !"git log | grep git-subtree-dir | awk '{ print $2 }'"
+    sta = !"f() { git subtree add --squash --prefix=$2 $1 master; }; f"
+    stu = "!f() { git subtree pull --squash --prefix=$2 $1 master; }; f"
 [color]
     ui = true
 [color "status"]
@@ -35,6 +34,8 @@
     untracked = cyan
 [branch]
     autosetupmerge = true
+[github]
+    user = felix
 [gui]
     spellingdictionary = none
 [mergetool "vimdiff3"]
