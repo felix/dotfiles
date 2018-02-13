@@ -1,0 +1,40 @@
+
+// Incomplete Downloads
+// At least for now, these prevent Syncthing from transferring data that's
+// going to be thrown out anyway once the download is finished and the
+// file is renamed. Things may change when Syncthing gets smarter.
+//
+// Firefox downloads and other things
+*.part
+// Chrom(ium|e) downloads
+*.crdownload
+
+// Temporary / Backup Files
+*~
+.*.swp
+
+// OS-generated files (OS X)
+.DS_Store
+.Spotlight-V100
+.Trashes
+._*
+.Trash-*
+
+// OS-generated files (Windows)
+desktop.ini
+ehthumbs.db
+Thumbs.db
+
+// BTSync files
+.sync
+*.bts
+*.!Sync
+.SyncID
+.SyncIgnore
+.SyncArchive
+*.SyncPart
+*.SyncTemp
+*.SyncOld
+
+// Synology files
+@eaDir
