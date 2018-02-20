@@ -37,15 +37,18 @@ set laststatus=2
 "
 
 call plug#begin('~/.vim/plugged')
+" UI
 Plug 'altercation/vim-colors-solarized'
+Plug 'ervandew/supertab'
+Plug 'godlygeek/tabular'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/goyo.vim'
+" Filetypes
 Plug 'cespare/vim-toml'
 Plug 'cmcaine/vim-uci'
-Plug 'ervandew/supertab'
 Plug 'fatih/vim-go'
-Plug 'godlygeek/tabular'
-Plug 'itchyny/lightline.vim'
 Plug 'jamessan/vim-gnupg'
-Plug 'jlanzarotta/bufexplorer'
 Plug 'leafgarland/typescript-vim'
 Plug 'lervag/vimtex'
 Plug 'lifepillar/pgsql.vim'
@@ -53,8 +56,11 @@ Plug 'pangloss/vim-javascript'
 Plug 'pearofducks/ansible-vim'
 Plug 'slim-template/vim-slim'
 Plug 'tmatilai/gitolite.vim'
-Plug 'tpope/vim-fugitive'
 Plug 'w0rp/ale'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+" Utils
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 
