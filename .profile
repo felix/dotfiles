@@ -29,8 +29,9 @@ export HISTSIZE=9000
 export HISTFILE=~/.history
 export CLICOLOR=true
 export SAVEHIST=9000
-#export XDG_RUNTIME_DIR=/run/user/$(id -u)
 export VIRTUALENV_PYTHON=/usr/local/bin/python3
+#export XDG_RUNTIME_DIR=/run/user/$(id -u)
+[ "$XDG_CURRENT_DESKTOP" = "KDE" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] || export QT_QPA_PLATFORMTHEME="qt5ct"
 
 
 if [ -n "$KSH_VERSION" ]; then
@@ -38,16 +39,3 @@ if [ -n "$KSH_VERSION" ]; then
 fi
 
 #umask 022
-
-case "$OSTYPE" in
-    linux*)
-        platform="linux"
-        ;;
-    openbsd*)
-        platform="bsd"
-        ;;
-    *)
-        platform="unknown"
-        ;;
-esac
-export $platform
