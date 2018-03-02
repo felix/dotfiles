@@ -32,12 +32,6 @@ if [ ${TERM} == "xterm" ]; then
     export LESS_TERMCAP_us=$'\E[04;33;146m'  # begin underline is now yellow
 fi
 
-if [ "${platform}" == 'linux' ]; then
-    # 'ls' colors
-    eval $(dircolors -b ~/.dircolors)
-fi
-
-
 # completion
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     source /etc/bash_completion
