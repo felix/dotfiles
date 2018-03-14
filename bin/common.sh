@@ -1,6 +1,6 @@
 #!/bin/sh
 
-hostname=$(hostname -s)
+#hostname=$(hostname -s)
 
 alias ll='ls -l'
 alias la='ls -A'
@@ -18,9 +18,6 @@ alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
 
 # maths in the CLI
 calc(){ printf 'scale=2;%s\n' "$*" |bc;}
-
-# Sometimes I need AltGr, make sure it is the right Alt key
-[ "$hostname" = "beastie" ] && xmodmap -e "keycode 113 = Alt_R" -e "remove mod1 = Alt_R" -e "add mod3 = Alt_R"
 
 SSH_ENV="$HOME/.ssh/environment"
 SSH_AGENT=$(which ssh-agent)
@@ -59,13 +56,12 @@ TMUX_PATH=$(which tmux)
 if [ "$SHOWED_MUX_MESSAGE" != "true" ]; then
     if [ -x "$SCREEN_PATH" ]; then
         detached_screens=$(screen -list | grep Detached)
-        [ ! -z "$detached_screens" ] && printf '%s\n' "$detached_screens"
+        [ ! -z "$detached_screens" ] && printf '\nDetached Screen: %s\n' "$detached_screens"
     fi
     if [ -x "$TMUX_PATH" ]; then
         detached_tmux=$(tmux ls 2> /dev/null)
-        [ ! -z "$detached_tmux" ] && printf '%s\n' "$detached_tmux"
+        [ ! -z "$detached_tmux" ] && printf '\nDetached Tmux: %s\n' "$detached_tmux"
     fi
-    printf '%s\n' "$detached_screens"
     export SHOWED_MUX_MESSAGE="true"
 fi
 

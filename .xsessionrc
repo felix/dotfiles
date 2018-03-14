@@ -14,6 +14,9 @@ xsetroot -solid "#000000"
 # Source local fonts too
 [ -d ~/.fonts ] && xset +fp ~/.fonts/
 
+# Sometimes I need AltGr, make sure it is the right Alt key
+[ "$hostname" = "beastie" ] && xmodmap -e "keycode 113 = Alt_R" -e "remove mod1 = Alt_R" -e "add mod3 = Alt_R"
+
 # Add thai and lahu keyboards
 setxkbmap -I"$HOME/.xkb -option grp:shifts_toggle,grp_led:scroll" "us,th,lhu" -print |xkbcomp -I"$HOME/.xkb" - "$DISPLAY"
 #setxkbmap -I$HOME/.xkb -option grp:shifts_toggle,grp_led:scroll "us,th" -print | xkbcomp -I$HOME/.xkb - $DISPLAY
