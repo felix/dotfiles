@@ -1,4 +1,6 @@
 
+hostname=$(hostname -s)
+
 #export JAVA_HOME="/usr/lib/jvm/openjdk"
 #export JAVA_HOME="/usr/lib/jvm/jdk1.8.0_101"
 export JAVA_HOME="/usr/local/openjdk8"
@@ -33,6 +35,9 @@ export VIRTUALENV_PYTHON=/usr/local/bin/python3
 #export XDG_RUNTIME_DIR=/run/user/$(id -u)
 [ "$XDG_CURRENT_DESKTOP" = "KDE" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] || export QT_QPA_PLATFORMTHEME="qt5ct"
 
+[ "$hostname" = "beastie" ] && export http_proxy="http://10.1.1.1:3128"
+[ "$hostname" = "docker" ] && export http_proxy="http://10.1.1.1:3128"
+[ "$hostname" = "zappa" ] && export http_proxy="http://10.0.2.6:3128"
 
 if [ -n "$KSH_VERSION" ]; then
     export ENV=${HOME}/.kshrc

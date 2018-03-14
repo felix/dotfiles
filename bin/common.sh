@@ -19,6 +19,8 @@ alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
 # maths in the CLI
 calc(){ printf 'scale=2;%s\n' "$*" |bc;}
 
+# Sometimes I need AltGr, make sure it is the right Alt key
+[ "$hostname" = "beastie" ] && xmodmap -e "keycode 113 = Alt_R" -e "remove mod1 = Alt_R" -e "add mod3 = Alt_R"
 
 SSH_ENV="$HOME/.ssh/environment"
 SSH_AGENT=$(which ssh-agent)
