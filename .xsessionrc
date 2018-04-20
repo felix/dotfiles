@@ -6,7 +6,6 @@ hostname=$(hostname -s)
 xrdb -merge "$HOME/.Xresources"
 
 [ "$hostname" = "monk" ] && xset dpms 300 1800 3600
-[ "$hostname" = "beastie" ] && xset dpms 1800 3600 7200
 xset s off
 xset -b
 xsetroot -solid "#000000"
