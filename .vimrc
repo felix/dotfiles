@@ -59,6 +59,7 @@ Plug 'tmatilai/gitolite.vim'
 Plug 'w0rp/ale'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'zah/nim.vim'
 " Utils
 Plug 'tpope/vim-fugitive'
 call plug#end()
