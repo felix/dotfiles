@@ -1,14 +1,12 @@
 #lists 
 
 subscribe \
-@openbsd.org \
 @bouncycastle.org \
 lists.opennicproject.org \
-mailman.powerdns.com \
-@freebsd.org \
-@dragonflybsd.org \
 .github.com \
 misc.opensmtpd.org \
+.googlegroups.com \
 pgpool.net
 
+subscribe -group bsd @openbsd freebsd.org  @dragonflybsd.org
 #  vim: set ft=muttrc:
