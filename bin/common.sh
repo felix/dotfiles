@@ -15,9 +15,14 @@ alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 alias mutt-freestyle='neomutt -F ~/.mutt/muttrc.freestyle'
 alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
+# Docker
+alias dm='docker-machine'
+alias dc='docker-compose'
+alias dcl='docker-compose logs -t -f --tail=100'
+dcu(){ dc pull "$1" && dc up -d "$1" && dcl "$1"; }
 
 # maths in the CLI
-calc(){ printf 'scale=2;%s\n' "$*" |bc;}
+calc(){ printf 'scale=2;%s\n' "$*" |bc; }
 
 SSH_ENV="$HOME/.ssh/environment"
 SSH_AGENT=$(which ssh-agent)
