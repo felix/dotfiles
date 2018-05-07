@@ -42,16 +42,23 @@ chpwd () {print -Pn "\e]0;%n@%m: %~\a"}
 ## Prompt
 
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn hg
+zstyle ':vcs_info:*' enable git hg fossil
 zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
 zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
 zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
-precmd () { vcs_info }
+precmd () {
+    vcs_info
+    _docker_machine=""
+    if [ -n "$DOCKER_MACHINE_NAME" ]; then
+        _docker_machine="(🐳 $DOCKER_MACHINE_NAME) "
+    fi
+    export _docker_machine
+}
 
 setopt PROMPT_SUBST
 autoload -U promptinit && promptinit
 PS1='%{$fg[green]%}(%{$fg[white]%}%*%{$fg[green]%})[%(!.$fg[red].$fg[yellow])%n%{$fg[green]%}@%{$fg[green]%}%m%{$fg[green]%}]%(?.. $fg[red]%? )%{$fg[white]%}%~
-%{$fg[green]%}${vcs_info_msg_0_}%{$reset_color%}%(!.#.$) '
+%{$fg[green]%}${vcs_info_msg_0_}%{$reset_color%}${_docker_machine}%(!.#.$) '
 
 
 ## Completion
