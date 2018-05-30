@@ -13,6 +13,9 @@ alias mv='mv -v'
 alias wget="wget --timeout 10 -c"
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
+alias fsl="fossil"
+alias psql="psql --host pgsql"
+# Mail
 alias mutt-freestyle='neomutt -F ~/.mutt/muttrc.freestyle'
 alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
 # Docker
