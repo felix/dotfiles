@@ -17,7 +17,7 @@ if [ -d "${HOME}/perl5/bin" ]; then
     export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
 fi
 export PATH
-export GOPATH=/home/felix
+export GOPATH=$HOME
 export XML_CATALOG_FILES="${HOME}/src/XMLCatalog/catalog.xml"
 export LC_ALL=en_AU.UTF-8
 export LC_CTYPE=en_AU.UTF-8
