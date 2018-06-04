@@ -1,3 +1,62 @@
+! Fonts
+URxvt*font: xft:Hack:size=10, -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1, xft:Noto\ Emoji
+URxvt*letterSpace: -1
+xterm*font: -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1
+!xterm*boldFont: -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1
+xterm*wideFont: -misc-fixed-medium-r-normal-ja-*-*-*-*-*-*-iso10646-1
+!xterm*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
+!xterm*faceName: Free Mono:size=12
+!xterm*faceNameDoublesize: Unifont:size=12
+!xterm*faceNameDoublesize: Droid Sans Japanese:style=Regular
+!xterm*faceNameDoublesize: xft:Droid Sans Japanese:style=Regular
+
+! term common
+*loginShell: true
+*scrollBar: false
+*termName: xterm-256color
+*visualBell: false
+
+! URxvt
+URxvt*perl-ext-common:
+URxvt*perl-ext:
+URxvt*saveLines: 0
+URxvt*scrollBar_right: false
+URxvt*scrollTtyKeypress: true
+URxvt*scrollTtyOutput:  false
+URxvt*scrollWithBuffer: true
+URxvt*urgentOnBell: false
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+
+! xterm
+xterm*bellIsUrgent: true
+xterm*charClass: 33:48,36-38:48,43-47:48,58:48,61:48,63-64:48,126:48
+xterm*cutNewline: false
+xterm*dynamicColors: true
+xterm*eightBitInput: true
+xterm*eightBitSelectTypes: true
+xterm*jumpScroll: true
+xterm*locale: utf8
+xterm*multiScroll: true
+xterm*saveLines: 512
+xterm*scrollKey: true
+xterm*scrollTtyOutput: false
+xterm*trimSelection: true
+xterm*utf8: 2
+
+! xcalc
+xcalc*geometry: 300x375
+
+! color man pages
+*VT100*colorMode: on
+*VT100*boldColors: on
+*VT100*dynamicColors: on
+*VT100*colorULMode:on
+*VT100*underLine: off
+*VT100*colorBDMode: on
+*VT100*colorUL: #b58900
+*VT100*colorBD: #859900
+
 ! colours --------------------------------------------------------------------
 
 ! Solarized color scheme for the X Window System
@@ -61,57 +120,3 @@
 !! white dark/light
 *color7:                S_base2
 *color15:               S_base3
-
-
-! xterm ----------------------------------------------------------------------
-
-xterm*termName:             xterm-256color
-!xterm*font:                -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
-*font:                 -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1
-xterm*boldFont:             -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1
-xterm*wideFont:             -misc-fixed-medium-r-normal-ja-*-*-*-*-*-*-iso10646-1
-!xterm*faceName:            Free Mono:size=12
-!xterm*faceName:             Unifont:size=12
-!xterm*faceNameDoublesize:   Droid Sans Japanese:style=Regular
-!xterm*faceNameDoublesize:   xft:Droid Sans Japanese:style=Regular
-xterm*dynamicColors:        true
-xterm*utf8:                 2
-xterm*eightBitInput:        true
-xterm*eightBitSelectTypes:  true
-xterm*saveLines:            512
-xterm*cutNewline:           false
-xterm*scrollKey:            true
-xterm*scrollTtyOutput:      false
-xterm*scrollBar:            false
-xterm*loginShell:           true
-!xterm*locale:               true
-xterm*locale:               utf8
-xterm*jumpScroll:           true
-xterm*multiScroll:          true
-!xterm*toolBar:             false
-xterm*bellIsUrgent:         true
-xterm*visualBell:           false
-xterm*trimSelection:        true
-xterm*charClass:            33:48,36-38:48,43-47:48,58:48,61:48,63-64:48,126:48
-
-! xcalc ----------------------------------------------------------------------
-
-xcalc*geometry:         300x375
-
-! color man pages
-*VT100*colorMode:       on
-*VT100*boldColors:      on
-*VT100*dynamicColors:   on
-*VT100*colorULMode:     on
-*VT100*underLine:       off
-*VT100*colorBDMode:     on
-*VT100*colorUL:         #b58900
-*VT100*colorBD:         #859900
-
-! xpdf -----------------------------------------------------------------------
-
-xpdf*enableFreetype:    yes
-xpdf*antialias:         yes
-xpdf*foreground:        black
-xpdf*background:        white
-xpdf*urlCommand:        chromium %s
