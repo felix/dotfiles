@@ -2,4 +2,4 @@
 
 #i3lock -e -d -c 000000
 #xlock -mode rain
-xlock -mode random
+xlock -modelist rain,space,flow,spline,pyro,anemone

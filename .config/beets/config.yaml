@@ -45,6 +45,8 @@ smartplaylist:
           query: ['mb_albumid::^$', 'format:MP3', 'rg_track_gain::^$', 'original_year::^[^12]']
         - name: '%left{$year,3}0s.m3u'
           query: 'year::^(1|2)'
+        - name: 'Danceable.m3u'
+          query: 'bpm::120..140'
 lastgenre:
     force: no
     canonical: yes
