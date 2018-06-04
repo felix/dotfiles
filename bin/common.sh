@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#hostname=$(hostname -s)
+hostname=$(hostname -s)
 
 alias ll='ls -l'
 alias la='ls -A'
@@ -14,7 +14,6 @@ alias wget="wget --timeout 10 -c"
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 alias fsl="fossil"
-alias psql="psql --host pgsql"
 # Mail
 alias mutt-freestyle='neomutt -F ~/.mutt/muttrc.freestyle'
 alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
@@ -27,33 +26,12 @@ dcu(){ docker-compose pull "$1" && docker-compose up -d "$1" && dcl "$1"; }
 # maths in the CLI
 calc(){ printf 'scale=2;%s\n' "$*" |bc; }
 
-SSH_ENV="$HOME/.ssh/environment"
-SSH_AGENT=$(which ssh-agent)
-SSH_ADD=$(which ssh-add)
-
-start_ssh_agent() {
-    echo "Initializing new SSH agent..."
-    $SSH_AGENT | sed 's/^echo/#echo/' > "${SSH_ENV}"
-    echo succeeded
-    chmod 600 "${SSH_ENV}"
-    # shellcheck disable=SC1090
-    . "${SSH_ENV}" >/dev/null
-    $SSH_ADD
-}
-
-if [ -z "$SSH_AUTH_SOCK" ]; then
-    if [ -x "$SSH_AGENT" ]; then
-        # source SSH settings, if applicable
-        if [ -f "${SSH_ENV}" ]; then
-            # shellcheck disable=SC1090
-            . "${SSH_ENV}" >/dev/null
-            uid=$(id -u)
-            [ "$(pgrep -u "$uid" ssh-agent)" = "$SSH_AGENT_PID" ] || { start_ssh_agent; }
-        else
-            start_ssh_agent;
-        fi
-    fi
+if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+  eval `ssh-agent`
+  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
 fi
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+ssh-add -l > /dev/null || ssh-add
 
 GPG_TTY=$(tty)
 export GPG_TTY
@@ -63,7 +41,7 @@ TMUX_PATH=$(which tmux)
 
 if [ "$SHOWED_MUX_MESSAGE" != "true" ]; then
     if [ -x "$SCREEN_PATH" ]; then
-        detached_screens=$(screen -list | grep Detached)
+        detached_screens=$(screen -list |grep Detached)
         [ ! -z "$detached_screens" ] && printf '\nDetached Screen: %s\n' "$detached_screens"
     fi
     if [ -x "$TMUX_PATH" ]; then
