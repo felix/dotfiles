@@ -4,7 +4,7 @@ syntax enable sync minlines=200
 
 set background=dark
 set cinoptions=b1
-set colorcolumn=80
+set colorcolumn=81
 set cursorline
 set directory=~/tmp//,/tmp//,.
 set encoding=utf-8
@@ -32,6 +32,11 @@ set ttyfast
 set viminfo='1000,f1,:100,@100,/20,h
 set visualbell
 set whichwrap+=<,>,h,l,[,]
+
+if executable("ag")
+    set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
 
 set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "              | | | | |  |   |      |  |     |    |
@@ -70,6 +75,7 @@ Plug 'zah/nim.vim'
 " Utils
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
+Plug 'romainl/vim-qf'
 call plug#end()
 
 let g:solarized_termtrans=1
@@ -94,6 +100,7 @@ map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
+nnoremap ; :
 " Toggle line numbers and fold column for easy copying:
 nnoremap <F2> :set nonumber<CR>:set nofoldenable<CR>:set nolist<CR>:set paste<CR>
 nnoremap <F3> :set number<CR>:set foldenable<CR>:set list<CR>:set nopaste<CR>
@@ -128,7 +135,7 @@ vnoremap <leader>Q gq
 inoremap <silent> ,f <C-x><C-f>
 " current file
 inoremap <silent> ,n <C-x><C-n>
-" keywors in current and included
+" keywords in current and included
 inoremap <silent> ,i <C-x><C-i>
 " whole lines
 inoremap <silent> ,l <C-x><C-l>
