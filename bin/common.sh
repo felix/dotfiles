@@ -51,12 +51,12 @@ if [ "$SHOWED_MUX_MESSAGE" != "true" ]; then
     export SHOWED_MUX_MESSAGE="true"
 fi
 
-if [ -e "$HOME/bin/chruby.sh" ]; then
-    # shellcheck source=chruby.sh
-    . "$HOME/bin/chruby.sh"
-    #source /usr/local/share/chruby/auto.sh
-    chruby system
-fi
+#if [ -e "$HOME/bin/chruby.sh" ]; then
+#    # shellcheck source=chruby.sh
+#    . "$HOME/bin/chruby.sh"
+#    #source /usr/local/share/chruby/auto.sh
+#    chruby system
+#fi
 
 # shellcheck disable=SC1094
-[ -e /usr/local/bin/virtualenvwrapper.sh ] && . /usr/local/bin/virtualenvwrapper.sh
+#[ -e /usr/local/bin/virtualenvwrapper.sh ] && . /usr/local/bin/virtualenvwrapper.sh
