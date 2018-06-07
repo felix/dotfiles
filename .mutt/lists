@@ -6,7 +6,8 @@ lists.opennicproject.org \
 .github.com \
 misc.opensmtpd.org \
 .googlegroups.com \
-pgpool.net
+pgpool.net \
+lists.fossil-scm.org
 
 subscribe -group bsd @openbsd freebsd.org  @dragonflybsd.org
 #  vim: set ft=muttrc:
