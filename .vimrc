@@ -57,6 +57,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/goyo.vim'
+Plug 'w0rp/ale'
 " Filetypes
 Plug 'cespare/vim-toml'
 Plug 'cmcaine/vim-uci'
@@ -85,6 +86,7 @@ let g:solarized_underline=0
 "let g:solarized_italic=1
 "let g:solarized_termcolors=256
 let g:vim_markdown_frontmatter=1
+let g:ale_linters = { 'javascript': ['standard'] }
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
