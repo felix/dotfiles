@@ -1,17 +1,24 @@
 #!/bin/sh
 
-cachedir="${XDG_CACHE_HOME:-"$HOME/.cache"}"
-[ ! -d "$cachedir" ] && mkdir "$cachedir"
-cache="$cachedir/dmenu_cache"
-recent="$cachedir/dmenu_recent"
+history=10
 
-IFS=:
-if stest -dqr -n "$cache" "$PATH"; then
-    stest -flx "$PATH" |sort -u >"$cache"
+cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
+if [ -d "$cachedir" ]; then
+    cache=$cachedir/dmenu_cache
+    recent=$cachedir/dmenu_recent
+else   # if no xdg dir, fall back to dotfiles in ~
+    cache=$HOME/.dmenu_cache
+    recent=$HOME/.dmenu_recent
 fi
 
+IFS=:
+if stest -dqr -n "$cache" $PATH; then
+    stest -flx $PATH |sort -u >"$cache"
+fi
+unset IFS
+
 # Combine the recent with cache and pass to dmenu
-run=$(cat "$recent" "$cache" |dmenu -l 10 -p Run: "$@") || exit
+run=$(cat "$recent" "$cache" |uniq |dmenu -l $history -p Run: "$@") || exit
 
 # Run with shell if terminated with semi-colon
 case "$run" in
@@ -22,6 +29,6 @@ case "$run" in
 esac
 
 # Clean recent keeping last 10 entries
-(echo "$run"; cat "$recent" |sort -u |head -n 10 2>/dev/null) > "$recent.$$" && mv "$recent.$$" "$recent"
+(echo "$run"; cat "$recent" |sort -u |head -n $history 2>/dev/null) > "$recent.$$" && mv "$recent.$$" "$recent"
 
 exit 0
