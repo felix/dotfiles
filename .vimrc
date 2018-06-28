@@ -86,7 +86,9 @@ let g:solarized_underline=0
 "let g:solarized_italic=1
 "let g:solarized_termcolors=256
 let g:vim_markdown_frontmatter=1
+let g:ale_sign_column_always = 1
 let g:ale_linters = { 'javascript': ['standard'] }
+let g:go_fmt_fail_silently = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
@@ -185,7 +187,6 @@ function! ToggleConcealLevel()
     endif
 endfunction
 
-autocmd BufRead,BufNewFile package.json setlocal ft=javascript
 autocmd BufRead,BufNewFile *.tag setlocal ft=html
 autocmd BufRead,BufNewFile *mutt* setlocal ft=mail
 autocmd BufRead,BufNewFile *.deface setlocal ft=html
