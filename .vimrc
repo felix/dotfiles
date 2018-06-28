@@ -104,7 +104,7 @@ map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
-nnoremap ; :
+"nnoremap ; :
 " Toggle line numbers and fold column for easy copying:
 nnoremap <F2> :set nonumber<CR>:set nofoldenable<CR>:set nolist<CR>:set paste<CR>
 nnoremap <F3> :set number<CR>:set foldenable<CR>:set list<CR>:set nopaste<CR>
@@ -136,19 +136,19 @@ vnoremap <leader>Q gq
 
 " replace supertab?? see http://vimdoc.sourceforge.net/htmldoc/insert.html#ins-completion
 " file names
-inoremap <silent> ,f <C-x><C-f>
+inoremap <silent> ;f <C-x><C-f>
 " current file
-inoremap <silent> ,n <C-x><C-n>
+inoremap <silent> ;n <C-x><C-n>
 " keywords in current and included
-inoremap <silent> ,i <C-x><C-i>
+inoremap <silent> ;i <C-x><C-i>
 " whole lines
-inoremap <silent> ,l <C-x><C-l>
+inoremap <silent> ;l <C-x><C-l>
 " omni
-inoremap <silent> ,o <C-x><C-o>
+inoremap <silent> ;o <C-x><C-o>
 " thesaurus
-inoremap <silent> ,t <C-x><C-]>
+inoremap <silent> ;t <C-x><C-]>
 " user
-inoremap <silent> ,u <C-x><C-u>
+inoremap <silent> ;u <C-x><C-u>
 
 nnoremap <silent> <C-c><C-y> :call ToggleConcealLevel()<CR>
 map <leader>w :call <SID>ToggleVisibility()<CR>
