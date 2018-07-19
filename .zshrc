@@ -51,7 +51,7 @@ precmd () {
     vcs_info
     _docker_machine=""
     if [ -n "$DOCKER_MACHINE_NAME" ]; then
-        _docker_machine="(🐳 $DOCKER_MACHINE_NAME) "
+        _docker_machine="($DOCKER_MACHINE_NAME)"
     fi
     export _docker_machine
 }
@@ -59,7 +59,7 @@ precmd () {
 setopt PROMPT_SUBST
 autoload -U promptinit && promptinit
 PS1='%{$fg[green]%}(%{$fg[white]%}%*%{$fg[green]%})[%(!.$fg[red].$fg[yellow])%n%{$fg[green]%}@%{$fg[green]%}%m%{$fg[green]%}]%(?.. $fg[red]%? )%{$fg[white]%}%~
-%{$fg[green]%}${vcs_info_msg_0_}%{$reset_color%}${_docker_machine}%(!.#.$) '
+%{$fg[green]%}${vcs_info_msg_0_}%{$fg[blue]%}${_docker_machine}%{$reset_color%}%(!.#.$) '
 
 
 ## Completion

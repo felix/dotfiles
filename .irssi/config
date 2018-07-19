@@ -50,7 +50,7 @@ chatnets = {
 channels = (
   { name = "#freebsd"; chatnet = "Freenode"; autojoin = "Yes"; },
   { name = "#openbsd"; chatnet = "Freenode"; autojoin = "Yes"; }
-  { name = "#hindsight"; chatnet = "Mozilla"; autojoin = "Yes"; }
+  { name = "#lobsters"; chatnet = "Freenode"; autojoin = "Yes"; }
 );
 
 aliases = {
