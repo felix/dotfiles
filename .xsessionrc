@@ -29,7 +29,7 @@ fi
 # Screen
 [ -x "$(which xautolock)" ] && xautolock -time 5 -locker "$HOME/bin/lockscreen" &
 [ -x "$(which xdimmer)" ] && xdimmer -t 120 &
-[ -x "$(which redshift-gtk)" ] && redshift-gtk &
+[ -x "$(which redshift)" ] && redshift -m randr -t 5700:3500 -l -37.8023217:145.1144633 &
 
 # synergy
 #[ -x `which synergy` ] && synergy &
