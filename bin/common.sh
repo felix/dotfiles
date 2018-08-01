@@ -17,6 +17,7 @@ alias fsl="fossil"
 # Mail
 alias mutt-freestyle='neomutt -F ~/.mutt/muttrc.freestyle'
 alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
+alias mutt-seer='neomutt -F ~/.mutt/muttrc.seersec'
 # Docker
 alias dockerm='docker-machine'
 alias dockerc='docker-compose'

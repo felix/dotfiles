@@ -19,5 +19,4 @@ set status_format    = '-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d
 my_hdr Organization: FreestyleIoT, http://freestyleiot.com
 color status green black
 
-source ~/.mutt/gpg
 # vim: set ft=muttrc:

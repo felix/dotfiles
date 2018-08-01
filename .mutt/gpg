@@ -1,4 +1,3 @@
-set pgp_sign_as=$my_gpg_key
 set crypt_use_gpgme = yes
 #set crypt_autosign=yes
 set crypt_replysign = yes
@@ -6,4 +5,5 @@ set crypt_replyencrypt = yes
 set crypt_replysignencrypted = yes
 set pgp_good_sign="^\\[GNUPG:\\] GOODSIG"
 message-hook '!(~g|~G) ~b"^-----BEGIN\ PGP\ (SIGNED\ )?MESSAGE"' "exec check-traditional-pgp"
+
 # vim: set ft=muttrc :

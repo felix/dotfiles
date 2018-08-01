@@ -13,7 +13,7 @@ set record           = '+Sent'
 set trash            = '+Bin'
 set header_cache     = '~/.cache/mutt-userspace-headers'
 set message_cachedir = '~/.cache/mutt-userspace-bodies'
-set my_gpg_key       = '7E20D10B'
+set pgp_default_key  = '7E20D10B'
 set status_format    = '-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-userspace%>-(%P)---'
 send-hook . 'set signature=~/.mutt/signature.userspace'
 send-hook . 'set crypt_autosign=yes'
@@ -25,4 +25,5 @@ my_hdr X-PGP-Key: fp="971C F7B2 913A D163 70AC 02C3 B6F2 29D7 7E20 D10B"\; id="0
 color status brightwhite black
 
 source ~/.mutt/gpg
+
 # vim: set ft=muttrc:
