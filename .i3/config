@@ -15,7 +15,8 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec "$HOME/bin/dmenu-recent"
 bindsym $mod+p exec "$HOME/bin/dmenu-passwords"
 
-bindcode $mod+Ctrl+107 exec "$HOME/bin/lockscreen"
+#bindcode $mod+Ctrl+107 exec xautolock -locknow
+bindsym $mod+Ctrl+Delete exec xautolock -locknow
 
 # change focus
 bindsym $mod+h focus left

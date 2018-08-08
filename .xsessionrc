@@ -1,9 +1,9 @@
 #!/bin/sh
 
-hostname=$(hostname -s)
+hostname=$(hostname |cut -d. -f1)
 
 # load resources, to be sure
-xrdb -merge "$HOME/.Xresources"
+[ -x "$(which xrdb)" ] && xrdb -merge "$HOME/.Xresources"
 
 [ "$hostname" = "monk" ] && xset dpms 300 1800 3600
 xset s off
@@ -24,16 +24,22 @@ setxkbmap -I"$HOME/.xkb -option grp:shifts_toggle,grp_led:scroll" "us,th,lhu" -p
 if [ -x "$(which xrandr)" ]; then
     [ "$hostname" = "monk" ] && xrandr --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output LVDS1 --mode 1366x768 --pos 232x1080 --rotate normal --output DP1 --off --output VGA1 --off &
     [ "$hostname" = "beastie" ] && xrandr --output DisplayPort-0 --mode 1920x1080 --pos 1920x0 --rotate normal --output DVI-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal &
+    [ "$hostname" = "bowie" ] && xrandr --output DVI-I-1-1 --mode 1920x1080 --pos 0x440 --rotate normal --output DVI-I-2-2 --mode 1920x1080 --pos 1920x0 --rotate right --output HDMI-1 --off --output eDP-1 --primary --mode 1920x1080 --pos 3000x840 --rotate normal
+
+    [ -x "$(which redshift)" ] && redshift -m randr -t 5500:3500 -l -37.8023217:145.1144633 &
 fi
 
-# Screen
-[ -x "$(which xautolock)" ] && xautolock -time 5 -locker "$HOME/bin/lockscreen" &
+if [ -x "$(which xautolock)" ]; then 
+    if [ -x "$(which xlock)" ]; then
+        xautolock -time 5 -locker xlock -modelist rain,space,pyro &
+    elif [ -x "$(which i3lock)" ]; then
+        xautolock -time 5 -locker i3lock -f -e -d -c 000000 &
+    fi
+fi
 [ -x "$(which xdimmer)" ] && xdimmer -t 120 &
-[ -x "$(which redshift)" ] && redshift -m randr -t 5700:3500 -l -37.8023217:145.1144633 &
-
-# synergy
 #[ -x `which synergy` ] && synergy &
-#[ -x `which synclient` ] && synclient CoastingSpeed=0 TapButton3=2
-#[ -x `which syndaemon` ] && syndaemon -R -K -i 0.5 -d &
+[ -x "$(which synclient)" ] && synclient CoastingSpeed=0 TapButton3=2 ClickFinger3=2
+[ -x "$(which syndaemon)" ] && syndaemon -R -K -i 0.5 -d &
+[ -x "$(which nm-applet)" ] && nm-applet &
 
 # vim: set ft=sh :

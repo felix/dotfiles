@@ -1,13 +1,14 @@
 
-hostname=$(hostname -s)
+#hostname=$(hostname |cut -d. -f1)
+os=$(uname -s)
+prefix="/usr"
+if [ "$os" = "FreeBSD" ]; then
+    prefix="/usr/local"
+fi
 
-#export JAVA_HOME="/usr/lib/jvm/openjdk"
-#export JAVA_HOME="/usr/lib/jvm/jdk1.8.0_101"
-export JAVA_HOME="/usr/local/openjdk8"
-#export JAVA_HOME="/usr/local/openjdk7"
-#export PATH="$HOME/.yarn/bin:$PATH"
 [ -d "${HOME}/.node/bin" ] && PATH=${HOME}/.node/bin:$PATH
 [ -d "${HOME}/.cabal/bin" ] && PATH=${HOME}/.cabal/bin:$PATH
+[ -d "${HOME}/.yarn/bin" ] && PATH=${HOME}/.yarn/bin:$PATH
 [ -d "${HOME}/bin" ] && PATH=${HOME}/bin:$PATH
 if [ -d "${HOME}/perl5/bin" ]; then
     PATH=${HOME}/perl5/bin:$PATH
@@ -18,25 +19,23 @@ if [ -d "${HOME}/perl5/bin" ]; then
 fi
 export PATH
 export GOPATH=$HOME
-export XML_CATALOG_FILES="${HOME}/src/XMLCatalog/catalog.xml"
+export SAVEHIST=9000
 export LC_ALL=en_AU.UTF-8
 export LC_CTYPE=en_AU.UTF-8
 export EDITOR=vim
 export VISUAL=$EDITOR
 export PAGER=less
 export BROWSER=firefox
+export VIRTUALENV_PYTHON=$prefix/bin/python3
 export GIT_EDITOR=$EDITOR
+export XML_CATALOG_FILES="${HOME}/src/XMLCatalog/catalog.xml"
 export PASSWORD_STORE_X_SELECTION=primary
+export JAVA_HOME=$prefix/openjdk8
 export HISTSIZE=9000
 export HISTFILE=~/.history
 export CLICOLOR=true
-export SAVEHIST=9000
-export VIRTUALENV_PYTHON=$(which python3)
 #export XDG_RUNTIME_DIR=/run/user/$(id -u)
 [ "$XDG_CURRENT_DESKTOP" = "KDE" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] || export QT_QPA_PLATFORMTHEME="qt5ct"
-
-if [ -n "$KSH_VERSION" ]; then
-    export ENV=${HOME}/.kshrc
-fi
+[ -n "$KSH_VERSION" ] && export ENV=${HOME}/.kshrc
 
 #umask 022
