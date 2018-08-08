@@ -1,34 +1,40 @@
 ! Fonts
-URxvt*font: xft:Hack:size=10, -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1, xft:Noto\ Emoji
-URxvt*letterSpace: -1
-xterm*font: -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1
+!.font: -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1
+!xterm*font: -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1
 !xterm*boldFont: -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1
-xterm*wideFont: -misc-fixed-medium-r-normal-ja-*-*-*-*-*-*-iso10646-1
-!xterm*font: -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
-!xterm*faceName: Free Mono:size=12
-!xterm*faceNameDoublesize: Unifont:size=12
-!xterm*faceNameDoublesize: Droid Sans Japanese:style=Regular
-!xterm*faceNameDoublesize: xft:Droid Sans Japanese:style=Regular
+!xterm*wideFont: -misc-fixed-medium-r-normal-ja-*-*-*-*-*-*-iso10646-1
 
 ! term common
 *loginShell: true
 *scrollBar: false
-*termName: xterm-256color
-*visualBell: false
 
-! URxvt
-URxvt*perl-ext-common:
-URxvt*perl-ext:
-URxvt*saveLines: 0
-URxvt*scrollBar_right: false
-URxvt*scrollTtyKeypress: true
-URxvt*scrollTtyOutput:  false
-URxvt*scrollWithBuffer: true
-URxvt*urgentOnBell: false
-URxvt.secondaryScreen: 1
-URxvt.secondaryScroll: 0
+! URxvt, using instance name urxvt
+!urxvt.font: -misc-fixed-medium-r-normal--15-*-*-*-*-*-iso10646-1
+urxvt.font: 9x15bold,\
+        -misc-fixed-bold-r-normal--15-140-75-75-c-90-iso10646-1,\
+        -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1, \
+        [codeset=JISX0208]xft:Kochi Gothic, \
+        xft:Bitstream Vera Sans Mono:autohint=true, \
+        xft:Code2000:antialias=false
+urxvt.boldFont:         -xos4-terminus-bold-r-normal--14-140-72-72-c-80-iso8859-15
+urxvt.italicFont:       xft:Bitstream Vera Sans Mono:italic:autohint=true
+urxvt.boldItalicFont:   xft:Bitstream Vera Sans Mono:bold:italic:autohint=true
+urxvt.matcher.button: 1
+urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+urxvt.perl-ext-common: default,matcher
+urxvt.saveLines: 0
+urxvt.scrollBar_right: false
+urxvt.scrollTtyKeypress: true
+urxvt.scrollTtyOutput:  false
+urxvt.scrollWithBuffer: true
+urxvt.secondaryScreen: 1
+urxvt.secondaryScroll: 0
+urxvt.urgentOnBell: false
+urxvt.urlLauncher: firefox
+urxvt.visualBell: false
 
 ! xterm
+xterm*termName: xterm-256color
 xterm*bellIsUrgent: true
 xterm*charClass: 33:48,36-38:48,43-47:48,58:48,61:48,63-64:48,126:48
 xterm*cutNewline: false
