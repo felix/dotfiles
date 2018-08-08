@@ -2,6 +2,7 @@ source ~/.mutt/muttrc.common
 
 set imap_user        = 'felix.hanley@seersec.com.au'
 set imap_pass        = `pass seersec/office365`
+set from             = 'Felix Hanley <felix.hanley@seersec.com.au>'
 set header_cache     = '~/.cache/mutt-seersec-headers''
 set message_cachedir = '~/.cache/mutt-seersec-bodies'
 set smime_default_key = 'a2136167.0'
@@ -11,6 +12,7 @@ my_hdr Organization: seersec, http://seersec.com.au
 color status green black
 
 set crypt_autosign      = yes
+set crypt_autoencrypt   = yes
 
 source ~/.mutt/office365
 source ~/.mutt/smime

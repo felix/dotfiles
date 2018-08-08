@@ -1,6 +1,6 @@
 #!/bin/sh
 
-hostname=$(hostname -s)
+#hostname=$(hostname |cut -d. -f1)
 
 alias ll='ls -l'
 alias la='ls -A'
@@ -58,6 +58,3 @@ fi
 #    #source /usr/local/share/chruby/auto.sh
 #    chruby system
 #fi
-
-# shellcheck disable=SC1094
-#[ -e /usr/local/bin/virtualenvwrapper.sh ] && . /usr/local/bin/virtualenvwrapper.sh
