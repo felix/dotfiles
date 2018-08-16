@@ -37,8 +37,8 @@ ssh-add -l > /dev/null || ssh-add
 GPG_TTY=$(tty)
 export GPG_TTY
 
-SCREEN_PATH=$(which screen)
-TMUX_PATH=$(which tmux)
+SCREEN_PATH=$(command -v screen)
+TMUX_PATH=$(command -v tmux)
 
 if [ "$SHOWED_MUX_MESSAGE" != "true" ]; then
     if [ -x "$SCREEN_PATH" ]; then
