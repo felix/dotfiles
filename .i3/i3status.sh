@@ -1,6 +1,6 @@
 #!/bin/sh
 
-hostname=`hostname -s`
+hostname=$(hostname |cut -d. -f1)
 
 i3status -c ~/.i3/i3status-${hostname}.conf | (read line && echo $line && read line && echo $line && read line && echo $line && while :
 do
