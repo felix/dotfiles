@@ -1,5 +1,5 @@
 text/calendar          ; ~/bin/icalview.rb                                        ; copiousoutput
-text/html              ; w3m -I %{charset} -T text/html                           ; copiousoutput
+text/html              ; w3m -o display_link_number=1 -I %{charset} -T text/html                           ; copiousoutput
 message/*              ; w3m -I %{charset} -T text/html                           ; copiousoutput
 image/svg+xml          ; mutt_bgrun inkscape %s                                   ; copiousoutput
 image/*                ; mutt_bgrun feh --fullscreen --auto-rotate --auto-zoom %s ; copiousoutput
