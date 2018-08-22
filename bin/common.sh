@@ -32,7 +32,9 @@ if [ ! -S ~/.ssh/ssh_auth_sock ]; then
   ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
 fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-ssh-add -l > /dev/null || ssh-add
+for i in $(ls $HOME/.ssh/*.pub); do
+    ssh-add -l |grep -q $(basename "${i%%.pub}") ||ssh-add "${i%%.pub}"
+done
 
 GPG_TTY=$(tty)
 export GPG_TTY

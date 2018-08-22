@@ -37,7 +37,7 @@ autoload -U colors
 colors
 
 # title
-chpwd () {print -Pn "\e]0;%n@%m: %~\a"}
+chpwd () { print -Pn "\e]0;%n@%m: %~\a" }
 
 
 ## Prompt
