@@ -30,7 +30,7 @@ set synmaxcol=200
 set tabstop=4
 set ttyfast
 set viminfo='1000,f1,:100,@100,/20,h
-set visualbell
+set novisualbell
 set whichwrap+=<,>,h,l,[,]
 
 if executable("ag")
