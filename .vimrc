@@ -61,6 +61,7 @@ Plug 'w0rp/ale'
 " Filetypes
 Plug 'cespare/vim-toml'
 Plug 'cmcaine/vim-uci'
+Plug 'zchee/vim-flatbuffers'
 Plug 'fatih/vim-go'
 Plug 'jamessan/vim-gnupg'
 Plug 'leafgarland/typescript-vim'
@@ -70,13 +71,11 @@ Plug 'pangloss/vim-javascript'
 Plug 'pearofducks/ansible-vim'
 Plug 'slim-template/vim-slim'
 Plug 'tmatilai/gitolite.vim'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'zah/nim.vim'
 " Utils
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
-Plug 'romainl/vim-qf'
+Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 
 let g:solarized_termtrans=1
@@ -113,7 +112,7 @@ nnoremap <F3> :set number<CR>:set foldenable<CR>:set list<CR>:set nopaste<CR>
 " add files with wildcards, like **/*.md for all markdown files
 nnoremap <leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
 " buffer prompt and displays all buffers
-nnoremap <leader>b :b <C-d>
+"nnoremap <leader>b :b <C-d>
 " similar to buffers but for opening a single file
 nnoremap <leader>e :e **/
 " drops to the grep line
