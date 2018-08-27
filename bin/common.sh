@@ -29,9 +29,9 @@ calc(){ printf 'scale=2;%s\n' "$*" |bc; }
 if [ ! -S ~/.ssh/ssh_auth_sock ]; then
   eval `ssh-agent`
   ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+  ssh-add
 fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-ssh-add
 
 GPG_TTY=$(tty)
 export GPG_TTY
