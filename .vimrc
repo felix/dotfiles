@@ -196,6 +196,7 @@ autocmd Filetype html setlocal ts=2 sw=2
 autocmd Filetype mail setlocal nohlsearch spell nobackup noswapfile nowritebackup noautoindent
 autocmd Filetype markdown setlocal spell
 autocmd Filetype ruby setlocal ts=2 sw=2
+autocmd Filetype python setlocal ts=4 tw=79
 
 " Jump to last known position
 autocmd BufReadPost *

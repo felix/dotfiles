@@ -15,7 +15,6 @@ alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 alias fsl="fossil"
 # Mail
-alias mutt-freestyle='neomutt -F ~/.mutt/muttrc.freestyle'
 alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
 alias mutt-seer='neomutt -F ~/.mutt/muttrc.seersec'
 # Docker
@@ -38,6 +37,9 @@ done
 
 GPG_TTY=$(tty)
 export GPG_TTY
+
+[ ! -d "$WORKON_HOME" ] && mkdir -p $WORKON_HOME
+. /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 SCREEN_PATH=$(command -v screen)
 TMUX_PATH=$(command -v tmux)

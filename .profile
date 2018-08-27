@@ -38,5 +38,6 @@ export CLICOLOR=true
 #export XDG_RUNTIME_DIR=/run/user/$(id -u)
 [ "$XDG_CURRENT_DESKTOP" = "KDE" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] || export QT_QPA_PLATFORMTHEME="qt5ct"
 [ -n "$KSH_VERSION" ] && export ENV=${HOME}/.kshrc
+export WORKON_HOME=$HOME/.venv
 
 #umask 022
