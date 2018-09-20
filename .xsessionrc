@@ -20,17 +20,10 @@ xsetroot -solid "#000000"
 setxkbmap -I"$HOME/.xkb -option grp:shifts_toggle,grp_led:scroll" "us,th,lhu" -print |xkbcomp -I"$HOME/.xkb" - "$DISPLAY"
 #setxkbmap -I$HOME/.xkb -option grp:shifts_toggle,grp_led:scroll "us,th" -print | xkbcomp -I$HOME/.xkb - $DISPLAY
 
-# Other screens
-if [ -x "$(command -v autorandr)" ]; then
-    autorandr --change
-elif [ -x "$(command -v xrandr)" ]; then
-    [ "$hostname" = "monk" ] && xrandr --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output LVDS1 --mode 1366x768 --pos 232x1080 --rotate normal --output DP1 --off --output VGA1 --off &
-    [ "$hostname" = "beastie" ] && xrandr --output DisplayPort-0 --mode 1920x1080 --pos 1920x0 --rotate normal --output DVI-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal &
-    [ "$hostname" = "bowie" ] && xrandr --output DVI-I-1-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output DVI-I-2-2 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off --output eDP-1 --mode 1280x720 --pos 1280x1080 --rotate normal &
-
-fi
+# Setup screens
+$HOME/bin/screen.sh
 [ -x "$(command -v redshift)" ] && redshift -m randr -t 5500:3500 -l -37.8023217:145.1144633 &
-[ -x "$(command -v xinput)" ] && xinput list --id-only 'ELAN Touchscreen' |xargs xinput disable
+#[ -x "$(command -v xinput)" ] && xinput list --id-only 'ELAN Touchscreen' |xargs xinput disable
 
 if [ -x "$(command -v xautolock)" ]; then 
     if [ -x "$(command -v xlock)" ]; then
@@ -41,10 +34,9 @@ if [ -x "$(command -v xautolock)" ]; then
 fi
 [ -x "$(command -v xdimmer)" ] && xdimmer -t 120 &
 #[ -x `command -v synergy` ] && synergy &
-[ -x "$(command -v synclient)" ] && synclient CoastingSpeed=0 \
-    TapButton1=1 TapButton2=3 TapButton3=2 \
-    ClickFinger3=2
-[ -x "$(command -v syndaemon)" ] && syndaemon -R -K -i 0.5 -d &
-[ -x "$(command -v nm-applet)" ] && nm-applet &
+#[ -x "$(command -v synclient)" ] && synclient CoastingSpeed=0 \
+#    TapButton1=1 TapButton2=3 TapButton3=2 \
+#    ClickFinger3=2
+#[ -x "$(command -v syndaemon)" ] && syndaemon -R -K -i 0.5 -d &
 
 # vim: set ft=sh :

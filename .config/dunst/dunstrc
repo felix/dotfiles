@@ -7,7 +7,7 @@ font = Monospace-10
 #   %b  body
 #   %i  iconname (including its path)
 #   %I  iconname (without its path)
-format = "%s %b"
+format = "%a: %s\n%b"
 
 # Sort messages by urgency
 sort = yes
@@ -77,7 +77,7 @@ sticky_history = no
 # This adds empty space above and under the text.
 line_height = 1.25
 
-# Draw a line of 'separatpr_height' pixel height between two notifications.
+# Draw a line of 'separator_height' pixel height between two notifications.
 # Set to 0 to disable
 separator_height = 1;
 
@@ -108,17 +108,17 @@ history = ctrl+grave
 # Otherwise the '#' and following  would be interpreted as a comment.
 background = "#268bd2"
 foreground = "#eee8d5"
-timeout = 2
+timeout = 5
 
 [urgency_normal]
 background = "#859900"
 foreground = "#eee8d5"
-timeout = 4
+timeout = 8
 
 [urgency_critical]
 background = "#dc322f"
 foreground = "#eee8d5"
-timeout = 5
+timeout = 10
 
 
 # Every section that isn't one of the above is interpreted as a rules

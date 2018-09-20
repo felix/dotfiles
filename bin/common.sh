@@ -37,7 +37,7 @@ GPG_TTY=$(tty)
 export GPG_TTY
 
 [ ! -d "$WORKON_HOME" ] && mkdir -p $WORKON_HOME
-. /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+. /usr/local/bin/virtualenvwrapper.sh
 
 SCREEN_PATH=$(command -v screen)
 TMUX_PATH=$(command -v tmux)
@@ -60,3 +60,4 @@ fi
 #    #source /usr/local/share/chruby/auto.sh
 #    chruby system
 #fi
+cd $HOME
