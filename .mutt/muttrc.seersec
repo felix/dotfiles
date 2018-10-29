@@ -1,7 +1,7 @@
 source ~/.mutt/muttrc.common
 
 set imap_user        = 'felix.hanley@seersec.com.au'
-set imap_pass        = `pass seersec/office365`
+set imap_pass        = `pass seersec/outlook.office365.com`
 set from             = 'Felix Hanley <felix.hanley@seersec.com.au>'
 set header_cache     = '~/.cache/mutt-seersec-headers''
 set message_cachedir = '~/.cache/mutt-seersec-bodies'

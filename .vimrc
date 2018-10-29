@@ -25,6 +25,7 @@ set shiftwidth=4
 set showbreak=>\
 set showmatch
 set smartcase
+set spellfile=~/.vim/spell/.en.add
 set spelllang=en_au
 set synmaxcol=200
 set tabstop=4
@@ -73,6 +74,8 @@ Plug 'slim-template/vim-slim'
 Plug 'tmatilai/gitolite.vim'
 Plug 'zah/nim.vim'
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
+Plug 'peter-edge/vim-capnp'
+Plug 'vim-scripts/ebnf.vim'
 " Utils
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
@@ -88,7 +91,9 @@ let g:solarized_underline=0
 let g:vim_markdown_frontmatter=1
 let g:ale_sign_column_always = 1
 let g:ale_linters = { 'javascript': ['standard'] }
-let g:go_fmt_fail_silently = 1
+let g:ale_linters_explicit = 1
+"let g:pymode_lint = 0
+"let g:go_fmt_fail_silently = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
@@ -197,6 +202,7 @@ autocmd Filetype html setlocal ts=2 sw=2
 autocmd Filetype mail setlocal nohlsearch spell nobackup noswapfile nowritebackup noautoindent
 autocmd Filetype markdown setlocal spell
 autocmd Filetype ruby setlocal ts=2 sw=2
+autocmd Filetype fbs setlocal ts=2 sw=2
 
 " Jump to last known position
 autocmd BufReadPost *
