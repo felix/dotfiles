@@ -35,9 +35,6 @@ export JAVA_HOME=$prefix/openjdk8
 export HISTSIZE=9000
 export HISTFILE=~/.history
 export CLICOLOR=true
-mkdir -p -m 0700 /tmp/xdg-felix
-export XDG_RUNTIME_DIR=/tmp/xdg-felix
-[ "$XDG_CURRENT_DESKTOP" = "KDE" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] || export QT_QPA_PLATFORMTHEME="qt5ct"
 [ -n "$KSH_VERSION" ] && export ENV=${HOME}/.kshrc
 #export WORKON_HOME=$HOME/.venv
 

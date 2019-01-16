@@ -14,17 +14,25 @@ xsetroot -solid "#000000"
 [ -d ~/.fonts ] && xset +fp ~/.fonts/
 
 # Sometimes I need AltGr, make sure it is the right Alt key
-[ "$hostname" = "beastie" ] && xmodmap -e "keycode 113 = Alt_R" -e "remove mod1 = Alt_R" -e "add mod3 = Alt_R"
+#[ "$hostname" = "beastie" ] && xmodmap -e "keycode 113 = Alt_R" -e "remove mod1 = Alt_R" -e "add mod3 = Alt_R"
 
 # Add thai and lahu keyboards
 setxkbmap -I"$HOME/.xkb -option grp:shifts_toggle,grp_led:scroll" "us,th,lhu" -print |xkbcomp -I"$HOME/.xkb" - "$DISPLAY"
 #setxkbmap -I$HOME/.xkb -option grp:shifts_toggle,grp_led:scroll "us,th" -print | xkbcomp -I$HOME/.xkb - $DISPLAY
+
+# XDG setup
+[ ! -d /tmp/xdg-felix ] && mkdir -m 0700 -p /tmp/xdg-felix
+export XDG_RUNTIME_DIR=/tmp/xdg-felix
+
+# Qt theming
+[ "$XDG_CURRENT_DESKTOP" = "KDE" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] || export QT_QPA_PLATFORMTHEME="qt5ct"
 
 # Setup screens
 $HOME/bin/screen.sh
 [ -x "$(command -v redshift)" ] && redshift -m randr -t 5500:3500 -l -37.8023217:145.1144633 &
 #[ -x "$(command -v xinput)" ] && xinput list --id-only 'ELAN Touchscreen' |xargs xinput disable
 
+# Screen control
 if [ -x "$(command -v xautolock)" ]; then 
     if [ -x "$(command -v xlock)" ]; then
         xautolock -time 5 -locker "xlock -modelist rain,space,pyro" &
@@ -33,6 +41,7 @@ if [ -x "$(command -v xautolock)" ]; then
     fi
 fi
 [ -x "$(command -v xdimmer)" ] && xdimmer -t 120 &
+
 #[ -x `command -v synergy` ] && synergy &
 #[ -x "$(command -v synclient)" ] && synclient CoastingSpeed=0 \
 #    TapButton1=1 TapButton2=3 TapButton3=2 \
