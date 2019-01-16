@@ -27,7 +27,7 @@ export VISUAL=$EDITOR
 export TERMINAL=urxvtcd
 export PAGER=less
 export BROWSER=firefox
-export VIRTUALENV_PYTHON=$prefix/bin/python3
+#export VIRTUALENV_PYTHON=$prefix/bin/python3
 export GIT_EDITOR=$EDITOR
 export XML_CATALOG_FILES="${HOME}/src/XMLCatalog/catalog.xml"
 export PASSWORD_STORE_X_SELECTION=primary
@@ -35,9 +35,10 @@ export JAVA_HOME=$prefix/openjdk8
 export HISTSIZE=9000
 export HISTFILE=~/.history
 export CLICOLOR=true
-#export XDG_RUNTIME_DIR=/run/user/$(id -u)
+mkdir -p -m 0700 /tmp/xdg-felix
+export XDG_RUNTIME_DIR=/tmp/xdg-felix
 [ "$XDG_CURRENT_DESKTOP" = "KDE" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] || export QT_QPA_PLATFORMTHEME="qt5ct"
 [ -n "$KSH_VERSION" ] && export ENV=${HOME}/.kshrc
-export WORKON_HOME=$HOME/.venv
+#export WORKON_HOME=$HOME/.venv
 
 #umask 022
