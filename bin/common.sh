@@ -24,7 +24,6 @@ alias dockerc='docker-compose'
 alias dcl='docker-compose logs -t -f --tail=100'
 dcu(){ docker-compose pull "$1" && docker-compose up -d "$1" && dcl "$1"; }
 
-# maths in the CLI
 calc(){ printf 'scale=2;%s\n' "$*" |bc; }
 
 if [ ! -S ~/.ssh/ssh_auth_sock ]; then
@@ -38,8 +37,8 @@ export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 GPG_TTY=$(tty)
 export GPG_TTY
 
-[ ! -d "$WORKON_HOME" ] && mkdir -p $WORKON_HOME
-. /usr/local/bin/virtualenvwrapper.sh
+#[ ! -d "$WORKON_HOME" ] && mkdir -p $WORKON_HOME
+#. /usr/local/bin/virtualenvwrapper.sh
 
 SCREEN_PATH=$(command -v screen)
 TMUX_PATH=$(command -v tmux)
