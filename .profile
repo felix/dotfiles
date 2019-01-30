@@ -9,6 +9,7 @@ fi
 [ -d "${HOME}/.node/bin" ] && PATH=${HOME}/.node/bin:$PATH
 [ -d "${HOME}/.cabal/bin" ] && PATH=${HOME}/.cabal/bin:$PATH
 [ -d "${HOME}/.yarn/bin" ] && PATH=${HOME}/.yarn/bin:$PATH
+[ -d "${HOME}/go/bin" ] && PATH=${HOME}/go/bin:$PATH
 [ -d "${HOME}/bin" ] && PATH=${HOME}/bin:$PATH
 if [ -d "${HOME}/perl5/bin" ]; then
     PATH=${HOME}/perl5/bin:$PATH
