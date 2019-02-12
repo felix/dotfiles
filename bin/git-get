@@ -1,0 +1,18 @@
+#!/bin/sh
+
+p=$1
+p=${p##https://}
+p=${p##http://}
+p=${p##git://}
+p=${p##ssh://}
+p=${p##ftps://}
+p=${p##ftp://}
+
+if [ -z "$p" ]; then
+   echo "Bad repository"
+   exit 1
+fi
+
+b="$PWD/$p"
+mkdir -p $(dirname "$b")
+git clone "$1" "$b"
