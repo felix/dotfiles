@@ -1,12 +1,16 @@
 #!/bin/sh
 
 p=$1
+p=${p##*@}
 p=${p##https://}
 p=${p##http://}
 p=${p##git://}
 p=${p##ssh://}
 p=${p##ftps://}
 p=${p##ftp://}
+p=${p%%.git}
+
+p=$(printf "$p" |sed -e s@:@/@g)
 
 if [ -z "$p" ]; then
    echo "Bad repository"
