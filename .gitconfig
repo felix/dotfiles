@@ -28,6 +28,7 @@
     stl = !"git log | grep git-subtree-dir | awk '{ print $2 }'"
     sta = !"f() { git subtree add --squash --prefix=$2 $1 master; }; f"
     stu = "!f() { git subtree pull --squash --prefix=$2 $1 master; }; f"
+    fsrs = !"git fetch && git stash && git rebase && git stash pop"
 [color]
     ui = true
 [color "status"]
