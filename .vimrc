@@ -76,6 +76,7 @@ Plug 'zah/nim.vim'
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
 Plug 'peter-edge/vim-capnp'
 Plug 'vim-scripts/ebnf.vim'
+Plug 'ledger/vim-ledger'
 " Utils
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
@@ -203,6 +204,11 @@ autocmd Filetype mail setlocal nohlsearch spell nobackup noswapfile nowritebacku
 autocmd Filetype markdown setlocal spell
 autocmd Filetype ruby setlocal ts=2 sw=2
 autocmd Filetype fbs setlocal ts=2 sw=2
+
+autocmd FileType ledger noremap { ?^\d<CR>
+autocmd FileType ledger noremap } /^\d<CR>
+"autocmd FileType ledger inoremap <silent> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
+autocmd FileType ledger vnoremap <silent> <Tab> :LedgerAlign<CR>
 
 " Jump to last known position
 autocmd BufReadPost *
