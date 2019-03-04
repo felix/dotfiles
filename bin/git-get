@@ -1,22 +1,53 @@
 #!/bin/sh
 
-p=$1
-p=${p##*@}
-p=${p##https://}
-p=${p##http://}
-p=${p##git://}
-p=${p##ssh://}
-p=${p##ftps://}
-p=${p##ftp://}
-p=${p%%.git}
+fetch() {
+    # Repo
+    repo=$1; shift
+    # Base path
+    b=$1; shift
 
-p=$(printf "$p" |sed -e s@:@/@g)
+    # Relative path
+    p=$repo
 
-if [ -z "$p" ]; then
-   echo "Bad repository"
-   exit 1
-fi
+    p=${p##*@}
+    p=${p##https://}
+    p=${p##http://}
+    p=${p##git://}
+    p=${p##ssh://}
+    p=${p##ftps://}
+    p=${p##ftp://}
+    p=${p%%.git}
 
-b="$PWD/$p"
-mkdir -p $(dirname "$b")
-git clone "$1" "$b"
+    p=$(printf "$p" |sed -e s@:@/@g)
+
+    if [ -z "$repo" ]; then
+       printf "Bad repository: %s" "$repo"
+       exit 1
+    fi
+
+    b="$b/$p"
+    mkdir -p $(dirname "$b")
+    git clone "$repo" "$b"
+}
+
+main() {
+    while getopts ":b:" opt; do
+        case $opt in
+            b) BASE=$OPTARG
+                ;;
+            ?)
+                usage
+                exit 0
+                ;;
+        esac
+    done
+
+    # Shift the rest
+    shift $((OPTIND - 1))
+
+    BASE="${BASE:-$PWD}"
+
+    fetch $1 $BASE
+}
+
+main "$@"
