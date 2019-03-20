@@ -33,7 +33,7 @@ fetch() {
 main() {
     while getopts ":b:" opt; do
         case $opt in
-            b) BASE=$OPTARG
+            b) GITGETBASE=$OPTARG
                 ;;
             ?)
                 usage
@@ -45,9 +45,9 @@ main() {
     # Shift the rest
     shift $((OPTIND - 1))
 
-    BASE="${BASE:-$PWD}"
+    GITGETBASE="${GITGETBASE:-$PWD}"
 
-    fetch $1 $BASE
+    fetch $1 $GITGETBASE
 }
 
 main "$@"

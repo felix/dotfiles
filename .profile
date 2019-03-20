@@ -42,5 +42,6 @@ export HISTFILE=~/.history
 export CLICOLOR=true
 [ -n "$KSH_VERSION" ] && export ENV=${HOME}/.kshrc
 #export WORKON_HOME=$HOME/.venv
+export GITGETBASE=$HOME/src
 
 #umask 022
