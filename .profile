@@ -1,11 +1,15 @@
 
 #hostname=$(hostname |cut -d. -f1)
 os=$(uname -s)
+
+# Build my path
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
 prefix="/usr"
 if [ "$os" = "FreeBSD" ]; then
     prefix="/usr/local"
+    PATH=$PATH:/usr/local/sbin:/usr/local/bin
 fi
-
 [ -d "${HOME}/.node/bin" ] && PATH=${HOME}/.node/bin:$PATH
 [ -d "${HOME}/.cabal/bin" ] && PATH=${HOME}/.cabal/bin:$PATH
 [ -d "${HOME}/.yarn/bin" ] && PATH=${HOME}/.yarn/bin:$PATH
