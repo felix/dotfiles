@@ -14,6 +14,8 @@ alias wget="wget --timeout 10 -c"
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 alias fsl="fossil"
+alias vim="nvim"
+alias vimdiff="nvim -d"
 # Mail
 alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
 alias mutt-seer='neomutt -F ~/.mutt/muttrc.seersec'

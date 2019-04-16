@@ -4,6 +4,7 @@ syntax enable sync minlines=200
 
 set background=dark
 set cinoptions=b1
+set clipboard+=unnamed
 set colorcolumn=81
 set cursorline
 set directory=~/tmp//,/tmp//,.
@@ -19,6 +20,7 @@ set listchars=extends:»,tab:·\ ,trail:•,nbsp:␣
 set mouse=a
 set nocompatible
 set noshowmode
+set novisualbell
 set nowritebackup
 set number
 set shiftwidth=4
@@ -29,14 +31,21 @@ set spellfile=~/.vim/spell/.en.add
 set spelllang=en_au
 set synmaxcol=200
 set tabstop=4
+"set termguicolors
 set ttyfast
 set viminfo='1000,f1,:100,@100,/20,h
-set novisualbell
 set whichwrap+=<,>,h,l,[,]
 
 if executable("ag")
     set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
     set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let &undodir = expand('$HOME/.vim/undo')
+    call system('mkdir -p ' . &undodir)
+    set undofile
 endif
 
 set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
@@ -62,32 +71,43 @@ Plug 'w0rp/ale'
 " Filetypes
 Plug 'cespare/vim-toml'
 Plug 'cmcaine/vim-uci'
-Plug 'zchee/vim-flatbuffers'
 Plug 'fatih/vim-go'
 Plug 'jamessan/vim-gnupg'
 Plug 'leafgarland/typescript-vim'
+Plug 'ledger/vim-ledger'
 Plug 'lervag/vimtex'
 Plug 'lifepillar/pgsql.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'pearofducks/ansible-vim'
+Plug 'peter-edge/vim-capnp'
+Plug 'python-mode/python-mode', { 'branch': 'develop' }
 Plug 'slim-template/vim-slim'
 Plug 'tmatilai/gitolite.vim'
-Plug 'zah/nim.vim'
-Plug 'python-mode/python-mode', { 'branch': 'develop' }
-Plug 'peter-edge/vim-capnp'
 Plug 'vim-scripts/ebnf.vim'
-Plug 'ledger/vim-ledger'
+Plug 'zah/nim.vim'
+Plug 'zchee/vim-flatbuffers'
+Plug 'ziglang/zig.vim'
 " Utils
-Plug 'tpope/vim-fugitive'
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+"Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'jreybert/vimagit'
 Plug 'tpope/vim-commentary'
 Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 
+let g:deoplete#enable_at_startup = 1
 let g:solarized_termtrans=1
 let g:solarized_visibility='low'
-let g:solarized_bold=0
-let g:solarized_underline=0
-"let g:solarized_italic=1
+"let g:solarized_bold=0
+"let g:solarized_underline=0
+let g:solarized_italic=1
 "let g:solarized_termcolors=256
 let g:vim_markdown_frontmatter=1
 let g:ale_sign_column_always = 1
@@ -158,7 +178,6 @@ inoremap <silent> ;u <C-x><C-u>
 
 nnoremap <silent> <C-c><C-y> :call ToggleConcealLevel()<CR>
 map <leader>w :call <SID>ToggleVisibility()<CR>
-
 
 " When vimrc is edited, reload it
 autocmd! bufwritepost .vimrc source ~/.vimrc
