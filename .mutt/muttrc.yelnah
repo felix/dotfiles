@@ -6,7 +6,7 @@ set smtp_url         = smtp://$imap_user:$imap_pass@smtp.userspace.com.au:587
 set ssl_starttls     = yes
 
 set from             = 'Felix Hanley <felix@yelnah.org>'
-set folder           = 'imap://mail.userspace.com.au'
+set folder           = 'imap://imap.userspace.com.au'
 set spoolfile        = '+INBOX'
 set postponed        = '+Drafts'
 set record           = '+Sent'
