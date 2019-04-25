@@ -6,13 +6,14 @@ os=$(uname -s)
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 
 prefix="/usr"
-if [ "$os" = "FreeBSD" ]; then
+if [ "$os" = "FreeBSD" ] || [ "$os" = "Darwin" ]; then
     prefix="/usr/local"
     PATH=$PATH:/usr/local/sbin:/usr/local/bin
 fi
 [ -d "${HOME}/.node/bin" ] && PATH=${HOME}/.node/bin:$PATH
 [ -d "${HOME}/.cabal/bin" ] && PATH=${HOME}/.cabal/bin:$PATH
 [ -d "${HOME}/.yarn/bin" ] && PATH=${HOME}/.yarn/bin:$PATH
+[ -d "${HOME}/.local/bin" ] && PATH=${HOME}/.local/bin:$PATH
 [ -d "${HOME}/go/bin" ] && PATH=${HOME}/go/bin:$PATH
 [ -d "${HOME}/bin" ] && PATH=${HOME}/bin:$PATH
 if [ -d "${HOME}/perl5/bin" ]; then
