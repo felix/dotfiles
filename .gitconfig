@@ -14,7 +14,7 @@
 	sl = stash list
 	sp = stash pop
 	ls = ls-files
-	gui = !sh -c '/usr/local/opt/git/libexec/git-core/git-gui'
+	#gui = !sh -c '/usr/local/opt/git/libexec/git-core/git-gui'
 	lg = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph
 	lga = !"git lg --all"
 	lgd = log -u
@@ -46,3 +46,5 @@
 	followTags = true
 [github]
 	user = felix
+[url "git@github.com:"]
+	insteadOf = https://github.com/
