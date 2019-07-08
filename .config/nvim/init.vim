@@ -20,7 +20,6 @@ Plug 'slim-template/vim-slim'
 Plug 'tmatilai/gitolite.vim'
 Plug 'zah/nim.vim'
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
-Plug 'peter-edge/vim-capnp'
 Plug 'vim-scripts/ebnf.vim'
 Plug 'ledger/vim-ledger'
 " Utils
