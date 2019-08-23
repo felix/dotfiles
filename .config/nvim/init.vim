@@ -1,15 +1,15 @@
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 " UI
 Plug 'lifepillar/vim-solarized8'
 Plug 'godlygeek/tabular'
-Plug 'junegunn/goyo.vim'
 Plug 'w0rp/ale'
 " Filetypes
 Plug 'cespare/vim-toml'
 Plug 'cmcaine/vim-uci'
 Plug 'zchee/vim-flatbuffers'
 Plug 'fatih/vim-go'
+"Plug 'arp242/gopher.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'leafgarland/typescript-vim'
 Plug 'lervag/vimtex'
@@ -22,6 +22,7 @@ Plug 'zah/nim.vim'
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
 Plug 'vim-scripts/ebnf.vim'
 Plug 'ledger/vim-ledger'
+Plug 'liuchengxu/graphviz.vim'
 " Utils
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
@@ -33,7 +34,7 @@ set background=dark
 set clipboard+=unnamedplus
 set colorcolumn=81
 set cursorline
-set ignorecase
+set smartcase
 set list
 set listchars=extends:»,tab:·\ ,trail:•,nbsp:␣
 set mouse=a
@@ -42,17 +43,23 @@ set number
 set viminfo='1000,f1,:100,@100,/20,h
 set whichwrap+=<,>,h,l,[,]
 
+let g:pymode_python = 'python3'
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_metalinter_enabled = ['revive', 'vet', 'golint', 'errcheck']
 let g:ale_sign_column_always = 1
 let g:ale_linters = {
 			\ 'javascript': ['standard'],
-			\ 'yaml': ['cfn-python-lint']
+			\ 'yaml': ['cfn-python-lint'],
+			\ 'go': ['gopls']
 			\ }
-"let g:ale_linters_explicit = 1
+let g:ale_linters_explicit = 1
 
 if executable("rg")
     set grepprg=rg\ --smart-case\ --column
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
+
 
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
@@ -80,12 +87,6 @@ nnoremap <leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
 nnoremap <leader>e :e **/
 " drops to the grep line
 nnoremap <leader>g :grep<space>
-" uses the Ilist function from qlist -- makes :ilist go into a quickfix window
-nnoremap <leader>i :Ilist<space>
-" lands me on a taglist jump command line
-nnoremap <leader>j :tjump /
-" runs make
-nnoremap <leader>m :make<cr>
 " strips whitespace using a little function
 nnoremap <leader>s :call StripTrailingWhitespace()<cr>
 " switches to the last buffer edited
@@ -96,25 +97,29 @@ nnoremap <leader>t :TTags<space>*<space>*<space>.<cr>
 nnoremap <leader>f gqap
 vnoremap <leader>Q gq
 
-" replace supertab?? see http://vimdoc.sourceforge.net/htmldoc/insert.html#ins-completion
-" file names
-inoremap <silent> ;f <C-x><C-f>
-" current file
-inoremap <silent> ;n <C-x><C-n>
-" keywords in current and included
-inoremap <silent> ;i <C-x><C-i>
-" whole lines
-inoremap <silent> ;l <C-x><C-l>
-" omni
-inoremap <silent> ;o <C-x><C-o>
-" thesaurus
-inoremap <silent> ;t <C-x><C-]>
-" user
-inoremap <silent> ;u <C-x><C-u>
+let g:stop_autocomplete=0
 
-nnoremap <silent> <C-c><C-y> :call ToggleConcealLevel()<CR>
-map <leader>w :call <SID>ToggleVisibility()<CR>
-
+" https://stackoverflow.com/a/2138303
+function! CleverTab(type)
+    if a:type=='omni'
+        if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+            let g:stop_autocomplete=1
+            return "\<TAB>"
+        elseif !pumvisible() && !&omnifunc
+            return "\<C-X>\<C-O>\<C-P>"
+        endif
+    elseif a:type=='keyword' && !pumvisible() && !g:stop_autocomplete
+        return "\<C-X>\<C-N>\<C-P>"
+    elseif a:type=='next'
+        if g:stop_autocomplete
+            let g:stop_autocomplete=0
+        else
+            return "\<C-N>"
+        endif
+    endif
+    return ''
+endfunction
+inoremap <silent><TAB> <C-R>=CleverTab('omni')<CR><C-R>=CleverTab('keyword')<CR><C-R>=CleverTab('next')<CR>
 
 " When vimrc is edited, reload it
 autocmd! bufwritepost init.vim source ~/.config/nvim/init.vim
@@ -140,6 +145,7 @@ function! s:ToggleVisibility()
     endif
     color solarized8
 endfunction
+map <leader>w :call <SID>ToggleVisibility()<CR>
 
 function! ToggleConcealLevel()
     if &conceallevel == 0
@@ -148,18 +154,15 @@ function! ToggleConcealLevel()
         setlocal conceallevel=0
     endif
 endfunction
+nnoremap <silent> <C-c><C-y> :call ToggleConcealLevel()<CR>
 
-autocmd BufRead,BufNewFile *.tag setlocal ft=html
 autocmd BufRead,BufNewFile *mutt* setlocal ft=mail
-autocmd BufRead,BufNewFile *.deface setlocal ft=html
-autocmd BufRead,BufNewFile *.pug setlocal ft=slim
+autocmd Filetype mail setlocal nohlsearch spell nobackup noswapfile nowritebackup noautoindent
 autocmd BufRead,BufNewFile Jenkinsfile setlocal ft=groovy
+autocmd BufRead,BufNewFile *.tag setlocal ft=html
 autocmd Filetype javascript setlocal ts=2 sw=2 nowrap
 autocmd Filetype html setlocal ts=2 sw=2
-autocmd Filetype mail setlocal nohlsearch spell nobackup noswapfile nowritebackup noautoindent
 autocmd Filetype markdown setlocal spell
-autocmd Filetype ruby setlocal ts=2 sw=2
-autocmd Filetype fbs setlocal ts=2 sw=2
 autocmd Filetype yaml setlocal ts=2 sw=2
 
 autocmd FileType ledger noremap { ?^\d<CR>
