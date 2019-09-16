@@ -4,7 +4,7 @@ syntax enable sync minlines=200
 
 set background=dark
 set cinoptions=b1
-set clipboard+=unnamed
+set clipboard+=unnamedplus,unnamed,autoselect
 set colorcolumn=81
 set cursorline
 set directory=~/tmp//,/tmp//,.
@@ -71,7 +71,8 @@ Plug 'w0rp/ale'
 " Filetypes
 Plug 'cespare/vim-toml'
 Plug 'cmcaine/vim-uci'
-Plug 'fatih/vim-go'
+"Plug 'fatih/vim-go'
+Plug 'arp242/gopher.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'leafgarland/typescript-vim'
 Plug 'ledger/vim-ledger'
@@ -79,7 +80,7 @@ Plug 'lervag/vimtex'
 Plug 'lifepillar/pgsql.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'pearofducks/ansible-vim'
-Plug 'peter-edge/vim-capnp'
+"Plug 'peter-edge/vim-capnp'
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
 Plug 'slim-template/vim-slim'
 Plug 'tmatilai/gitolite.vim'
@@ -88,13 +89,6 @@ Plug 'zah/nim.vim'
 Plug 'zchee/vim-flatbuffers'
 Plug 'ziglang/zig.vim'
 " Utils
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
 "Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jreybert/vimagit'
@@ -111,8 +105,12 @@ let g:solarized_italic=1
 "let g:solarized_termcolors=256
 let g:vim_markdown_frontmatter=1
 let g:ale_sign_column_always = 1
-let g:ale_linters = { 'javascript': ['standard'] }
-let g:ale_linters_explicit = 1
+let g:ale_linters = {
+            \ 'javascript': ['standard'],
+            \ 'yaml': ['cfn-python-lint'],
+            \ 'go': ['gopls'],
+            \}
+"let g:ale_linters_explicit = 1
 "let g:pymode_lint = 0
 "let g:go_fmt_fail_silently = 1
 let g:go_highlight_functions = 1
