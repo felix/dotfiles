@@ -15,8 +15,9 @@ fi
 [ -d "${HOME}/.node/bin" ] && PATH=${HOME}/.node/bin:$PATH
 [ -d "${HOME}/.cabal/bin" ] && PATH=${HOME}/.cabal/bin:$PATH
 [ -d "${HOME}/.yarn/bin" ] && PATH=${HOME}/.yarn/bin:$PATH
-[ -d "/Library/TeX/texbin" ] && PATH=$PATH:/Library/TeX/texbin
 [ -d "/usr/local/opt/perl/bin" ] && PATH=$PATH:/usr/local/opt/perl/bin
+[ -d "${HOME}/go/bin" ] && PATH=${HOME}/go/bin:$PATH
+[ -d "${HOME}/bin" ] && PATH=${HOME}/bin:$PATH
 if [ -d "${HOME}/perl5/bin" ]; then
     PATH=${HOME}/perl5/bin:$PATH
     export PERL5LIB="{$HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
@@ -32,7 +33,11 @@ if [ -d "${HOME}/src/github.com/9fans/plan9port" ]; then
     export PLAN9=$HOME/src/github.com/9fans/plan9port
     PATH=$PATH:$PLAN9/bin
 fi
-if [ -d "/Library/Frameworks/Python.framework/Versions/3.6/bin" ] && PATH="${PATH}:/Library/Frameworks/Python.framework/Versions/3.6/bin"
+
+if [ "$os" = "Darwin" ]; then
+	[ -d "/Library/TeX/texbin" ] && PATH=$PATH:/Library/TeX/texbin
+	[ -d "/Library/Frameworks/Python.framework/Versions/3.6/bin" ] && PATH="${PATH}:/Library/Frameworks/Python.framework/Versions/3.6/bin"
+fi
 
 export PATH
 
