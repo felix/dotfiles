@@ -33,5 +33,5 @@ if [ -d "$HOME/.password-store" ]; then
 fi
 
 if [ -e $HOME/bin/common.sh ]; then
-    source $HOME/bin/common.sh
+    . $HOME/bin/common.sh
 fi
