@@ -1,5 +1,6 @@
 [user]
 	name = Felix Hanley
+	email = felix@userspace.com.au
 [core]
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = /home/felix/.gitignore.global
@@ -44,7 +45,11 @@
 [push]
 	default = simple
 	followTags = true
+[sendemail]
+	smtpEncryption = tls
+	smtpServer = smtp.userspace.com.au
+	smtpUser = felix@userspace.com.au
 [github]
 	user = felix
 [includeIf "gitdir:MYOB-Technology/"]
-	path = ~/src/github.com/MYOB-Technology/gitconfig
+	path = ~/.gitconfig.myob
