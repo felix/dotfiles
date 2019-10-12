@@ -160,7 +160,9 @@ autocmd BufRead,BufNewFile *mutt* setlocal ft=mail
 autocmd Filetype mail setlocal nohlsearch spell nobackup noswapfile nowritebackup noautoindent
 autocmd BufRead,BufNewFile Jenkinsfile setlocal ft=groovy
 autocmd BufRead,BufNewFile *.tag setlocal ft=html
-autocmd Filetype javascript setlocal ts=2 sw=2 nowrap
+autocmd BufRead,BufNewFile *.tmpl setlocal ft=gohtmltmpl
+autocmd Filetype javascript setlocal ts=2 sw=2 et nowrap
+autocmd Filetype json setlocal ts=2 sw=2 et nowrap
 autocmd Filetype html setlocal ts=2 sw=2
 autocmd Filetype markdown setlocal spell
 autocmd Filetype yaml setlocal ts=2 sw=2
