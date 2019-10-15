@@ -1,7 +1,7 @@
 source ~/.mutt/muttrc.common
 
 set imap_user        = 'felix@yelnah.org'
-set imap_pass        = `pass mail.yelnah.org`
+set imap_pass        = `pass yelnah/mail.userspace.com.au`
 set smtp_url         = smtp://$imap_user:$imap_pass@smtp.userspace.com.au:587
 set ssl_starttls     = yes
 
