@@ -16,8 +16,10 @@ alias getclip="xclip -selection c -o"
 alias fsl="fossil"
 alias vim="nvim"
 alias vimdiff="nvim -d"
+alias ap="ansible-playbook"
 # Mail
 alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
+alias mutt-myob='neomutt -F ~/.mutt/muttrc.myob'
 alias mutt-yelnah='neomutt -F ~/.mutt/muttrc.yelnah'
 # Docker
 alias dockerm='docker-machine'
