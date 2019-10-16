@@ -53,3 +53,5 @@
 	user = felix
 [includeIf "gitdir:MYOB-Technology/"]
 	path = ~/.gitconfig.myob
+[credential "https://github.com"]
+	helper = pass-store
