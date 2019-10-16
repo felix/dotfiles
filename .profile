@@ -14,6 +14,7 @@ fi
 [ -d "/usr/local/sbin" ] && PATH=/usr/local/sbin:$PATH
 [ -d "${HOME}/.node/bin" ] && PATH=${HOME}/.node/bin:$PATH
 [ -d "${HOME}/.cabal/bin" ] && PATH=${HOME}/.cabal/bin:$PATH
+[ -d "${HOME}/.cargo/bin" ] && PATH=${HOME}/.cargo/bin:$PATH
 [ -d "${HOME}/.yarn/bin" ] && PATH=${HOME}/.yarn/bin:$PATH
 [ -d "/usr/local/opt/perl/bin" ] && PATH=$PATH:/usr/local/opt/perl/bin
 [ -d "${HOME}/go/bin" ] && PATH=${HOME}/go/bin:$PATH
