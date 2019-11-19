@@ -112,3 +112,4 @@ PROMPT_COMMAND=prompt_command
 if [ -e $HOME/bin/common.sh ]; then
     source $HOME/bin/common.sh
 fi
+eval $( perl -Mlocal::lib )

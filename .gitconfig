@@ -33,8 +33,8 @@
 	untracked = cyan
 [branch]
 	autosetupmerge = true
-[github]
-	user = felix
+#[github]
+#	user = felix
 [gui]
 	spellingdictionary = none
 [mergetool "vimdiff3"]

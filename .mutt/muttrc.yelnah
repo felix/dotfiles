@@ -17,4 +17,6 @@ set status_format    = '-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d
 send-hook . 'set signature=~/.mutt/signature.yelnah'
 color status brightwhite blue
 
+mailboxes = +INBOX +Spam +Drafts
+
 # vim: set ft=muttrc:

@@ -24,6 +24,13 @@ my_hdr Organization: User Space, https://userspace.com.au/
 my_hdr X-PGP-Key: fp="971C F7B2 913A D163 70AC 02C3 B6F2 29D7 7E20 D10B"\; id="0xb6f229d77e20d10b"\; get=<hkp://pgp.mit.edu/pks/lookup?search=0xb6f229d77e20d10b&op=get>\; get=<http://userspace.com.au/gpg/0xb6f229d77e20d10b.asc>\;
 color status brightwhite black
 
+mailboxes = +INBOX +Spam +Drafts \
+	    +invoices \
+	    +status \
+	    +lists \
+	    +lists.openbsd \
+	    +lists.opensmtpd
+
 source ~/.mutt/gpg
 
 # vim: set ft=muttrc:

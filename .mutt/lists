@@ -8,4 +8,5 @@ misc.opensmtpd.org \
 securityfocus.com
 
 subscribe -group bsd @openbsd freebsd.org  @dragonflybsd.org
+
 #  vim: set ft=muttrc:
