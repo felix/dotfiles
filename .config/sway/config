@@ -1,0 +1,207 @@
+
+# Alt
+set $mod Mod1
+# Windows
+#set $mod Mod4
+
+font pango:monospace 8
+#font pango:DejaVu Sans Mono 8
+#font -*-fixed-medium-r-normal-*-12-*-*-*-*-*-iso10646-1
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec "$HOME/bin/dmenu-recent"
+bindsym $mod+p exec "$HOME/bin/dmenu-passwords"
+
+#bindcode $mod+Ctrl+107 exec xautolock -locknow
+bindsym $mod+Ctrl+Delete exec xautolock -locknow
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+Ctrl+h split h
+
+# split in vertical orientation
+bindsym $mod+Ctrl+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindcode $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2: www
+bindsym $mod+3 workspace 3: mail
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+workspace_auto_back_and_forth yes
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2: www
+bindsym $mod+Shift+3 move container to workspace 3: mail
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+bindsym $mod+Ctrl+Left  move workspace to output left
+bindsym $mod+Ctrl+Right move workspace to output right
+bindsym $mod+Ctrl+Up    move workspace to output up
+bindsym $mod+Ctrl+Down  move workspace to output down
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit sway (logs you out of your session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+#  default to tabbed layout
+workspace_layout tabbed
+
+assign [class="mail"] 3: mail
+assign [class="hrom"] 2: www
+assign [class="irefox"] 2: www
+assign [class="ceweasel"] 2: www
+
+force_display_urgency_hint 1000 ms
+
+# Terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
+
+# Volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id mixer +10
+bindsym Mod4+Up exec --no-startup-id mixer vol +10
+bindsym XF86AudioLowerVolume exec --no-startup-id mixer -10
+bindsym Mod4+Down exec --no-startup-id mixer vol -10
+bindsym XF86AudioMute exec --no-startup-id mixer pcm toggle
+# ALSA
+#bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set 'Master' 5%+
+#bindsym XF86AudioLowerVolume exec --no-startup-id  amixer -q set 'Master' 5%-
+#bindsym XF86AudioMute exec --no-startup-id amixer -q set 'Master' toggle
+
+# Playback
+bindsym XF86AudioNext exec --no-startup-id mpc next
+bindsym Mod4+Right exec --no-startup-id mpc next
+bindsym XF86AudioPrev exec --no-startup-id mpc prev
+bindsym Mod4+Left exec --no-startup-id mpc prev
+bindsym XF86AudioStop exec --no-startup-id mpc stop
+bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+bindsym Mod4+Delete exec --no-startup-id mpc toggle
+
+# Display
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+
+#                       border  back    text
+#client.focused          #121212 #101010 #b58900
+#client.focused_inactive #101010 #191919 #999999
+#client.unfocused        #101010 #191919 #999999
+#client.urgent           #cd989a #cd989a #2e3436
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        status_command ~/.i3/i3status.sh
+        position       top
+        colors {
+            #background #002b36
+            statusline #93a1a1
+            #focused_workspace  #b58900 #002b36
+            #active_workspace   #859900 #073642
+            #inactive_workspace #657b83 #002b36
+            #urgent_workspace   #dc322f #073642
+        }
+}
+
+# custom rules
+# width x height
+floating_minimum_size 100 x 100
+floating_maximum_size 1024 x 1024
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [class="Dia" window_role="toolbox_window"] floating enable
+for_window [class="Pinentry"] floating enable
+for_window [class="XCalc"] floating enable
+for_window [class="Qjackctl"] floating enable
+
+exec xrdb -load ~/.Xresources
