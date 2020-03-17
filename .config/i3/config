@@ -182,7 +182,7 @@ client.urgent           #cd989a #cd989a #2e3436
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command ~/.i3/i3status.sh
+        status_command ~/.config/i3status/i3status.sh
         position       top
         colors {
             #background #002b36
