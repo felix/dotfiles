@@ -10,11 +10,13 @@ alias h='history |grep'
 alias rm='rm -v'
 alias cp='cp -v'
 alias mv='mv -v'
+alias k='kubectl'
 alias wget="wget --timeout 10 -c"
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 alias fsl="fossil"
 alias vim="nvim"
+alias vimf="vimfzf"
 alias vimdiff="nvim -d"
 alias ap="ansible-playbook"
 # Mail
@@ -25,6 +27,7 @@ alias mutt-yelnah='neomutt -F ~/.mutt/muttrc.yelnah'
 alias dockerm='docker-machine'
 alias dockerc='docker-compose'
 alias dcl='docker-compose logs -t -f --tail=100'
+
 dcu(){ docker-compose pull "$1" && docker-compose up -d "$1" && dcl "$1"; }
 
 calc(){ printf 'scale=2;%s\n' "$*" |bc; }
@@ -40,7 +43,7 @@ if [ ! -S ~/.ssh/ssh_auth_sock ]; then
   ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
   ssh-add
 fi
-export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+export SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
 
 GPG_TTY=$(tty)
 export GPG_TTY
@@ -69,3 +72,4 @@ fi
 #    #source /usr/local/share/chruby/auto.sh
 #    chruby system
 #fi
+
