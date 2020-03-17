@@ -1,6 +1,7 @@
 #!/bin/sh
 
 echo "Cleaning..."
+id3v2 --delete-all *.flac
 metaflac --remove --block-type=PICTURE --dont-use-padding *.flac
 echo "Defragmenting..."
 metaflac --sort-padding *.flac
