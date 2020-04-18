@@ -29,7 +29,7 @@ export XDG_RUNTIME_DIR=/tmp/xdg-felix
 [ -x "$(command -v redshift)" ] && redshift -m randr -t 5500:3500 -l -37.8023217:145.1144633 &
 
 # Setup screens
-case "$hostname"
+case "$hostname" in
 	bowie)
 		xrandr --output HDMI-1 --off --output DP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1 --mode 1920x1080 --pos 984x1080 --rotate normal --output DP-2 --mode 1920x1080 --pos 1920x0 --rotate normal
 		;;

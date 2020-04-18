@@ -204,3 +204,5 @@ for_window [class="Dia" window_role="toolbox_window"] floating enable
 for_window [class="Pinentry"] floating enable
 for_window [class="XCalc"] floating enable
 for_window [class="Qjackctl"] floating enable
+
+exec --no-startup-id xsetroot -solid "#000000"
