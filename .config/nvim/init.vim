@@ -1,24 +1,25 @@
 
 call plug#begin('~/.config/nvim/plugged')
 " UI
-Plug 'lifepillar/vim-solarized8'
+Plug 'iCyMind/NeoSolarized'
 Plug 'godlygeek/tabular'
 Plug 'w0rp/ale'
 " Filetypes
 Plug 'cespare/vim-toml'
 Plug 'cmcaine/vim-uci'
-Plug 'zchee/vim-flatbuffers'
 Plug 'fatih/vim-go'
+Plug 'ziglang/zig.vim'
+Plug 'cstrahan/vim-capnp'
 "Plug 'arp242/gopher.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'leafgarland/typescript-vim'
 Plug 'lervag/vimtex'
 Plug 'lifepillar/pgsql.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'sheerun/vim-polyglot'
 Plug 'pearofducks/ansible-vim'
-Plug 'slim-template/vim-slim'
+Plug 'evanleck/vim-svelte'
 Plug 'tmatilai/gitolite.vim'
-Plug 'zah/nim.vim'
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
 Plug 'vim-scripts/ebnf.vim'
 Plug 'ledger/vim-ledger'
@@ -29,7 +30,6 @@ Plug 'tpope/vim-commentary'
 Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 
-colorscheme solarized8
 set background=dark
 set clipboard+=unnamedplus
 set colorcolumn=81
@@ -43,17 +43,26 @@ set number
 set viminfo='1000,f1,:100,@100,/20,h
 set whichwrap+=<,>,h,l,[,]
 
+let g:neosolarized_contrast = "high"
 let g:pymode_python = 'python3'
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_metalinter_enabled = ['revive', 'vet', 'golint', 'errcheck']
+let g:svelte_indent_script = 0
+let g:svelte_indent_style = 0
 let g:ale_sign_column_always = 1
+let g:ale_linter_aliases = {'svelte': ['css', 'javascript']}
 let g:ale_linters = {
-			\ 'javascript': ['standard'],
 			\ 'yaml': ['cfn-python-lint'],
+			\ 'svelte': ['stylelint', 'eslint'],
 			\ 'go': ['gopls']
 			\ }
 let g:ale_linters_explicit = 1
+let g:ale_fixers = {
+			\   'svelte': ['prettier', 'eslint'],
+			\}
+
+colorscheme NeoSolarized
 
 if executable("rg")
     set grepprg=rg\ --smart-case\ --column
@@ -68,11 +77,6 @@ if has('persistent_undo')
     set undofile
 endif
 
-" learn those keys!
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
 "nnoremap ; :
 " Toggle line numbers and fold column for easy copying:
 nnoremap <F2> :set nonumber<CR>:set nofoldenable<CR>:set nolist<CR>:set paste<CR>
@@ -81,8 +85,6 @@ nnoremap <F3> :set number<CR>:set foldenable<CR>:set list<CR>:set nopaste<CR>
 :noremap <silent> <Space> :nohlsearch<CR><Space>
 " add files with wildcards, like **/*.md for all markdown files
 nnoremap <leader>a :argadd <c-r>=fnameescape(expand('%:p:h'))<cr>/*<C-d>
-" buffer prompt and displays all buffers
-"nnoremap <leader>b :b <C-d>
 " similar to buffers but for opening a single file
 nnoremap <leader>e :e **/
 " drops to the grep line
@@ -91,8 +93,6 @@ nnoremap <leader>g :grep<space>
 nnoremap <leader>s :call StripTrailingWhitespace()<cr>
 " switches to the last buffer edited
 nnoremap <leader>q :b#<cr>
-" runs :TTags but on the current file, lands on a prompt to filter the tags
-nnoremap <leader>t :TTags<space>*<space>*<space>.<cr>
 " Reflow paragraph with Q in normal and visual mode
 nnoremap <leader>f gqap
 vnoremap <leader>Q gq
@@ -136,17 +136,6 @@ function! StripTrailingWhitespace()
     endif
 endfunction
 
-" Show whitespace
-function! s:ToggleVisibility()
-    if g:solarized_visibility != 'high'
-        let g:solarized_visibility = 'high'
-    else
-        let g:solarized_visibility = 'low'
-    endif
-    color solarized8
-endfunction
-map <leader>w :call <SID>ToggleVisibility()<CR>
-
 function! ToggleConcealLevel()
     if &conceallevel == 0
         setlocal conceallevel=2
@@ -159,14 +148,14 @@ nnoremap <silent> <C-c><C-y> :call ToggleConcealLevel()<CR>
 autocmd BufRead,BufNewFile *mutt* setlocal ft=mail
 autocmd Filetype mail setlocal nohlsearch spell nobackup noswapfile nowritebackup noautoindent
 autocmd BufRead,BufNewFile Jenkinsfile setlocal ft=groovy
-autocmd BufRead,BufNewFile *.tag setlocal ft=html
 autocmd BufRead,BufNewFile *.tmpl setlocal ft=gohtmltmpl
 autocmd Filetype javascript setlocal ts=2 sw=2 et nowrap
 autocmd Filetype json setlocal ts=2 sw=2 et nowrap
-autocmd Filetype html setlocal ts=2 sw=2
+autocmd Filetype html setlocal ts=2 sw=2 et
 autocmd Filetype markdown setlocal spell
 autocmd Filetype yaml setlocal ts=2 sw=2
 
+autocmd FileType ledger setlocal ts=2 sw=2
 autocmd FileType ledger noremap { ?^\d<CR>
 autocmd FileType ledger noremap } /^\d<CR>
 "autocmd FileType ledger inoremap <silent> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>

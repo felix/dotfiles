@@ -1,53 +1,26 @@
 #!/bin/sh
 
-fetch() {
-    # Repo
-    repo=$1; shift
-    # Base path
-    b=$1; shift
+if [ $# -eq 0 ]; then
+printf "Missing repository"
+exit 1
+fi
 
-    # Relative path
-    p=$repo
+GITGETBASE="${GITGETBASE:-$HOME/src}"
 
-    p=${p##*@}
-    p=${p##https://}
-    p=${p##http://}
-    p=${p##git://}
-    p=${p##ssh://}
-    p=${p##ftps://}
-    p=${p##ftp://}
-    p=${p%%.git}
+# Relative path
+eval p=\${$#}
 
-    p=$(printf "$p" |sed -e s@:@/@g)
+p=${p##*@}
+p=${p##https://}
+p=${p##http://}
+p=${p##git://}
+p=${p##ssh://}
+p=${p##ftps://}
+p=${p##ftp://}
+p=${p%%.git}
 
-    if [ -z "$repo" ]; then
-       printf "Bad repository: %s" "$repo"
-       exit 1
-    fi
+p=$(printf "$p" |sed -e s@:@/@g)
 
-    b="$b/$p"
-    mkdir -p $(dirname "$b")
-    git clone "$repo" "$b"
-}
-
-main() {
-    while getopts ":b:" opt; do
-        case $opt in
-            b) GITGETBASE=$OPTARG
-                ;;
-            ?)
-                usage
-                exit 0
-                ;;
-        esac
-    done
-
-    # Shift the rest
-    shift $((OPTIND - 1))
-
-    GITGETBASE="${GITGETBASE:-$PWD}"
-
-    fetch $1 $GITGETBASE
-}
-
-main "$@"
+b="$GITGETBASE/$p"
+mkdir -p $(dirname "$b")
+git clone $@ "$b"

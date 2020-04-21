@@ -17,6 +17,7 @@ fi
 [ -d "${HOME}/.cargo/bin" ] && PATH=${HOME}/.cargo/bin:$PATH
 [ -d "${HOME}/.yarn/bin" ] && PATH=${HOME}/.yarn/bin:$PATH
 [ -d "/usr/local/opt/perl/bin" ] && PATH=$PATH:/usr/local/opt/perl/bin
+[ -d "/usr/local/go/bin" ] && PATH=$PATH:/usr/local/go/bin
 [ -d "${HOME}/go/bin" ] && PATH=${HOME}/go/bin:$PATH
 [ -d "${HOME}/bin" ] && PATH=${HOME}/bin:$PATH
 if [ -d "${HOME}/perl5/bin" ]; then
@@ -27,17 +28,18 @@ if [ -d "${HOME}/perl5/bin" ]; then
     export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
 fi
 [ -d "${HOME}/.local/bin" ] && PATH=${HOME}/.local/bin:$PATH
-[ -d "${HOME}/go/bin" ] && PATH=${HOME}/go/bin:$PATH
-[ -d "/usr/local/go/bin" ] && PATH=/usr/local/go/bin:$PATH
+#[ -d "/usr/local/go/bin" ] && PATH=/usr/local/go/bin:$PATH
 [ -d "${HOME}/bin" ] && PATH=${HOME}/bin:$PATH
-if [ -d "${HOME}/src/github.com/9fans/plan9port" ]; then
-    export PLAN9=$HOME/src/github.com/9fans/plan9port
-    PATH=$PATH:$PLAN9/bin
-fi
+# if [ -d "${HOME}/src/github.com/9fans/plan9port" ]; then
+#     export PLAN9=$HOME/src/github.com/9fans/plan9port
+#     PATH=$PATH:$PLAN9/bin
+# fi
 
 if [ "$os" = "Darwin" ]; then
+	[ -d "/opt/local/bin" ] && PATH=/opt/local/bin:/opt/local/sbin:$PATH
+	[ -d "$HOME/Library/Python/3.7/bin" ] && PATH=$HOME/Library/Python/3.7/bin:$PATH
+	MANPATH=/opt/local/share/man:${MANPATH}
 	[ -d "/Library/TeX/texbin" ] && PATH=$PATH:/Library/TeX/texbin
-	[ -d "/Library/Frameworks/Python.framework/Versions/3.6/bin" ] && PATH="${PATH}:/Library/Frameworks/Python.framework/Versions/3.6/bin"
 fi
 
 export PATH
@@ -62,6 +64,5 @@ export HISTFILE=~/.history
 export CLICOLOR=true
 [ -n "$KSH_VERSION" ] && export ENV=${HOME}/.kshrc
 #export WORKON_HOME=$HOME/.venv
-export GITGETBASE=$HOME/src
 
 #umask 022

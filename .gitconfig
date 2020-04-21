@@ -4,10 +4,18 @@
 [core]
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = /home/felix/.gitignore.global
+	commitGraph = true
+[gc]
+	writecommitGraph = true
+[push]
+	default = simple
+	followTags = true
 [alias]
 	st = status --short
 	ci = commit
 	br = branch
+	# Branch ages
+	bra = !git for-each-ref --sort='-authordate' --format='%(authordate:short), %(authorname), %(refname:lstrip=2)' 'refs/remotes'
 	co = checkout
 	diff = diff --word-diff
 	cp = cherry-pick
@@ -15,8 +23,9 @@
 	sl = stash list
 	sp = stash pop
 	ls = ls-files
-	#gui = !sh -c '/usr/local/opt/git/libexec/git-core/git-gui'
+	# Log of current branch
 	lg = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph
+	# Log of all branches
 	lga = !"git lg --all"
 	lgd = log -u
 	lgf = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
@@ -42,9 +51,6 @@
 [merge]
     #tool = vimdiff3
 	tool = meld
-[push]
-	default = simple
-	followTags = true
 [sendemail]
 	smtpEncryption = tls
 	smtpServer = smtp.userspace.com.au
@@ -53,5 +59,7 @@
 	user = felix
 [includeIf "gitdir:MYOB-Technology/"]
 	path = ~/.gitconfig.myob
+[includeIf "gitdir:src.userspace.com.au/"]
+	path = ~/.gitconfig.userspace
 [credential "https://github.com"]
 	helper = pass-store
