@@ -2,32 +2,6 @@
 
 #hostname=$(hostname |cut -d. -f1)
 
-alias ll='ls -l'
-alias la='ls -A'
-alias lh='ls -lh'
-alias l='ls -CF'
-alias h='history |grep'
-alias rm='rm -v'
-alias cp='cp -v'
-alias mv='mv -v'
-alias k='kubectl'
-alias wget="wget --timeout 10 -c"
-alias setclip="xclip -selection c"
-alias getclip="xclip -selection c -o"
-alias fsl="fossil"
-alias vim="nvim"
-alias vimf="vimfzf"
-alias vimdiff="nvim -d"
-alias ap="ansible-playbook"
-# Mail
-alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
-alias mutt-myob='neomutt -F ~/.mutt/muttrc.myob'
-alias mutt-yelnah='neomutt -F ~/.mutt/muttrc.yelnah'
-# Docker
-alias dockerm='docker-machine'
-alias dockerc='docker-compose'
-alias dcl='docker-compose logs -t -f --tail=100'
-
 dcu(){ docker-compose pull "$1" && docker-compose up -d "$1" && dcl "$1"; }
 
 calc(){ printf 'scale=2;%s\n' "$*" |bc; }
