@@ -50,6 +50,7 @@ let g:go_info_mode='gopls'
 let g:go_metalinter_enabled = ['revive', 'vet', 'golint', 'errcheck']
 let g:svelte_indent_script = 0
 let g:svelte_indent_style = 0
+let g:ansible_unindent_after_newline = 1
 let g:ale_sign_column_always = 1
 let g:ale_linter_aliases = {'svelte': ['css', 'javascript']}
 let g:ale_linters = {
