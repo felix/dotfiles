@@ -1,1 +1,2 @@
 .vim/autoload/*.old
+.local/share/nvim/site/autoload/*.old
