@@ -1,24 +1,31 @@
-filetype indent plugin on
 scriptencoding utf-8
-syntax enable sync minlines=200
 
-set background=dark
 set clipboard+=unnamedplus
 set colorcolumn=81
 set cursorline
-" set formatoptions+=nr2l
-set hlsearch
 set ignorecase
-" set laststatus=2
-" set lazyredraw
 set list
 set listchars=extends:»,tab:·\ ,trail:•,nbsp:␣
 set mouse=a
-set nocompatible
-"set noshowmode
 set novisualbell
-"set nowritebackup
 set number
+set viminfo='1000,f1,:100,@100,/20,h
+set whichwrap+=<,>,h,l,[,]
+
+" Guard for plain vim
+if !has('nvim')
+filetype indent plugin on
+syntax enable sync minlines=200
+set background=dark
+set hlsearch
+set incsearch
+set laststatus=2
+set nocompatible
+set ttyfast
+"set formatoptions+=nr2l
+"set lazyredraw
+"set noshowmode
+"set nowritebackup
 "set showbreak=>\
 "set showmatch
 "set smartcase
@@ -26,9 +33,7 @@ set number
 "set spelllang=en_au
 "set synmaxcol=200
 "set termguicolors
-"set ttyfast
-set viminfo='1000,f1,:100,@100,/20,h
-set whichwrap+=<,>,h,l,[,]
+endif
 
 if executable("ag")
     set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
@@ -89,19 +94,6 @@ Plug 'tpope/vim-commentary'
 Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 
-set background=dark
-set clipboard+=unnamedplus
-set colorcolumn=81
-set cursorline
-set smartcase
-set list
-set listchars=extends:»,tab:·\ ,trail:•,nbsp:␣
-set mouse=a
-set novisualbell
-set number
-set viminfo='1000,f1,:100,@100,/20,h
-set whichwrap+=<,>,h,l,[,]
-
 let g:neosolarized_contrast = "high"
 let g:pymode_python = 'python3'
 let g:go_def_mode='gopls'
@@ -157,9 +149,8 @@ nnoremap <leader>q :b#<cr>
 nnoremap <leader>f gqap
 vnoremap <leader>Q gq
 
-"let g:stop_autocomplete=0
-
 " https://stackoverflow.com/a/2138303
+let g:stop_autocomplete=0
 function! CleverTab(type)
     if a:type=='omni'
         if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
