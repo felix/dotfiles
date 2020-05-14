@@ -1,6 +1,10 @@
 scriptencoding utf-8
 
-set clipboard+=unnamedplus
+if system('uname -s') == "Darwin\n"
+  set clipboard=unnamed
+else
+  set clipboard=unnamedplus
+endif
 set colorcolumn=81
 set cursorline
 set ignorecase
@@ -24,7 +28,6 @@ set nocompatible
 set ttyfast
 "set formatoptions+=nr2l
 "set lazyredraw
-"set noshowmode
 "set nowritebackup
 "set showbreak=>\
 "set showmatch
@@ -71,6 +74,7 @@ Plug 'cespare/vim-toml'
 Plug 'cmcaine/vim-uci'
 Plug 'fatih/vim-go'
 Plug 'ziglang/zig.vim'
+Plug 'aklt/plantuml-syntax'
 Plug 'cstrahan/vim-capnp'
 Plug 'jamessan/vim-gnupg'
 Plug 'leafgarland/typescript-vim'
