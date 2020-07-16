@@ -13,9 +13,9 @@ alias wget="wget --timeout 10 -c"
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 alias fsl="fossil"
-alias vim="nvim"
-alias vimf="vimfzf"
-alias vimdiff="nvim -d"
+# alias vim="nvim"
+# alias vimf="vimfzf"
+# alias vimdiff="nvim -d"
 alias ap="ansible-playbook"
 # Mail
 alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
