@@ -7,6 +7,8 @@
 	commitGraph = true
 [gc]
 	writecommitGraph = true
+[pull]
+	ff = only
 [push]
 	default = simple
 	followTags = true
