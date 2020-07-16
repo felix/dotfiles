@@ -85,7 +85,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'pearofducks/ansible-vim'
 Plug 'evanleck/vim-svelte'
 Plug 'tmatilai/gitolite.vim'
-Plug 'python-mode/python-mode', { 'branch': 'develop' }
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'vim-scripts/ebnf.vim'
 Plug 'ledger/vim-ledger'
 Plug 'liuchengxu/graphviz.vim'
