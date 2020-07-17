@@ -158,7 +158,7 @@ process() {
 	dest=$REALHOME/$relative
 	src=$DOTFILES/$relative
 	# check for host specific version
-	hostn="$(hostname -s)"
+	hostn="$(hostname |cut -d. -f1)"
 	if [ -f "$src.__$hostn" ]; then
 		src="$src.__$hostn"
 		printf 'using host version %s\n' "$src"
