@@ -36,7 +36,7 @@ set smtp_authenticators="login"
 
 set net_inc=5
 #set new_mail_command="notify-send 'F: %F S: %s' &"
-set new_mail_command="notify-send 'New email' '%n new messages, %u unread.' &"
+#set new_mail_command="notify-send 'New email' '%n new messages, %u unread.' &"
 set noaskbcc
 set noaskcc
 set nobeep

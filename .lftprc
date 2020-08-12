@@ -2,3 +2,5 @@ set ssl:verify-certificate no
 set ftp:list-options "-a"
 #set ftp:ssl-allow no
 set ftp:passive-mode no
+set xfer:log 1
+#set xfer:log-file //to/transfer_log
