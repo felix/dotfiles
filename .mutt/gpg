@@ -6,4 +6,7 @@ set crypt_replysignencrypted = yes
 set pgp_good_sign="^\\[GNUPG:\\] GOODSIG"
 message-hook '!(~g|~G) ~b"^-----BEGIN\ PGP\ (SIGNED\ )?MESSAGE"' "exec check-traditional-pgp"
 
+#set autocrypt = yes
+#set autocrypt_dir = ~/.mutt/autocrypt
+
 # vim: set ft=muttrc :
