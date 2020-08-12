@@ -35,8 +35,6 @@ set imap_authenticators="login"
 set smtp_authenticators="login"
 
 set net_inc=5
-#set new_mail_command="notify-send 'F: %F S: %s' &"
-#set new_mail_command="notify-send 'New email' '%n new messages, %u unread.' &"
 set noaskbcc
 set noaskcc
 set nobeep
@@ -69,6 +67,7 @@ set tmpdir="/tmp"
 set followup_to
 set honor_followup_to=yes
 
+source ~/.mutt/muttrc.notify
 source ~/.mutt/colour
 source ~/.mutt/lists
 source "gpg --decrypt --quiet ~/.mutt/aliases.gpg |"
