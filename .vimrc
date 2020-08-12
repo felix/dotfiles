@@ -115,6 +115,7 @@ let g:ale_linters_explicit = 1
 let g:ale_fixers = {
 			\   'svelte': ['prettier', 'eslint'],
 			\}
+let g:tex_flavor = 'latex'
 
 colorscheme NeoSolarized
 
@@ -134,6 +135,8 @@ endif
 " Toggle line numbers and fold column for easy copying:
 nnoremap <F2> :set nonumber<CR>:set nofoldenable<CR>:set nolist<CR>:set paste<CR>
 nnoremap <F3> :set number<CR>:set foldenable<CR>:set list<CR>:set nopaste<CR>
+" GoDef
+nnoremap <F4> :GoDef<CR>
 " Space clears highlighting
 :noremap <silent> <Space> :nohlsearch<CR><Space>
 " add files with wildcards, like **/*.md for all markdown files
