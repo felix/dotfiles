@@ -39,6 +39,7 @@ usage() {
 	printf '  add\t\tadd a file to your dotfile repo\n'
 	printf '  check\t\tlist files needing linking (same is -n flag)\n'
 	printf '  clean\t\tlist and prompt to delete broken symlinks\n'
+	printf '  pull\t\tpull dotfiles from git\n'
 	printf '\n'
 	printf 'Options:\n'
 	printf '\t-s <path> Specify dotfile path (default: %s)\n' "$DOTFILES"
@@ -235,6 +236,11 @@ main() {
 			;;
 		clean)
 			$find "$REALHOME" -type l -exec test ! -e '{}' \; -exec rm -i '{}' \;
+			;;
+		pull)
+			oldpwd=$PWD
+			cd $DOTFILES && git pull
+			cd $oldpwd
 			;;
 		*)
 			scan
