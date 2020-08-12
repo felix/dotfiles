@@ -1,0 +1,1 @@
+set new_mail_command="terminal-notifier -title 'New email' -message '%n new messages, %u unread.' -activate 'com.apple.Terminal'"
