@@ -3,6 +3,7 @@ set crypt_use_gpgme = yes
 set crypt_replysign = yes
 set crypt_replyencrypt = yes
 set crypt_replysignencrypted = yes
+set crypt_verify_sig = ask-no
 set pgp_good_sign="^\\[GNUPG:\\] GOODSIG"
 message-hook '!(~g|~G) ~b"^-----BEGIN\ PGP\ (SIGNED\ )?MESSAGE"' "exec check-traditional-pgp"
 
