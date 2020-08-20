@@ -160,7 +160,6 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-finish
 fi
 
-[ -e $HOME/.aliases ] && source $HOME/.aliases
 [ -e $HOME/bin/common.sh ] && source $HOME/bin/common.sh
 
 #zprof
