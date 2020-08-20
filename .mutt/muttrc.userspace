@@ -30,6 +30,7 @@ mailboxes = +INBOX +Spam +Drafts \
 	    +lists \
 	    +lists.openbsd \
 	    +lists.opensmtpd
+unmailboxes = +Bin
 
 source ~/.mutt/gpg
 

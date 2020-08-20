@@ -18,5 +18,6 @@ send-hook . 'set signature=~/.mutt/signature.yelnah'
 color status brightwhite blue
 
 mailboxes = +INBOX +Spam +Drafts
+unmailboxes = +Bin
 
 # vim: set ft=muttrc:
