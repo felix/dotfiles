@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#hostname=$(hostname |cut -d. -f1)
+[ -e $HOME/.aliases ] && source $HOME/.aliases
 
 dcu(){ docker-compose pull "$1" && docker-compose up -d "$1" && dcl "$1"; }
 
@@ -22,9 +22,6 @@ export SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
 GPG_TTY=$(tty)
 export GPG_TTY
 
-#[ ! -d "$WORKON_HOME" ] && mkdir -p $WORKON_HOME
-#. /usr/local/bin/virtualenvwrapper.sh
-
 SCREEN_PATH=$(command -v screen)
 TMUX_PATH=$(command -v tmux)
 
@@ -39,11 +36,3 @@ if [ "$SHOWED_MUX_MESSAGE" != "true" ]; then
     fi
     export SHOWED_MUX_MESSAGE="true"
 fi
-
-#if [ -e "$HOME/bin/chruby.sh" ]; then
-#    # shellcheck source=chruby.sh
-#    . "$HOME/bin/chruby.sh"
-#    #source /usr/local/share/chruby/auto.sh
-#    chruby system
-#fi
-
