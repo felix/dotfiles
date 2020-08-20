@@ -8,4 +8,4 @@ hostname=$(hostname |cut -d. -f1)
 #     dat=$(mpc current)
 #     echo ",[{ \"color\": \"#859900\", \"full_text\": \"${dat}\" }, ${line#,\[}" || exit 1
 # done)
-py3status -c ~/.config/i3status/${hostname}.conf
+$HOME/.local/bin/py3status -c ~/.config/i3status/${hostname}.conf
