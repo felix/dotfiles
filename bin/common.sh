@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[ -e $HOME/.aliases ] && source $HOME/.aliases
+[ -e $HOME/.aliases ] && . $HOME/.aliases
 
 dcu(){ docker-compose pull "$1" && docker-compose up -d "$1" && dcl "$1"; }
 

@@ -31,11 +31,11 @@ done
 # Should not need to export but just in case
 export PATH
 
-if [ -d "${HOME}/perl5/bin" ]; then
+if [ -d "$HOME/perl5/bin" ]; then
     export PERL5LIB="{$HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
-    export PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
-    export PERL_MB_OPT="--install_base \"${HOME}/perl5\""
-    export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
+    export PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+    export PERL_MB_OPT="--install_base \"$HOME/perl5\""
+    export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
 fi
 
 [ -d /opt/local/share/man ] && MANPATH=/opt/local/share/man:$MANPATH
@@ -55,11 +55,12 @@ export VISUAL=$EDITOR
 export PAGER=less
 export BROWSER=firefox
 export GIT_EDITOR=$EDITOR
-export XML_CATALOG_FILES="${HOME}/src/XMLCatalog/catalog.xml"
+export XML_CATALOG_FILES="$HOME/src/XMLCatalog/catalog.xml"
 export PASSWORD_STORE_X_SELECTION=primary
 export HISTSIZE=9000
 export HISTFILE=~/.history
 export CLICOLOR=true
-[ -n "$KSH_VERSION" ] && export ENV=${HOME}/.kshrc
+[ -n "$KSH_VERSION" ] && export ENV=$HOME/.kshrc
+#export MOZ_ENABLE_WAYLAND=1
 
 #umask 022
