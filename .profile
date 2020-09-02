@@ -3,10 +3,9 @@ hostname=$(hostname |cut -d. -f1)
 os=$(uname -s)
 
 # Build my path
-PATH=/sbin:/bin:/usr/sbin:/usr/bin
+PATH=$HOME/bin
 
-for bindir in $HOME/bin \
-	$HOME/go/bin \
+for bindir in $HOME/go/bin \
 	$HOME/.local/bin \
 	$HOME/.node/bin \
 	$HOME/.cabal/bin \
