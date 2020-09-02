@@ -1,2 +1,3 @@
 .vim/autoload/*.old
+.mutt/private/
 .local/share/nvim/site/autoload/*.old
