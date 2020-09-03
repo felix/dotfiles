@@ -1,0 +1,10 @@
+text/calendar          ; ~/bin/icalview.rb                                        ; copiousoutput
+text/html              ; w3m -o display_link_number=1 -I %{charset} -T text/html  ; copiousoutput
+message/*              ; w3m -I %{charset} -T text/html                           ; copiousoutput
+image/svg+xml          ; mutt_bgrun inkscape %s                                   ; copiousoutput
+image/*                ; open -a Preview %s                            ; copiousoutput
+application/x-gunzip   ; gzcat                                                    ; copiousoutput
+application/x-tar-gz   ; gunzip -c %s | tar -tf -                                 ; copiousoutput
+application/postscript ; ps2ascii %s                                              ; copiousoutput
+application/pdf        ; mutt_bgrun open -a Preview '%s'                          ; copiousoutput
+application/*          ; mutt_bgrun libreoffice '%s'                              ; copiousoutput
