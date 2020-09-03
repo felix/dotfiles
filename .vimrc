@@ -15,11 +15,12 @@ set novisualbell
 set number
 set viminfo='1000,f1,:100,@100,/20,h
 set whichwrap+=<,>,h,l,[,]
+set re=0
 
 " Guard for plain vim
 if !has('nvim')
 filetype indent plugin on
-syntax enable sync minlines=200
+syntax enable sync minlines=20
 set background=dark
 set hlsearch
 set incsearch
@@ -95,27 +96,28 @@ Plug 'tpope/vim-commentary'
 Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 
-let g:neosolarized_contrast = "high"
-let g:pymode_python = 'python3'
+let g:neosolarized_contrast="high"
+let g:pymode_python='python3'
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
-let g:go_metalinter_enabled = ['revive', 'vet', 'golint', 'errcheck']
-let g:svelte_indent_script = 0
-let g:svelte_indent_style = 0
-let g:ansible_unindent_after_newline = 1
-let g:ale_sign_column_always = 1
-let g:ale_linter_aliases = {'svelte': ['css', 'javascript']}
-let g:ale_linters = {
+"let g:go_metalinter_command='golangci-lint'
+let g:go_metalinter_enabled = ['revive', 'vet', 'golint', 'errcheck', 'staticcheck']
+let g:go_metalinter_autosave_enabled=[]
+let g:svelte_indent_script=0
+let g:svelte_indent_style=0
+let g:ansible_unindent_after_newline=1
+let g:ale_sign_column_always=1
+let g:ale_linter_aliases={'svelte': ['css', 'javascript']}
+let g:ale_linters={
 			\ 'javascript': ['standard'],
 			\ 'yaml': ['cfn-python-lint'],
 			\ 'svelte': ['stylelint', 'eslint'],
-			\ 'go': ['gopls']
 			\ }
-let g:ale_linters_explicit = 1
-let g:ale_fixers = {
+let g:ale_linters_explicit=1
+let g:ale_fixers={
 			\   'svelte': ['prettier', 'eslint'],
 			\}
-let g:tex_flavor = 'latex'
+let g:tex_flavor='latex'
 
 colorscheme NeoSolarized
 
