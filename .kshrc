@@ -30,21 +30,27 @@ set -A complete_ifconfig_1 -- $(ifconfig | grep ^[a-z] | cut -d: -f1)
 if [ -f /dev/mixer ]; then
 	set -A complete_mixerctl_1 -- $(mixerctl | cut -d= -f 1)
 fi
+
 PASS_LIST=$(find $HOME/.password-store/ -type f | grep "gpg$" | \
 	sed 's/^\.password-store\///' | \
 	sed 's/\.gpg$//')
+
 set -A complete_pass -- $PASS_LIST
 if [ -n "$(command -v mpc)" ]; then
-    set -A complete_mpc -- ls play pause toggle prev random shuffle stop update
-    set -A complete_mpc_2 -- $(mpc lsplaylists | sort)
+	set -A complete_mpc_1 -- \
+		add clear clearerror consume current find findadd list listall ls lsplaylists \
+		next pause pause-if-playing play playlist prev random repeat rescan \
+		search searchadd searchplay shuffle single stats stop update volume
+	set -A complete_mpc_2 -- $(mpc lsplaylists | sort)
 fi
+
 if [ -d "$HOME/.password-store" ]; then
-    PASS_LIST=$(find "$HOME/.password-store" -type f -name \*.gpg | sed 's/^.*\.password-store\///' | sed 's/\.gpg$//g')
-    set -A complete_pass -- $PASS_LIST -c generate edit insert git
-    #set -A complete_pass_2 -- $PASS_LIST push
-
+	PASS_LIST=$(find "$HOME/.password-store" -type f -name \*.gpg | sed 's/^.*\.password-store\///' | sed 's/\.gpg$//g')
+	set -A complete_pass -- $PASS_LIST -c generate edit insert git
+	#set -A complete_pass_2 -- $PASS_LIST push
 fi
 
- if [ -e $HOME/bin/common.sh ]; then
-     . $HOME/bin/common.sh
- fi
+if [ -e $HOME/bin/common.sh ]; then
+	. $HOME/bin/common.sh
+fi
+# vim: ft=sh
