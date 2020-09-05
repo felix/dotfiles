@@ -13,6 +13,7 @@ set listchars=extends:»,tab:·\ ,trail:•,nbsp:␣
 set mouse=a
 set novisualbell
 set number
+set termguicolors
 set viminfo='1000,f1,:100,@100,/20,h
 set whichwrap+=<,>,h,l,[,]
 set re=0
@@ -36,7 +37,6 @@ set ttyfast
 "set spellfile=~/.vim/spell/.en.add
 "set spelllang=en_au
 "set synmaxcol=200
-"set termguicolors
 endif
 
 if executable("ag")

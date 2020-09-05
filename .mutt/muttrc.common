@@ -7,7 +7,7 @@ set date_format="%a, %b %d, %Y at %I:%M:%S%p %Z"
 set delete=yes
 set maildir_trash=yes    # set trash flag on delete
 set edit_headers=yes
-set editor="vim '+/^$'"  # moves to the first empty line
+set editor="$EDITOR '+/^$'"  # moves to the first empty line
 set fast_reply           # don't ask for sbj and to
 set reply_to
 set forward_format="Fwd: %s"
