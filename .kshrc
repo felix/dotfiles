@@ -1,12 +1,34 @@
 
-green='\[\e[0;32m\]'     # Green
-white='\[\e[0;37m\]'     # White
-yellow='\[\e[0;33m\]'    # Yellow
-red='\[\e[0;31m\]'       # Red
-cyan='\[\e[0;36m\]'      # Cyan
+red='\[\e[0;31m\]'
+green='\[\e[0;32m\]'
+yellow='\[\e[0;33m\]'
+blue='\[\e[0;34m\]'
+purple='\[\e[0;35m\]'
+cyan='\[\e[0;36m\]'
+white='\[\e[0;37m\]' # not really white
 reset='\[\e[m\]'
 
-PS1="${green}(${white}\A${green})[${yellow}\u${green}@${cyan}\h${green}]${red} ${errcode}${white}\w\n${reset}$ "
+__exit_status() {
+	case $1 in
+		0) return ;;
+		*) printf '(%d) ' "$1" ;;
+	esac
+}
+
+__branch_status() {
+	ref="$(env git branch --show-current HEAD 2> /dev/null)"
+	case $? in        # See what the exit code is.
+		0) ;;           # contains the name of a checked-out branch.
+		128) return ;;  # No Git repository here.
+		# Otherwise, see if HEAD is in a detached state.
+		*) ref="$(env git rev-parse --short HEAD 2> /dev/null)" || return ;;
+	esac
+	printf ' (%s)' "${ref#refs/heads/}"
+	unset ref
+}
+
+PS1='${green}(${white}\A${green})[${yellow}\u${green}@${cyan}\h${green}]${purple}$(__branch_status $?)${red} ${errcode}${white}\w\n${red}$(__exit_status $?)${reset}\$ '
+#PS1="${green}(${white}\A${green})[${yellow}\u${green}@${cyan}\h${green}]${red} ${errcode}${white}\w\n${reset}$ "
 
 # Completions
 HOST_LIST=$(awk '{split($1,a,","); gsub("].*", "", a[1]); gsub("\\[", "", a[1]); print a[1] " root@" a[1]}' ~/.ssh/known_hosts | sort | uniq)
@@ -53,4 +75,3 @@ fi
 if [ -e $HOME/bin/common.sh ]; then
 	. $HOME/bin/common.sh
 fi
-# vim: ft=sh
