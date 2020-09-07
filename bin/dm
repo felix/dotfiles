@@ -30,6 +30,7 @@ if [ -z "$realpath" ]; then
 		canonicalize_path "$(resolve_symlinks "$1")"
 	}
 fi
+hostn="$(hostname |cut -d. -f1)"
 
 # Show usage
 usage() {
@@ -170,7 +171,6 @@ process() {
 	src=$DOTFILES/$relative
 
 	# check for host specific version
-	hostn="$(hostname |cut -d. -f1)"
 	if [ -f "$src.__$hostn!" ]; then
 		backup "$dest" && remove "$dest"
 		return
