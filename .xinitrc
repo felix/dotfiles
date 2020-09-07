@@ -2,4 +2,4 @@
 
 . $HOME/.xsessionrc
 
-exec i3
+exec dbus-launch --sh-syntax --exit-with-session i3

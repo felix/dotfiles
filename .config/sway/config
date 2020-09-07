@@ -4,6 +4,11 @@ set $mod Mod1
 # Windows
 #set $mod Mod4
 
+input "0:0:System_mouse" {
+	tap enabled
+}
+
+
 font pango:monospace 8
 #font pango:DejaVu Sans Mono 8
 #font -*-fixed-medium-r-normal-*-12-*-*-*-*-*-iso10646-1
