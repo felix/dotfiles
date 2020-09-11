@@ -1,6 +1,7 @@
-#!/usr/bin/env zsh -
+#!/bin/sh -
 #
 #   Oliver Fromme  <olli@fromme.com>
+#   Felix Hanley   <felix@userspace.com.au>
 #
 #   BSD-style copyright and standard disclaimer applies.
 #
@@ -28,37 +29,37 @@
 #      line (the default is ``*'').
 #
 
-if [[ "$VISUAL" != "" ]]; then
+if [ -n "$VISUAL" ]; then
 	VICMD="$VISUAL"
-elif [[ "$EDITOR" != "" ]]; then
+elif [ -n "$EDITOR" ]; then
 	VICMD="$EDITOR"
 else
 	VICMD="/usr/bin/vi"
 fi
 
-if [[ "x$1" == "x--" ]]; then
+if [ "x$1" = "x--" ]; then
 	shift
 elif expr "x$1" : 'x-' >/dev/null; then
-	echo "Usage: ${0:t} [file ...]" >&2
+	echo "Usage: vils [file ...]" >&2
 	exit 1
 fi
 
 #   Do not use a publicly writable directory such as /tmp,
 #   which would be a security hole because of possible
 #   race conditions!
-TMP="$HOME/.${0:t}.$$.tmp"
-Cleanup()
-{
+TMP="$HOME/.vils.$$.tmp"
+cleanup() {
 	rm -f "$TMP" "$TMP".new
 	exit 1
 }
-trap Cleanup 1 2 3 15
+trap cleanup 1 2 3 15
 
-if [[ $# -gt 0 ]]; then
-	ls -d -- "$@" | awk '{printf "%04d %s\n", NR, $0}' > "$TMP"
-else
-	ls > "$TMP" | awk '{printf "%04d %s\n", NR, $0}' > "$TMP"
-fi
+path=.
+[ $# -gt 0 ] && path=$@
+
+find -s $path -maxdepth 1 \
+	| sed "/^$path$/d;s|^\./||" \
+	| awk '{printf "%04d %s\n", NR, $0}' > "$TMP"
 cp "$TMP" "$TMP".new
 
 $VICMD "$TMP".new
@@ -76,11 +77,11 @@ $VICMD "$TMP".new
 	else {
 		new = substr($0, 6);
 		if (old[$1] && new && old[$1] != new)
-			printf "%s/%s\n", old[$1], new;
+			printf "%s|%s\n", old[$1], new;
 	}
 }' \
 | (
-	IFS='/'
+	IFS='|'
 	while read OLD NEW; do
 		mv -i -- "$OLD" "$NEW"
 	done
@@ -88,5 +89,3 @@ $VICMD "$TMP".new
 
 rm -f "$TMP" "$TMP".new
 exit 0
-
-#-- 
