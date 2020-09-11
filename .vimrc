@@ -13,7 +13,7 @@ set listchars=extends:»,tab:·\ ,trail:•,nbsp:␣
 set mouse=a
 set novisualbell
 set number
-set termguicolors
+"set termguicolors
 set viminfo='1000,f1,:100,@100,/20,h
 set whichwrap+=<,>,h,l,[,]
 set re=0
@@ -85,7 +85,7 @@ Plug 'liuchengxu/graphviz.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'pearofducks/ansible-vim'
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 Plug 'tmatilai/gitolite.vim'
 Plug 'vim-scripts/ebnf.vim'
 Plug 'ziglang/zig.vim'
