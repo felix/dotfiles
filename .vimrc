@@ -13,42 +13,44 @@ set listchars=extends:»,tab:·\ ,trail:•,nbsp:␣
 set mouse=a
 set novisualbell
 set number
-"set termguicolors
+if (has("termguicolors"))
+  set termguicolors
+endif
 set viminfo='1000,f1,:100,@100,/20,h
 set whichwrap+=<,>,h,l,[,]
 set re=0
 
 " Guard for plain vim
 if !has('nvim')
-filetype indent plugin on
-syntax enable sync minlines=20
-set background=dark
-set hlsearch
-set incsearch
-set laststatus=2
-set nocompatible
-set ttyfast
-"set formatoptions+=nr2l
-"set lazyredraw
-"set nowritebackup
-"set showbreak=>\
-"set showmatch
-"set smartcase
-"set spellfile=~/.vim/spell/.en.add
-"set spelllang=en_au
-"set synmaxcol=200
+  filetype indent plugin on
+  syntax enable sync minlines=20
+  set background=dark
+  set hlsearch
+  set incsearch
+  set laststatus=2
+  set nocompatible
+  set ttyfast
+  "set formatoptions+=nr2l
+  "set lazyredraw
+  "set nowritebackup
+  "set showbreak=>\
+  "set showmatch
+  "set smartcase
+  "set spellfile=~/.vim/spell/.en.add
+  "set spelllang=en_au
+  "set synmaxcol=200
 endif
 
 if executable("ag")
-    set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
-    set grepformat=%f:%l:%c:%m,%f:%l:%m
+  set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
-    let &undodir = expand('$HOME/.vim/undo')
-    call system('mkdir -p ' . &undodir)
-    set undofile
+  let &undodir = expand('$HOME/.vim/undo')
+  call system('mkdir -p ' . &undodir)
+  set undofile
 endif
 
 set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
@@ -109,28 +111,28 @@ let g:ansible_unindent_after_newline=1
 let g:ale_sign_column_always=1
 let g:ale_linter_aliases={'svelte': ['css', 'javascript']}
 let g:ale_linters={
-			\ 'javascript': ['standard'],
-			\ 'yaml': ['cfn-python-lint'],
-			\ 'svelte': ['stylelint', 'eslint'],
-			\ }
+      \ 'javascript': ['standard'],
+      \ 'yaml': ['cfn-python-lint'],
+      \ 'svelte': ['stylelint', 'eslint'],
+      \ }
 let g:ale_linters_explicit=1
 let g:ale_fixers={
-			\   'svelte': ['prettier', 'eslint'],
-			\}
+      \   'svelte': ['prettier', 'eslint'],
+      \}
 let g:tex_flavor='latex'
 
 colorscheme NeoSolarized
 
 if executable("rg")
-    set grepprg=rg\ --smart-case\ --column
-    set grepformat=%f:%l:%c:%m,%f:%l:%m
+  set grepprg=rg\ --smart-case\ --column
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
-    let &undodir = expand('$HOME/.vim/undo')
-    call system('mkdir -p ' . &undodir)
-    set undofile
+  let &undodir = expand('$HOME/.vim/undo')
+  call system('mkdir -p ' . &undodir)
+  set undofile
 endif
 
 "nnoremap ; :
@@ -158,23 +160,23 @@ vnoremap <leader>Q gq
 " https://stackoverflow.com/a/2138303
 let g:stop_autocomplete=0
 function! CleverTab(type)
-    if a:type=='omni'
-        if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-            let g:stop_autocomplete=1
-            return "\<TAB>"
-        elseif !pumvisible() && !&omnifunc
-            return "\<C-X>\<C-O>\<C-P>"
-        endif
-    elseif a:type=='keyword' && !pumvisible() && !g:stop_autocomplete
-        return "\<C-X>\<C-N>\<C-P>"
-    elseif a:type=='next'
-        if g:stop_autocomplete
-            let g:stop_autocomplete=0
-        else
-            return "\<C-N>"
-        endif
+  if a:type=='omni'
+    if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+      let g:stop_autocomplete=1
+      return "\<TAB>"
+    elseif !pumvisible() && !&omnifunc
+      return "\<C-X>\<C-O>\<C-P>"
     endif
-    return ''
+  elseif a:type=='keyword' && !pumvisible() && !g:stop_autocomplete
+    return "\<C-X>\<C-N>\<C-P>"
+  elseif a:type=='next'
+    if g:stop_autocomplete
+      let g:stop_autocomplete=0
+    else
+      return "\<C-N>"
+    endif
+  endif
+  return ''
 endfunction
 inoremap <silent><TAB> <C-R>=CleverTab('omni')<CR><C-R>=CleverTab('keyword')<CR><C-R>=CleverTab('next')<CR>
 
@@ -183,22 +185,22 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 
 " Strip all trailing whitespace in file
 function! StripTrailingWhitespace()
-    "exec ':%s/[ \t]\+$//gc'
-    if !&binary && &filetype != 'diff'
-        normal mz
-        normal Hmy
-        %s/\s\+$//e
-        normal 'yz<CR>
-        normal `z
-    endif
+  "exec ':%s/[ \t]\+$//gc'
+  if !&binary && &filetype != 'diff'
+    normal mz
+    normal Hmy
+    %s/\s\+$//e
+    normal 'yz<CR>
+    normal `z
+  endif
 endfunction
 
 function! ToggleConcealLevel()
-    if &conceallevel == 0
-        setlocal conceallevel=2
-    else
-        setlocal conceallevel=0
-    endif
+  if &conceallevel == 0
+    setlocal conceallevel=2
+  else
+    setlocal conceallevel=0
+  endif
 endfunction
 nnoremap <silent> <C-c><C-y> :call ToggleConcealLevel()<CR>
 
@@ -220,5 +222,5 @@ autocmd FileType ledger vnoremap <silent> <Tab> :LedgerAlign<CR>
 
 " Jump to last known position
 autocmd BufReadPost *
-            \ if line("'\"") > 1 && line("'\"") <= line("$") |
-            \ exe "normal! g`\"" | endif
+      \ if line("'\"") > 1 && line("'\"") <= line("$") |
+      \ exe "normal! g`\"" | endif
