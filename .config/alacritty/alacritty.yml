@@ -1,5 +1,11 @@
 window:
   startup_mode: Maximized
+selection:
+  save_to_clipboard: true
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+bell:
+  duration: 0
 colors:
   primary:
     background: '0x002b36' # base03
