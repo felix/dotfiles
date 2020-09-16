@@ -57,6 +57,7 @@ export GIT_EDITOR=$EDITOR
 export XML_CATALOG_FILES="$HOME/src/XMLCatalog/catalog.xml"
 export PASSWORD_STORE_X_SELECTION=primary
 export HISTSIZE=9000
+export HISTCONTROL=ignorespace:ignoredups
 export HISTFILE=~/.history
 export CLICOLOR=true
 [ -n "$KSH_VERSION" ] && export ENV=$HOME/.kshrc
