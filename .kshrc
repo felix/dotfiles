@@ -1,3 +1,5 @@
+# Load defaults
+[ -e /etc/ksh.kshrc ] && . /etc/ksh.kshrc
 
 red='\[\e[0;31m\]'
 green='\[\e[0;32m\]'
@@ -26,6 +28,8 @@ __branch_status() {
 	printf ' (%s)' "${ref#refs/heads/}"
 	unset ref
 }
+
+set -o vi
 
 PS1='${green}(${white}\A${green})[${yellow}\u${green}@${cyan}\h${green}]${purple}$(__branch_status $?)${red} ${errcode}${white}\w\n${red}$(__exit_status $?)${reset}\$ '
 #PS1="${green}(${white}\A${green})[${yellow}\u${green}@${cyan}\h${green}]${red} ${errcode}${white}\w\n${reset}$ "
@@ -73,6 +77,4 @@ if [ -d "$HOME/.password-store" ]; then
 	#set -A complete_pass_2 -- $PASS_LIST push
 fi
 
-if [ -e $HOME/bin/common.sh ]; then
-	. $HOME/bin/common.sh
-fi
+[ -e $HOME/bin/common.sh ] && . $HOME/bin/common.sh
