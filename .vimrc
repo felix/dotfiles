@@ -7,7 +7,7 @@ else
 endif
 set colorcolumn=81
 set cursorline
-set ignorecase
+set smartcase
 set list
 set listchars=extends:»,tab:·\ ,trail:•,nbsp:␣
 set mouse=a
@@ -35,7 +35,6 @@ if !has('nvim')
   "set nowritebackup
   "set showbreak=>\
   "set showmatch
-  "set smartcase
   "set spellfile=~/.vim/spell/.en.add
   "set spelllang=en_au
   "set synmaxcol=200
