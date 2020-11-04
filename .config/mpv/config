@@ -1,0 +1,9 @@
+[default]
+
+vo=opengl
+profile=opengl-hq
+
+alang=en,eng
+
+ytdl
+ytdl-format=best
