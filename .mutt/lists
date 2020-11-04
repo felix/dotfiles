@@ -5,7 +5,8 @@ lists.opennicproject.org \
 .github.com \
 misc.opensmtpd.org \
 .googlegroups.com \
-securityfocus.com
+securityfocus.com \
+lobste.rs
 
 subscribe -group bsd @openbsd freebsd.org  @dragonflybsd.org
 
