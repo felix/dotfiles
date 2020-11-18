@@ -5,6 +5,8 @@
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = /home/felix/.gitignore.global
 	commitGraph = true
+[init]
+	defaultBranch = master
 [gc]
 	writecommitGraph = true
 [pull]
