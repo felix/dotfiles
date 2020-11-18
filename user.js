@@ -1,8 +1,12 @@
 // PREF: Disable Displaying Javascript in History URLs
 // http://kb.mozillazine.org/Browser.urlbar.filter.javascript
 user_pref("browser.urlbar.filter.javascript", true);
+// PREF: Enable search suggestions in the search bar
+user_pref("browser.search.suggest.enabled", true);
 // PREF: When using the location bar, do suggest URLs from browsing history
 user_pref("browser.urlbar.suggest.history", true);
+// PREF: Enable URL bar autocomplete and history/bookmarks suggestions dropdown
+user_pref("browser.urlbar.autocomplete.enabled", true);
 // PREF: Clear history when Firefox closes
 // https://support.mozilla.org/en-US/kb/Clear%20Recent%20History#w_how-do-i-make-firefox-clear-my-history-automatically
 user_pref("privacy.sanitize.sanitizeOnShutdown", true);
