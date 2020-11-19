@@ -35,6 +35,8 @@ PS1='${green}(${white}\A${green})[${yellow}\u${green}@${cyan}\h${green}]${purple
 #PS1="${green}(${white}\A${green})[${yellow}\u${green}@${cyan}\h${green}]${red} ${errcode}${white}\w\n${reset}$ "
 
 # Completions
+# When we need to force tab completion
+#bind ^i=complete
 HOST_LIST=$(awk '{split($1,a,","); gsub("].*", "", a[1]); gsub("\\[", "", a[1]); print a[1] " root@" a[1]}' ~/.ssh/known_hosts | sort | uniq)
 set -A complete_ssh -- $HOST_LIST
 set -A complete_scp -- $HOST_LIST

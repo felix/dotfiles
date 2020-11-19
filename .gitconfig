@@ -5,6 +5,7 @@
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = /home/felix/.gitignore.global
 	commitGraph = true
+	quotePath = false
 [init]
 	defaultBranch = master
 [gc]
@@ -71,3 +72,5 @@
         path = ~/.gitconfig.userspace
 [credential "https://github.com"]
 	helper = pass-store
+[receive]
+	advertisePushOptions = true

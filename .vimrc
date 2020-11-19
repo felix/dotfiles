@@ -106,6 +106,7 @@ let g:go_metalinter_enabled = ['revive', 'vet', 'golint', 'errcheck', 'staticche
 let g:go_metalinter_autosave_enabled=[]
 let g:svelte_indent_script=0
 let g:svelte_indent_style=0
+let g:ledger_date_format='%Y-%m-%d'
 let g:ansible_unindent_after_newline=1
 let g:ale_sign_column_always=1
 let g:ale_linter_aliases={'svelte': ['css', 'javascript']}
