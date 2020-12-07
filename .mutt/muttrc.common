@@ -11,10 +11,11 @@ set editor="$EDITOR '+/^$'"  # moves to the first empty line
 set fast_reply           # don't ask for sbj and to
 set reply_to
 set forward_format="Fwd: %s"
+set imap_headers=X-SPAM-STATUS
 set imap_check_subscribed
 #set imap_list_subscribed
 unset imap_passive
-set index_format="%4C %Z |%{%d %b %Y %R}| %-30.30L %?M?(#%03M)&(%5c)? %s"
+set index_format="%4C %Z |%{%d %b %Y %R}| %-30.30L %?M?(#%03M)&(%5c)? %?H?$& ? %s"
 set mail_check=30
 set nomarkers
 set mailcap_path="~/.mailcap"  # mime types and apps
@@ -33,6 +34,9 @@ set ssl_verify_host=yes
 
 set imap_authenticators="login"
 set smtp_authenticators="login"
+
+spam "X-Spam-Status: Yes, score=([0-9.]+)" "SPAM-%1"
+nospam "X-Spam-Status: No.*"
 
 set net_inc=5
 set noaskbcc
