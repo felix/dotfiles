@@ -1,8 +1,7 @@
 [default]
 
-vo=opengl
+vo=libmpv
 profile=opengl-hq
-opengl-backend=cocoa
 ao=coreaudio
 
 sub-scale=3
