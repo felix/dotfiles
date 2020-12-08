@@ -79,4 +79,6 @@ if [ -d "$HOME/.password-store" ]; then
 	#set -A complete_pass_2 -- $PASS_LIST push
 fi
 
+. $HOME/bin/dirstack.ksh
+
 [ -e $HOME/bin/common.sh ] && . $HOME/bin/common.sh
