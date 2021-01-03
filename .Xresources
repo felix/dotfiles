@@ -45,6 +45,8 @@ urxvt.secondaryScroll: 0
 urxvt.urgentOnBell: false
 urxvt.urlLauncher: firefox
 urxvt.visualBell: false
+urxvt.perl-ext-common: default
+urxvt.perl-ext-common: selection-to-clipboard
 
 ! xcalc
 xcalc*geometry: 300x375
