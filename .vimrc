@@ -214,7 +214,7 @@ autocmd Filetype html setlocal ts=2 sw=2 et
 autocmd Filetype markdown setlocal spell
 autocmd Filetype yaml setlocal ts=2 sw=2
 
-"autocmd FileType ledger setlocal ts=2 sw=2
+autocmd FileType ledger setlocal ts=4 sw=4 et
 autocmd FileType ledger noremap { ?^\d<CR>
 autocmd FileType ledger noremap } /^\d<CR>
 autocmd FileType ledger inoremap <silent> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
