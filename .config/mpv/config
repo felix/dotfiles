@@ -1,6 +1,6 @@
 [default]
 
-vo=opengl
+vo=gpu
 profile=opengl-hq
 
 alang=en,eng

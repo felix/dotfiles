@@ -35,6 +35,7 @@
 	lgd = log -u
 	lgf = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
 	lgt = tag --sort=-v:refname -n1
+	wip = for-each-ref --sort='-authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
 	stl = !"git log | grep git-subtree-dir | awk '{ print $2 }'"
 	sta = !"f() { git subtree add --squash --prefix=$2 $1 master; }; f"
 	stu = "!f() { git subtree pull --squash --prefix=$2 $1 master; }; f"
