@@ -1,5 +1,5 @@
-library: ~/Music/meta/beets.db
-directory: ~/Music
+library: /music/meta/beets.db
+directory: /music
 original_date: yes
 per_disc_numbering: yes
 paths:
@@ -13,7 +13,7 @@ ui:
     color: yes
 import:
     resume: ask
-    log: ~/Music/meta/beets-import.log
+    log: /music/meta/beets-import.log
 replace:
     '[\\/]': _
     '^\.': _
@@ -36,8 +36,8 @@ scrub:
 lyrics:
     auto: no
 smartplaylist:
-    relative_to: ~/Music
-    playlist_dir: ~/Music/playlists
+    relative_to: /music
+    playlist_dir: /music/playlists
     playlists:
         - name: '{$original_year[:2]}0s.m3u'
           query: ['original_year::(1|2)\d{3}']
