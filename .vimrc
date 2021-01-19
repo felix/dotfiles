@@ -102,7 +102,7 @@ let g:pymode_python='python3'
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 "let g:go_metalinter_command='golangci-lint'
-let g:go_metalinter_enabled = ['revive', 'vet', 'golint', 'errcheck', 'staticcheck']
+"let g:go_metalinter_enabled = ['revive', 'vet', 'golint', 'errcheck', 'staticcheck']
 let g:go_metalinter_autosave_enabled=[]
 let g:svelte_indent_script=0
 let g:svelte_indent_style=0
@@ -114,6 +114,7 @@ let g:ale_linters={
       \ 'javascript': ['standard'],
       \ 'yaml': ['cfn-python-lint'],
       \ 'svelte': ['stylelint', 'eslint'],
+      \ 'sh': ['shellcheck'],
       \ }
 let g:ale_linters_explicit=1
 let g:ale_fixers={
