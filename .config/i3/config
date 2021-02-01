@@ -46,10 +46,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+Ctrl+h split h
+#bindsym $mod+Ctrl+h split h
 
 # split in vertical orientation
-bindsym $mod+Ctrl+v split v
+#bindsym $mod+Ctrl+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -96,10 +96,10 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-bindsym $mod+Ctrl+Left  move workspace to output left
-bindsym $mod+Ctrl+Right move workspace to output right
-bindsym $mod+Ctrl+Up    move workspace to output up
-bindsym $mod+Ctrl+Down  move workspace to output down
+bindsym $mod+Ctrl+h  move workspace to output left
+bindsym $mod+Ctrl+l move workspace to output right
+bindsym $mod+Ctrl+k    move workspace to output up
+bindsym $mod+Ctrl+j  move workspace to output down
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
