@@ -1,26 +1,14 @@
 #!/bin/sh
 
-if [ $# -eq 0 ]; then
-printf "Missing repository"
-exit 1
-fi
+[ $# -eq 0 ] && printf "Missing repository" && exit 1
 
 GITGETBASE="${GITGETBASE:-$HOME/src}"
 
-# Relative path
-eval p=\${$#}
+repo="$(echo "$1" |sed -E 's/^.+@//;s/\.git$//;s@^.+//@@;s@:@/@g')"
+dir="$GITGETBASE/$repo"
 
-p=${p##*@}
-p=${p##https://}
-p=${p##http://}
-p=${p##git://}
-p=${p##ssh://}
-p=${p##ftps://}
-p=${p##ftp://}
-p=${p%%.git}
+# replace clone dir name
+[ "$2" != "" ] && dir="$(dirname "$dir")/$2"
 
-p=$(printf "$p" |sed -e s@:@/@g)
-
-b="$GITGETBASE/$p"
-mkdir -p $(dirname "$b")
-git clone $@ "$b"
+mkdir -p "$(dirname "$dir")"
+git clone "$1" "$dir"
