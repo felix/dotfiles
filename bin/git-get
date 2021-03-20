@@ -4,11 +4,20 @@
 
 GITGETBASE="${GITGETBASE:-$HOME/src}"
 
-repo="$(echo "$1" |sed -E 's/^.+@//;s/\.git$//;s@^.+//@@;s@:@/@g')"
+opts=clone
+
+# read options to pass through to git
+while [ "$(printf '%-.1s' "$1")" = "-" ]; do
+	opts="$opts $1"
+	shift
+done
+
+url=$1; shift
+repo="$(echo "$url" |sed -E 's/^.+@//;s/\.git$//;s@^.+//@@;s@:@/@g')"
 dir="$GITGETBASE/$repo"
 
 # replace clone dir name
-[ "$2" != "" ] && dir="$(dirname "$dir")/$2"
+[ -n "$1" ] && dir="$(dirname "$dir")/$1"
 
 mkdir -p "$(dirname "$dir")"
-git clone "$1" "$dir"
+git $opts "$url" "$dir"
