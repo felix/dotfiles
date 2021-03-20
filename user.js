@@ -61,3 +61,5 @@ user_pref("network.allow-experiments", false);
 // https://github.com/pyllyukko/user.js/issues/143
 user_pref("browser.pocket.enabled", false);
 user_pref("extensions.pocket.enabled", false);
+// Disable captiveportal checks
+user_pref("network.captive-portal-service.enabled", false);
