@@ -97,17 +97,25 @@ Plug 'tpope/vim-commentary'
 Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 
+" Plugin configs
+
 let g:neosolarized_contrast="high"
 let g:pymode_python='python3'
+" Go
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+let g:go_auto_type_info = 1
 let g:go_metalinter_command='golangci-lint'
 "let g:go_metalinter_enabled = ['revive', 'vet', 'golint', 'errcheck', 'staticcheck']
 let g:go_metalinter_autosave_enabled=[]
+" Javascript
 let g:svelte_indent_script=0
 let g:svelte_indent_style=0
+" Other
+let g:tex_flavor='latex'
 let g:ledger_date_format='%Y-%m-%d'
 let g:ansible_unindent_after_newline=1
+
 let g:ale_sign_column_always=1
 let g:ale_linter_aliases={'svelte': ['css', 'javascript']}
 let g:ale_linters={
@@ -115,12 +123,13 @@ let g:ale_linters={
       \ 'yaml': ['cfn-python-lint'],
       \ 'svelte': ['stylelint', 'eslint'],
       \ 'sh': ['shellcheck'],
+      \ 'go': ['gopls'],
       \ }
+" 'go': ['gofmt', 'golint', 'go vet', 'gopls'],
 let g:ale_linters_explicit=1
 let g:ale_fixers={
       \   'svelte': ['prettier', 'eslint'],
       \}
-let g:tex_flavor='latex'
 
 colorscheme NeoSolarized
 
@@ -214,7 +223,7 @@ autocmd Filetype json setlocal ts=2 sw=2 et nowrap
 autocmd Filetype html setlocal ts=2 sw=2 et
 autocmd Filetype markdown setlocal spell
 autocmd Filetype yaml setlocal ts=2 sw=2
-
+autocmd BufRead,BufNewFile *.m4 setlocal ft=m4
 autocmd FileType ledger setlocal ts=4 sw=4 et
 autocmd FileType ledger noremap { ?^\d<CR>
 autocmd FileType ledger noremap } /^\d<CR>
