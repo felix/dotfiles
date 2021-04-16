@@ -38,15 +38,15 @@ PS1='${green}(${white}\A${green})[${yellow}\u${green}@${cyan}\h${green}]${purple
 # When we need to force tab completion
 #bind ^i=complete
 HOST_LIST=$(awk '{split($1,a,","); gsub("].*", "", a[1]); gsub("\\[", "", a[1]); print a[1] " root@" a[1]}' ~/.ssh/known_hosts | sort | uniq)
-set -A complete_ssh -- "$HOST_LIST"
-set -A complete_scp -- "$HOST_LIST"
-set -A complete_mosh -- "$HOST_LIST"
-set -A complete_ping -- "$HOST_LIST"
+set -A complete_ssh -- ${HOST_LIST[*]}
+set -A complete_scp -- $HOST_LIST
+set -A complete_mosh -- $HOST_LIST
+set -A complete_ping -- $HOST_LIST
 set -A complete_kill_1 -- -9 -HUP -INFO -KILL -TERM
 if [ -d /var/db/pkg ]; then
 	PKG_LIST=$(ls -1 /var/db/pkg)
-	set -A complete_pkg_delete -- "$PKG_LIST"
-	set -A complete_pkg_info -- "$PKG_LIST"
+	set -A complete_pkg_delete -- $PKG_LIST
+	set -A complete_pkg_info -- $PKG_LIST
 fi
 if [ -d /etc/rc.d ]; then
 	set -A complete_rcctl_1 -- disable enable get ls order set start stop restart
@@ -57,11 +57,11 @@ set -A complete_chown_1 -- "$(users)"
 set -A complete_gpg2 -- --refresh --receive-keys --armor --clearsign --sign --list-key --decrypt --verify --detach-sig
 set -A complete_make_1 -- install clean build lint test
 set -A complete_git_1 -- \
-	"$(git --list-cmds=main)" \
-	"$(git config --get-regexp ^alias\. | awk -F '[\. ]' '{ print $2 }')"
+	$(git --list-cmds=main) \
+	$(git config --get-regexp ^alias\. | awk -F '[\. ]' '{ print $2 }')
 set -A complete_ifconfig_1 -- "$(ifconfig | grep '^[a-z]' | cut -d: -f1)"
 if [ -f /dev/mixer ]; then
-	set -A complete_mixerctl_1 -- "$(mixerctl | cut -d= -f 1)"
+	set -A complete_mixerctl_1 -- $(mixerctl | cut -d= -f 1)
 fi
 
 if [ -n "$(command -v mpc)" ]; then
@@ -70,14 +70,14 @@ if [ -n "$(command -v mpc)" ]; then
 		next pause pause-if-playing play playlist prev random repeat rescan \
 		search searchadd searchplay shuffle single stats stop update volume
 	if pgrep -fq "$(command -v musicpd)"; then
-		set -A complete_mpc_2 -- "$(mpc lsplaylists | sort)"
+		set -A complete_mpc_2 -- $(mpc lsplaylists | sort)
 	fi
 fi
 
 if [ -n "$(command -v pass)" ]; then
 	PASS_LIST=$(find "$HOME/.password-store" -type f -name '*.gpg' | sed 's/^.*\.password-store\///' | sed 's/\.gpg$//g')
-	set -A complete_pass_1 -- "$PASS_LIST" generate edit insert git
-	set -A complete_pass_2 -- "$PASS_LIST" push pull
+	set -A complete_pass_1 -- $PASS_LIST generate edit insert git otp
+	set -A complete_pass_2 -- $PASS_LIST push pull
 fi
 
 . $HOME/bin/dirstack.ksh
