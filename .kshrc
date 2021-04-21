@@ -4,7 +4,7 @@
 red='\[\e[0;31m\]'
 green='\[\e[0;32m\]'
 yellow='\[\e[0;33m\]'
-blue='\[\e[0;34m\]'
+#blue='\[\e[0;34m\]'
 purple='\[\e[0;35m\]'
 cyan='\[\e[0;36m\]'
 white='\[\e[0;37m\]' # not really white
@@ -18,12 +18,12 @@ __exit_status() {
 }
 
 __branch_status() {
-	ref="$(env git branch --show-current HEAD 2> /dev/null)"
+	ref="$(env git branch --show-current HEAD 2>/dev/null)"
 	case $? in        # See what the exit code is.
 		0) ;;           # contains the name of a checked-out branch.
 		128) return ;;  # No Git repository here.
 		# Otherwise, see if HEAD is in a detached state.
-		*) ref="$(env git rev-parse --short HEAD 2> /dev/null)" || return ;;
+		*) ref="$(env git rev-parse --short HEAD 2>/dev/null)" || return ;;
 	esac
 	printf ' (%s)' "${ref#refs/heads/}"
 	unset ref
@@ -50,16 +50,16 @@ if [ -d /var/db/pkg ]; then
 fi
 if [ -d /etc/rc.d ]; then
 	set -A complete_rcctl_1 -- disable enable get ls order set start stop restart
-	set -A complete_rcctl_2 -- "$(ls /etc/rc.d)"
+	set -A complete_rcctl_2 -- $(ls /etc/rc.d)
 fi
-set -A complete_ifconfig_1 -- "$(ifconfig | grep '^[a-z]' | cut -d: -f1)"
-set -A complete_chown_1 -- "$(users)"
+set -A complete_ifconfig_1 -- $(ifconfig | grep '^[a-z]' | cut -d: -f1)
+set -A complete_chown_1 -- $(users)
 set -A complete_gpg2 -- --refresh --receive-keys --armor --clearsign --sign --list-key --decrypt --verify --detach-sig
 set -A complete_make_1 -- install clean build lint test
 set -A complete_git_1 -- \
 	$(git --list-cmds=main) \
 	$(git config --get-regexp ^alias\. | awk -F '[\. ]' '{ print $2 }')
-set -A complete_ifconfig_1 -- "$(ifconfig | grep '^[a-z]' | cut -d: -f1)"
+set -A complete_ifconfig_1 -- $(ifconfig | grep '^[a-z]' | cut -d: -f1)
 if [ -f /dev/mixer ]; then
 	set -A complete_mixerctl_1 -- $(mixerctl | cut -d= -f 1)
 fi
@@ -69,9 +69,7 @@ if [ -n "$(command -v mpc)" ]; then
 		add clear clearerror consume current find findadd list listall ls lsplaylists \
 		next pause pause-if-playing play playlist prev random repeat rescan \
 		search searchadd searchplay shuffle single stats stop update volume
-	if pgrep -fq "$(command -v musicpd)"; then
-		set -A complete_mpc_2 -- $(mpc lsplaylists | sort)
-	fi
+	set -A complete_mpc_2 -- $(mpc lsplaylists 2>/dev/null | sort)
 fi
 
 if [ -n "$(command -v pass)" ]; then
