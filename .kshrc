@@ -42,6 +42,7 @@ set -A complete_ssh -- ${HOST_LIST[*]}
 set -A complete_scp -- $HOST_LIST
 set -A complete_mosh -- $HOST_LIST
 set -A complete_ping -- $HOST_LIST
+set -A complete_drill -- $HOST_LIST
 set -A complete_kill_1 -- -9 -HUP -INFO -KILL -TERM
 if [ -d /var/db/pkg ]; then
 	PKG_LIST=$(ls -1 /var/db/pkg)
