@@ -2,3 +2,4 @@
 
 xset dpms 300 1800 3600
 xrandr --output eDP-1 --primary --mode 1280x720 --pos 0x360 --rotate normal --output HDMI-1 --mode 1920x1080 --pos 1280x0 --rotate normal
+#xrandr --output eDP-1 --primary --mode 1280x720 --pos 0x1200 --rotate normal --output HDMI-1 --mode 1920x1080 --pos 1280x0 --rotate right --output DP-1 --off --output HDMI-2 --off
