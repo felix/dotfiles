@@ -86,7 +86,6 @@ Plug 'liuchengxu/graphviz.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'pearofducks/ansible-vim'
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-"Plug 'sheerun/vim-polyglot'
 Plug 'tmatilai/gitolite.vim'
 Plug 'vim-scripts/ebnf.vim'
 Plug 'ziglang/zig.vim'
