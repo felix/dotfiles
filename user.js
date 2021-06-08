@@ -9,15 +9,15 @@ user_pref("browser.urlbar.suggest.history", true);
 user_pref("browser.urlbar.autocomplete.enabled", true);
 // PREF: Clear history when Firefox closes
 // https://support.mozilla.org/en-US/kb/Clear%20Recent%20History#w_how-do-i-make-firefox-clear-my-history-automatically
-user_pref("privacy.sanitize.sanitizeOnShutdown", true);
+//user_pref("privacy.sanitize.sanitizeOnShutdown", true);
 user_pref("privacy.clearOnShutdown.cache", true);
-user_pref("privacy.clearOnShutdown.cookies", true);
-user_pref("privacy.clearOnShutdown.downloads", true);
+//user_pref("privacy.clearOnShutdown.cookies", true);
+//user_pref("privacy.clearOnShutdown.downloads", true);
 user_pref("privacy.clearOnShutdown.formdata", true);
-user_pref("privacy.clearOnShutdown.history", false);
+//user_pref("privacy.clearOnShutdown.history", false);
 user_pref("privacy.clearOnShutdown.offlineApps", true);
-user_pref("privacy.clearOnShutdown.sessions", true);
-user_pref("privacy.clearOnShutdown.openWindows", true);
+//user_pref("privacy.clearOnShutdown.sessions", true);
+//user_pref("privacy.clearOnShutdown.openWindows", true);
 // PREF: Do remember browsing history
 user_pref("places.history.enabled", true);
 // PREF: Enable Caching of SSL Pages
