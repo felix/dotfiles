@@ -108,17 +108,17 @@ history = ctrl+grave
 # Otherwise the '#' and following  would be interpreted as a comment.
 background = "#268bd2"
 foreground = "#eee8d5"
-timeout = 5
+timeout = 2
 
 [urgency_normal]
 background = "#859900"
 foreground = "#eee8d5"
-timeout = 8
+timeout = 4
 
 [urgency_critical]
 background = "#dc322f"
 foreground = "#eee8d5"
-timeout = 10
+timeout = 8
 
 
 # Every section that isn't one of the above is interpreted as a rules
