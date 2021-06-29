@@ -19,6 +19,7 @@ endif
 set viminfo='1000,f1,:100,@100,/20,h
 set whichwrap+=<,>,h,l,[,]
 set re=0
+set spelllang=en_au
 
 " Guard for plain vim
 if !has('nvim')
@@ -36,7 +37,6 @@ if !has('nvim')
   "set showbreak=>\
   "set showmatch
   "set spellfile=~/.vim/spell/.en.add
-  "set spelllang=en_au
   "set synmaxcol=200
 endif
 

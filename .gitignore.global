@@ -1,5 +1,3 @@
 *~
 *.swp
 .DS_Store
-
-# vim: set ts=4 sw=2 tw=80 ft=conf fdm=syntax:
