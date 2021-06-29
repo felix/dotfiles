@@ -1,4 +1,5 @@
 push <show-version>      # display version on startup
+set alias_file="~/.mutt/aliases"
 set allow_ansi
 set attribution="On %d, %n wrote:"
 set beep_new
@@ -74,7 +75,7 @@ set honor_followup_to=yes
 source ~/.mutt/muttrc.notify
 source ~/.mutt/colour
 source ~/.mutt/lists
-source "gpg --decrypt --quiet ~/.mutt/aliases.gpg |"
+source $alias_file
 
 ignore *
 unignore From:
@@ -109,17 +110,18 @@ bind  browser <left>   exit
 #macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
 #bind  editor  <Tab>    complete-query
 macro index,pager \cB |w3m<enter> "call w3m to extract URLs out of a message"
-macro index \ea "!vim ~/.mutt/aliases.gpg\n:source 'gpg --decrypt --quiet ~/.mutt/aliases.gpg |'\n"
 
 # 'L' performs a notmuch query, showing only the results
 macro index L "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
 # 'a' shows all messages again (supersedes default <alias> binding)
-macro index a "<limit>all\n" "show all messages (undo limit)"
+#macro index a "<limit>all\n" "show all messages (undo limit)"
 
-# shows all messages again (supersedes default <alias> binding)
+# shows all messages again
 #macro index <F9> "<limit>all\n" "show all messages (undo limit)"
 
 macro index,pager S "<save-message>=Spam<enter>y" "Mark as spam"
 macro index,pager H "<save-message>=Inbox<enter>y" "Mark as ham"
+
+#folder-hook +Bin 'push "<delete-pattern> ~d>60d\n"'
 
 #  vim: set ft=muttrc:
