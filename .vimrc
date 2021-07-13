@@ -1,25 +1,30 @@
 scriptencoding utf-8
 
-if system('uname -s') == "Darwin\n"
-  set clipboard=unnamed
-else
-  set clipboard=unnamedplus
-endif
 set colorcolumn=81
 set cursorline
-set smartcase
+set foldexpr=nvim_treesitter#foldexpr()
+set foldmethod=expr
+set foldminlines=10
+set foldnestmax=2
 set list
 set listchars=extends:»,tab:·\ ,trail:•,nbsp:␣
 set mouse=a
 set novisualbell
 set number
+set re=0
+set smartcase
+set spelllang=en_au
+set viminfo='1000,f1,:100,@100,/20,h
+set whichwrap+=<,>,h,l,[,]
+
 if (has("termguicolors"))
   set termguicolors
 endif
-set viminfo='1000,f1,:100,@100,/20,h
-set whichwrap+=<,>,h,l,[,]
-set re=0
-set spelllang=en_au
+if system('uname -s') == "Darwin\n"
+  set clipboard=unnamed
+else
+  set clipboard=unnamedplus
+endif
 
 " Guard for plain vim
 if !has('nvim')
@@ -31,13 +36,6 @@ if !has('nvim')
   set laststatus=2
   set nocompatible
   set ttyfast
-  "set formatoptions+=nr2l
-  "set lazyredraw
-  "set nowritebackup
-  "set showbreak=>\
-  "set showmatch
-  "set spellfile=~/.vim/spell/.en.add
-  "set synmaxcol=200
 endif
 
 if executable("ag")
@@ -94,6 +92,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'jlanzarotta/bufexplorer'
+
+Plug 'nvim-lua/completion-nvim'
+Plug 'steelsojka/completion-buffers'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'neovim/nvim-lspconfig'
+
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-lua/popup.nvim'
+" Plug 'crispgm/nvim-go'
 call plug#end()
 
 " Plugin configs
@@ -101,8 +108,11 @@ call plug#end()
 let g:neosolarized_contrast="high"
 let g:pymode_python='python3'
 " Go
+let g:go_list_type='quickfix'
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+let g:go_fmt_command='gopls'
+let g:go_rename_command='gopls'
 let g:go_auto_type_info = 1
 let g:go_metalinter_command='golangci-lint'
 "let g:go_metalinter_enabled = ['revive', 'vet', 'golint', 'errcheck', 'staticcheck']
@@ -122,8 +132,8 @@ let g:ale_linters={
       \ 'yaml': ['cfn-python-lint'],
       \ 'svelte': ['stylelint', 'eslint'],
       \ 'sh': ['shellcheck'],
-      \ 'go': ['gopls'],
       \ }
+      " \ 'go': ['gopls'],
 " 'go': ['gofmt', 'golint', 'go vet', 'gopls'],
 let g:ale_linters_explicit=1
 let g:ale_fixers={
@@ -148,8 +158,8 @@ endif
 " Toggle line numbers and fold column for easy copying:
 nnoremap <F2> :set nonumber<CR>:set nofoldenable<CR>:set nolist<CR>:set paste<CR>
 nnoremap <F3> :set number<CR>:set foldenable<CR>:set list<CR>:set nopaste<CR>
-" GoDef
-nnoremap <F4> :GoDef<CR>
+" " GoDef
+" nnoremap <F4> :GoDef<CR>
 " Space clears highlighting
 :noremap <silent> <Space> :nohlsearch<CR><Space>
 " add files with wildcards, like **/*.md for all markdown files
@@ -166,28 +176,15 @@ nnoremap <leader>q :b#<cr>
 nnoremap <leader>f gqap
 vnoremap <leader>Q gq
 
-" https://stackoverflow.com/a/2138303
-let g:stop_autocomplete=0
-function! CleverTab(type)
-  if a:type=='omni'
-    if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-      let g:stop_autocomplete=1
-      return "\<TAB>"
-    elseif !pumvisible() && !&omnifunc
-      return "\<C-X>\<C-O>\<C-P>"
-    endif
-  elseif a:type=='keyword' && !pumvisible() && !g:stop_autocomplete
-    return "\<C-X>\<C-N>\<C-P>"
-  elseif a:type=='next'
-    if g:stop_autocomplete
-      let g:stop_autocomplete=0
-    else
-      return "\<C-N>"
-    endif
-  endif
-  return ''
-endfunction
-inoremap <silent><TAB> <C-R>=CleverTab('omni')<CR><C-R>=CleverTab('keyword')<CR><C-R>=CleverTab('next')<CR>
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing message extra message when using completion
+set shortmess+=c
 
 " When vimrc is edited, reload it
 autocmd! bufwritepost .vimrc source ~/.vimrc
