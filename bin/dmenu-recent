@@ -1,6 +1,8 @@
 #!/bin/sh
 
 history=10
+MENU=dmenu
+[ -n "$WAYLAND_DISPLAY" ] && MENU=bemenu
 
 cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
 if [ -d "$cachedir" ]; then
@@ -18,7 +20,7 @@ fi
 unset IFS
 
 # Combine the recent with cache and pass to dmenu
-run=$(cat "$recent" "$cache" |uniq |dmenu -l $history -p Run: "$@") || exit
+run=$(cat "$recent" "$cache" |uniq |$MENU -l $history -p Run: "$@") || exit
 
 # Run with shell if terminated with semi-colon
 case "$run" in

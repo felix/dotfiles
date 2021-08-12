@@ -3,6 +3,8 @@ window:
   padding:
     x: 5
     y: 3
+font:
+  size: 9
 selection:
   save_to_clipboard: true
 mouse_bindings:
