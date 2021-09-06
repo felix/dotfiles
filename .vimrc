@@ -4,7 +4,7 @@ set colorcolumn=81
 set cursorline
 set foldexpr=nvim_treesitter#foldexpr()
 set foldmethod=expr
-set foldminlines=10
+"set foldminlines=10
 set foldnestmax=2
 set list
 set listchars=extends:»,tab:·\ ,trail:•,nbsp:␣
@@ -94,6 +94,7 @@ Plug 'tpope/vim-commentary'
 Plug 'jlanzarotta/bufexplorer'
 
 Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/nvim-compe'
 Plug 'steelsojka/completion-buffers'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'

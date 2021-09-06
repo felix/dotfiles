@@ -8,7 +8,14 @@ require'lspconfig'.gopls.setup{
 }
 require'lspconfig'.pyright.setup{}
 require'nvim-treesitter.configs'.setup {
-	ensure_installed = "maintained",
+	ensure_installed = {
+		"go",
+		"ledger",
+		"svelte",
+		"typescript",
+		"yaml",
+		"zig",
+	},
 	-- ignore_install = { "c_sharp" },
 	highlight = {
 		enable = true
