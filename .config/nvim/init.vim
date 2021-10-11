@@ -22,7 +22,8 @@ require'nvim-treesitter.configs'.setup {
 		-- disable = { "c", "rust" },
 	},
 	indent = {
-		enable = true
+		enable = true,
+		disable = { 'yaml' }
 	}
 }
 EOF
