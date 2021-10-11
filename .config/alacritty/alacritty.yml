@@ -4,7 +4,7 @@ window:
     x: 5
     y: 3
 font:
-  size: 9
+  size: 10
 selection:
   save_to_clipboard: true
 mouse_bindings:
