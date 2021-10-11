@@ -81,15 +81,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'jlanzarotta/bufexplorer'
 
-Plug 'nvim-lua/completion-nvim'
-Plug 'hrsh7th/nvim-compe'
-Plug 'steelsojka/completion-buffers'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
-
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-lua/popup.nvim'
-" Plug 'crispgm/nvim-go'
+" Plug 'nvim-lua/completion-nvim'
+" Plug 'hrsh7th/nvim-compe'
+" Plug 'steelsojka/completion-buffers'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 " Plugin configs
