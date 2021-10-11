@@ -22,6 +22,7 @@
 	co = checkout
 	cp = cherry-pick
 	diff = diff --word-diff
+	difff = diff --name-only
 	lg = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph # Log of current branch
 	lga = !"git lg --all" # Log of all branches
 	lgd = log -u
