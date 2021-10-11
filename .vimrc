@@ -50,25 +50,13 @@ if has('persistent_undo')
   set undofile
 endif
 
-set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
-"              | | | | |  |   |      |  |     |    |
-"              | | | | |  |   |      |  |     |    +-- current column
-"              | | | | |  |   |      |  |     +-- current line
-"              | | | | |  |   |      |  +-- current % into file
-"              | | | | |  |   |      +-- current syntax
-"              | | | | |  |   +-- current fileformat
-"              | | | | |  +-- number of lines
-"              | | | | +-- preview flag in square brackets
-"              | | | +-- help flag in square brackets
-"              | | +-- readonly flag in square brackets
-"              | +-- modified flag in square brackets
-"              +-- full path to file in the buffer
+set statusline=%F%m%r%h%w[%{&ff}]%y[%p%%][%l/%L,%v]
 
 call plug#begin('~/.vim/plugged')
 " UI
 Plug 'iCyMind/NeoSolarized'
 Plug 'godlygeek/tabular'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 " Filetypes
 Plug 'aklt/plantuml-syntax'
 Plug 'cespare/vim-toml'
@@ -115,7 +103,7 @@ let g:go_info_mode='gopls'
 let g:go_fmt_command='gopls'
 let g:go_rename_command='gopls'
 let g:go_auto_type_info = 1
-let g:go_metalinter_command='golangci-lint'
+"let g:go_metalinter_command='golangci-lint'
 "let g:go_metalinter_enabled = ['revive', 'vet', 'golint', 'errcheck', 'staticcheck']
 let g:go_metalinter_autosave_enabled=[]
 " Javascript
