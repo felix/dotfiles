@@ -13,7 +13,7 @@ while [ "$(printf '%-.1s' "$1")" = "-" ]; do
 done
 
 url=$1; shift
-repo="$(echo "$url" |sed -E 's/^.+@//;s/\.git$//;s@^.+//@@;s@:@/@g')"
+repo="$(echo "$url" |sed -E 's/^.+@//;s/\.git$//;s@^.+//@@;s/:[0-9]+//;s@:@/@g')"
 dir="$GITGETBASE/$repo"
 
 # replace clone dir name
