@@ -57,7 +57,7 @@ trap cleanup 1 2 3 15
 path=.
 [ $# -gt 0 ] && path=$@
 
-find -s $path -maxdepth 1 \
+find $path -maxdepth 1 \
 	| sed "/^$path$/d;s|^\./||" \
 	| awk '{printf "%04d %s\n", NR, $0}' > "$TMP"
 cp "$TMP" "$TMP".new
