@@ -41,7 +41,7 @@ if [ -x "$(command -v xautolock)" ]; then
 fi
 [ -x "$(command -v xdimmer)" ] && xdimmer -t 120 &
 
-[ -x "$(command -v barrier)" ] && barrier &
+#[ -x "$(command -v barrier)" ] && barrier &
 
 #[ -x "$(command -v synclient)" ] && synclient CoastingSpeed=0 \
 #    TapButton1=1 TapButton2=3 TapButton3=2 \

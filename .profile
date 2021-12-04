@@ -60,7 +60,7 @@ export HISTSIZE=9000
 export HISTCONTROL=ignorespace:ignoredups
 export HISTFILE=~/.history
 export CLICOLOR=true
-[ -n "$KSH_VERSION" ] && export ENV=$HOME/.kshrc
+export ENV=$HOME/.kshrc
 #export MOZ_ENABLE_WAYLAND=1
 
 #umask 022

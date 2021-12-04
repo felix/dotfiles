@@ -53,14 +53,15 @@ if [ -d /etc/rc.d ]; then
 	set -A complete_rcctl_1 -- disable enable get ls order set start stop restart
 	set -A complete_rcctl_2 -- $(ls /etc/rc.d)
 fi
+if [ -n "$(command -v iconfig)" ]; then
 set -A complete_ifconfig_1 -- $(ifconfig | grep '^[a-z]' | cut -d: -f1)
+fi
 set -A complete_chown_1 -- $(users)
 set -A complete_gpg2 -- --refresh --receive-keys --armor --clearsign --sign --list-key --decrypt --verify --detach-sig
 set -A complete_make_1 -- install clean build lint test
 set -A complete_git_1 -- \
 	$(git --list-cmds=main) \
-	$(git config --get-regexp ^alias\. | awk -F '[\. ]' '{ print $2 }')
-set -A complete_ifconfig_1 -- $(ifconfig | grep '^[a-z]' | cut -d: -f1)
+	$(git config --get-regexp ^alias\. | awk -F '[. ]' '{ print $2 }')
 if [ -f /dev/mixer ]; then
 	set -A complete_mixerctl_1 -- $(mixerctl | cut -d= -f 1)
 fi
