@@ -4,9 +4,14 @@ set $mod Mod1
 # Windows
 #set $mod Mod4
 
-input "0:0:System_mouse" {
+# input "0:0:System_mouse" {
+# 	tap enabled
+# }
+input type:touchpad {
 	tap enabled
+	natural_scroll enabled
 }
+
 
 
 font pango:monospace 8
@@ -203,12 +208,22 @@ bar {
 # width x height
 floating_minimum_size 100 x 100
 floating_maximum_size 1024 x 1024
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
 for_window [class="Dia" window_role="toolbox_window"] floating enable
 for_window [class="Pinentry"] floating enable
-for_window [class="XCalc"] floating enable
 for_window [class="Qjackctl"] floating enable
+for_window [class="Qjackctl"] floating enable
+for_window [class="Wine"] floating enable
+for_window [class="XCalc"] floating enable
+for_window [class="ksysguard"] floating enable
+for_window [class="ksysguard"] sticky enable
+for_window [class="xdg-desktop-portal-kde"] floating enable
+for_window [window_role="About"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
 
 exec xrdb -load ~/.Xresources
 exec wlsunset -l -33.8 -L 151.2

@@ -9,6 +9,9 @@ xset s off
 xset -b
 xsetroot -solid "#000000"
 
+[ -f /etc/profile ] && . /etc/profile
+[ -f "$HOME/.profile" ] && . $HOME/.profile
+
 # Source local fonts too
 [ -d ~/.fonts ] && xset +fp ~/.fonts/
 
