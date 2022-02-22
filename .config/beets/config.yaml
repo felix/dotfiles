@@ -3,58 +3,52 @@ directory: /music
 original_date: yes
 per_disc_numbering: yes
 paths:
-    default: $albumartist/$album%aunique{}/%if{$multidisc,${disc}_}${track}_${title}
-    comp: Various_Artists/$album/%if{$multidisc,${disc}_}${track}_${title}_\(${artist}\)
-    singleton: $artist/$title
+  default: $albumartist/$album%aunique{}/%if{$multidisc,${disc}_}${track}_${title}
+  comp: Various_Artists/$album/%if{$multidisc,${disc}_}${track}_${title}_\(${artist}\)
+  singleton: $artist/$title
 asciify_paths: yes
-ignore: .AppleDouble ._* *~ .DS_Store
+clutter: .AppleDouble .DS_Store Thumbs.DB
 art_filename: cover
 ui:
-    color: yes
+  color: yes
 import:
-    resume: ask
-    log: /music/meta/beets-import.log
+  resume: ask
+  incremental_skip_later: yes
+  log: /music/meta/beets-import.log
 replace:
-    '[\\/]': _
-    '^\.': _
-    '[\x00-\x1f]': _
-    '[<>"\*\|]': _
-    '\.$': _
-    '\s+$': ''
-    '^\s+': ''
-    '\s+': _
-    '[“”]': '"'
-plugins: inline missing chroma mbsync scrub zero fetchart lastgenre acousticbrainz lyrics smartplaylist info
+  '\s+': _
+  '[\\/]': _
+  '^\.': _
+  '\.$': _
+  '\s+$': ''
+#     '[\x00-\x1f]': _
+#     '[<>"\*\|]': _
+#     '^\s+': ''
+#     '[“”]': '"'
+plugins: inline missing chroma mbsync scrub zero fetchart smartplaylist info missing
 item_fields:
-    multidisc: 1 if disctotal > 1 else 0
+  multidisc: 1 if disctotal > 1 else 0
 chroma:
-    auto: yes
+  auto: yes
 acoustid:
-    apikey: W1GHyruT
+  apikey: W1GHyruT
 scrub:
-    auto: yes
-lyrics:
-    auto: no
+  auto: yes
+musicbrainz:
+  genres: yes
 smartplaylist:
-    relative_to: /music
-    playlist_dir: /music/playlists
-    playlists:
-        - name: '{$original_year[:2]}0s.m3u'
-          query: ['original_year::(1|2)\d{3}']
-        - name: 'NeedsUpdating.m3u'
-          query: ['mb_albumid::^$', 'format:MP3', 'rg_track_gain::^$', 'original_year::^[^12]']
-        - name: '%left{$year,3}0s.m3u'
-          query: 'year::^(1|2)'
-        - name: 'Danceable.m3u'
-          query: 'bpm:120..140'
-lastgenre:
-    force: no
-    canonical: yes
-    count: 2
+  relative_to: /music
+  playlist_dir: /music/playlists
+  playlists:
+    - name: '{$original_year[:2]}0s.m3u'
+      query: ['original_year::(1|2)\d{3}']
+    - name: 'NeedsUpdating.m3u'
+      query: ['mb_albumid::^$', 'format:MP3', 'rg_track_gain::^$', 'original_year::^[^12]']
+    - name: '%left{$year,3}0s.m3u'
+      query: 'year::^(1|2)'
+    - name: 'Danceable.m3u'
+      query: 'bpm:120..140'
 zero:
-    fields: images
-    comments: [EAC, LAME, from.+collection, 'ripped by']
-    update_database: true
-acousticbrainz:
-    auto: yes
-    force: no
+  fields: images
+  comments: [EAC, LAME, from.+collection, 'ripped by']
+  update_database: true
