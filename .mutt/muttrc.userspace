@@ -27,8 +27,11 @@ color status brightwhite black
 mailboxes = +INBOX +Spam +Drafts \
 	    +invoices \
 	    +status \
+	    +news \
 	    +lists \
 	    +lists.openbsd \
+	    +lists.freebsd-ports \
+	    +lists.freebsd-stable \
 	    +lists.opensmtpd
 unmailboxes = +Bin
 

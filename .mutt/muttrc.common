@@ -13,8 +13,7 @@ set fast_reply           # don't ask for sbj and to
 set reply_to
 set forward_format="Fwd: %s"
 set imap_headers=X-SPAM-STATUS
-set imap_check_subscribed
-#set imap_list_subscribed
+#set imap_check_subscribed
 unset imap_passive
 set index_format="%4C %Z |%{%d %b %Y %R}| %-30.30L %?M?(#%03M)&(%5c)? %?H?$& ? %s"
 set mail_check=30
