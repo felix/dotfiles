@@ -32,9 +32,6 @@
 	sl = stash list
 	sp = stash pop
 	st = status --short
-	sta = !"f() { git subtree add --squash --prefix=$2 $1 master; }; f"
-	stl = !"git log | grep git-subtree-dir | awk '{ print $2 }'"
-	stu = "!f() { git subtree pull --squash --prefix=$2 $1 master; }; f"
 	sw = switch
 	wip = for-each-ref --sort='-authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
 [color]

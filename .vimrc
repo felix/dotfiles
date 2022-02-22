@@ -63,7 +63,7 @@ Plug 'cespare/vim-toml'
 Plug 'cmcaine/vim-uci'
 Plug 'cstrahan/vim-capnp'
 Plug 'evanleck/vim-svelte'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'jamessan/vim-gnupg'
 Plug 'ledger/vim-ledger'
 Plug 'lervag/vimtex'
@@ -210,6 +210,7 @@ autocmd FileType ledger noremap { ?^\d<CR>
 autocmd FileType ledger noremap } /^\d<CR>
 autocmd FileType ledger inoremap <silent> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
 autocmd FileType ledger vnoremap <silent> <Tab> :LedgerAlign<CR>
+autocmd FileType php setlocal ts=4 sw=4 et
 
 " Jump to last known position
 autocmd BufReadPost *
