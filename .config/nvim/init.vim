@@ -8,6 +8,14 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
+local on_attach = function(client, bufnr)
+	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end  -- Mappings.
+	local opts = { noremap=true, silent=true }
+	buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+	buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+end
+
+
 local cmp = require'cmp'
 cmp.setup({
 mapping = {
@@ -66,5 +74,8 @@ require'nvim-treesitter.configs'.setup {
 		enable = true,
 		disable = { 'yaml' }
 	}
+}
+require'lspconfig'.tsserver.setup {
+	on_attach = on_attach
 }
 EOF

@@ -53,10 +53,8 @@ endif
 set statusline=%F%m%r%h%w[%{&ff}]%y[%p%%][%l/%L,%v]
 
 call plug#begin('~/.vim/plugged')
-" UI
 Plug 'iCyMind/NeoSolarized'
-Plug 'godlygeek/tabular'
-"Plug 'w0rp/ale'
+
 " Filetypes
 Plug 'aklt/plantuml-syntax'
 Plug 'cespare/vim-toml'
@@ -75,16 +73,22 @@ Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'tmatilai/gitolite.vim'
 Plug 'vim-scripts/ebnf.vim'
 Plug 'ziglang/zig.vim'
-" Utils
+
+" Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+
+" Comments
 Plug 'tpope/vim-commentary'
+
+" Buffers
 Plug 'jlanzarotta/bufexplorer'
 
+" Formatting
+Plug 'godlygeek/tabular'
+
+" Lsp
 Plug 'neovim/nvim-lspconfig'
-" Plug 'nvim-lua/completion-nvim'
-" Plug 'hrsh7th/nvim-compe'
-" Plug 'steelsojka/completion-buffers'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
@@ -200,6 +204,7 @@ autocmd Filetype mail setlocal nohlsearch spell nobackup noswapfile nowritebacku
 autocmd BufRead,BufNewFile Jenkinsfile setlocal ft=groovy
 autocmd BufRead,BufNewFile *.tmpl setlocal ft=gohtmltmpl
 autocmd Filetype javascript setlocal ts=2 sw=2 et nowrap
+autocmd Filetype typescript setlocal ts=2 sw=2 et nowrap
 autocmd Filetype json setlocal ts=2 sw=2 et nowrap
 autocmd Filetype html setlocal ts=2 sw=2 et
 autocmd Filetype markdown setlocal spell
