@@ -3,11 +3,22 @@ let &packpath=&runtimepath
 source ~/.vimrc
 
 lua << EOF
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+local lspconfig = require('lspconfig')
+
+-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+local servers = { 'gopls', 'tsserver' }
+for _, lsp in ipairs(servers) do
+	lspconfig[lsp].setup {
+		-- on_attach = my_custom_on_attach,
+		capabilities = capabilities,
+	}
 end
 
+<<<<<<< HEAD
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end  -- Mappings.
 	local opts = { noremap=true, silent=true }
@@ -23,57 +34,63 @@ mapping = {
 		behavior = cmp.ConfirmBehavior.Insert,
 		select = true,
 		},
+=======
+-- luasnip setup
+local luasnip = require 'luasnip'
 
-	['<Tab>'] = function(fallback)
-		if not cmp.select_next_item() then
-			if vim.bo.buftype ~= 'prompt' and has_words_before() then
-				cmp.complete()
-			else
-				fallback()
-			end
-		end
-	end,
-
-	['<S-Tab>'] = function(fallback)
-		if not cmp.select_prev_item() then
-			if vim.bo.buftype ~= 'prompt' and has_words_before() then
-				cmp.complete()
-			else
-				fallback()
-			end
-		end
-	end,
-},
-sources = {
-	{ name = 'nvim_lsp' },
-	{ name = 'buffer' },
-	}
-})
-
-require'lspconfig'.gopls.setup{
-	-- on_attach=require'completion'.on_attach
-	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require'lspconfig'.pyright.setup{
-	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-}
-require'nvim-treesitter.configs'.setup {
-	ensure_installed = {
-		"go",
-		"ledger",
-		"svelte",
-		"typescript",
-		"yaml",
-		"zig",
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup {
+	snippet = {
+		expand = function(args)
+			require('luasnip').lsp_expand(args.body)
+		end,
 	},
+	mapping = {
+		['<C-p>'] = cmp.mapping.select_prev_item(),
+		['<C-n>'] = cmp.mapping.select_next_item(),
+		['<C-d>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>'] = cmp.mapping.close(),
+		['<CR>'] = cmp.mapping.confirm {
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = true,
+		},
+		['<Tab>'] = function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+				elseif luasnip.expand_or_jumpable() then
+					luasnip.expand_or_jump()
+			else
+				fallback()
+			end
+		end,
+		['<S-Tab>'] = function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+				elseif luasnip.jumpable(-1) then
+					luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end,
+	},
+	sources = {
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
+	},
+}
+
+-- Treesitter configuration
+-- Parsers must be installed manually via :TSInstall
+require('nvim-treesitter.configs').setup {
 	highlight = {
-		enable = true
-		-- disable = { "c", "rust" },
+		enable = true, -- false will disable the whole extension
 	},
 	indent = {
-		enable = true,
-		disable = { 'yaml' }
-	}
+		enable = false,
+	},
 }
 require'lspconfig'.tsserver.setup {
 	on_attach = on_attach
