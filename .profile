@@ -13,8 +13,9 @@ for bindir in $HOME/go/bin \
 	$HOME/.yarn/bin \
 	$HOME/perl5/bin \
 	/opt/local/bin \
-	$HOME/Library/Python/3.7/bin \
+	$HOME/Library/Python/3.10/bin \
 	$HOME/Library/Python/3.8/bin \
+	$HOME/Library/Python/3.7/bin \
 	/Library/TeX/texbin \
 	/usr/local/opt/perl/bin \
 	/usr/local/go/bin \
@@ -23,7 +24,9 @@ for bindir in $HOME/go/bin \
 	/sbin \
 	/bin \
 	/usr/sbin \
-	/usr/bin ; do
+	/usr/bin \
+	/usr/local/plan9/bin \
+	; do
 		[ -d "$bindir" ] && PATH=$PATH:$bindir
 done
 

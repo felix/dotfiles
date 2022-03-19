@@ -18,23 +18,6 @@ for _, lsp in ipairs(servers) do
 	}
 end
 
-<<<<<<< HEAD
-local on_attach = function(client, bufnr)
-	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end  -- Mappings.
-	local opts = { noremap=true, silent=true }
-	buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-	buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-end
-
-
-local cmp = require'cmp'
-cmp.setup({
-mapping = {
-	['<C-Space>'] = cmp.mapping.confirm {
-		behavior = cmp.ConfirmBehavior.Insert,
-		select = true,
-		},
-=======
 -- luasnip setup
 local luasnip = require 'luasnip'
 
