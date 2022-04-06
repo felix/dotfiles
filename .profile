@@ -65,5 +65,6 @@ export HISTFILE=~/.history
 export CLICOLOR=true
 export ENV=$HOME/.kshrc
 #export MOZ_ENABLE_WAYLAND=1
+export GOPRIVATE=gitlab.com/toennjes
 
 #umask 022
