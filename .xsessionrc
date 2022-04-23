@@ -35,7 +35,7 @@ export XDG_RUNTIME_DIR=/tmp/xdg-felix
 [ -f "$HOME/.xsessionrc-$hostname" ] && "$HOME/.xsessionrc-$hostname"
 
 # Screen control
-if [ -x "$(command -v xautolock)" ]; then 
+if [ -x "$(command -v xautolock)" ]; then
     if [ -x "$(command -v xlock)" ]; then
         xautolock -time 5 -locker "xlock -modelist rain,space,pyro" &
     elif [ -x "$(command -v i3lock)" ]; then
@@ -43,6 +43,9 @@ if [ -x "$(command -v xautolock)" ]; then
     fi
 fi
 [ -x "$(command -v xdimmer)" ] && xdimmer -t 120 &
+
+
+[ -x "$(command -v alacritty)" ] && export TERMINAL=alacritty
 
 #[ -x "$(command -v barrier)" ] && barrier &
 

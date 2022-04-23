@@ -53,7 +53,6 @@ export LC_ALL=en_AU.UTF-8
 export LC_CTYPE=en_AU.UTF-8
 export EDITOR=nvim
 export VISUAL=$EDITOR
-#export TERMINAL=urxvtcd
 export PAGER=less
 export BROWSER=firefox
 export GIT_EDITOR=$EDITOR
