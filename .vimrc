@@ -2,6 +2,7 @@ set background=dark
 set colorcolumn=81
 set cursorline
 set ignorecase
+set mouse=a
 set list
 set listchars=extends:»,tab:·\ ,trail:•,nbsp:␣
 set number
@@ -16,6 +17,8 @@ if has('nvim')
 	if system('uname -s') == "Darwin\n"
 		set clipboard=unnamed
 	endif
+	set foldmethod=expr
+	set foldexpr=nvim_treesitter#foldexpr()
 else
 	syntax enable sync minlines=20
 	filetype indent plugin on
@@ -32,6 +35,9 @@ if has('persistent_undo')
 	call system('mkdir -p ' . &undodir)
 	set undofile
 endif
+
+" Restore file position
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 nnoremap <F2> :set nonumber<CR>:set nofoldenable<CR>:set nolist<CR>:set paste<CR>
 nnoremap <F3> :set number<CR>:set foldenable<CR>:set list<CR>:set nopaste<CR>
