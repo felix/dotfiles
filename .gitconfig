@@ -26,7 +26,8 @@
 	lg = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph # Log of current branch
 	lga = !"git lg --all" # Log of all branches
 	lgd = log -u
-	lgf = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	lgs = log --oneline --shortstat # with stats
+	lgf = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat # with files
 	lgt = tag --sort=-v:refname -n1
 	ls = ls-files
 	sl = stash list
@@ -65,6 +66,8 @@
 [includeIf "gitdir:myob-api/"]
 	path = ~/.gitconfig.myob
 [includeIf "gitdir:myob-ops/"]
+	path = ~/.gitconfig.myob
+[includeIf "gitdir:myob-sme/"]
 	path = ~/.gitconfig.myob
 #[includeIf "gitdir:src.userspace.com.au/"]
 #        path = ~/.gitconfig.userspace
