@@ -79,7 +79,7 @@ let g:ledger_date_format='%Y-%m-%d'
 
 autocmd BufRead,BufNewFile *.m4 setlocal ft=m4
 autocmd BufRead,BufNewFile *.tmpl setlocal ft=gohtmltmpl
-autocmd BufRead,BufNewFile *mutt* setlocal ft=mail
+autocmd BufRead,BufNewFile *mutt* setlocal ft=mail.markdown
 autocmd FileType ledger inoremap <silent> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
 autocmd FileType ledger noremap { ?^\d<CR>
 autocmd FileType ledger noremap } /^\d<CR>
