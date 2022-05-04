@@ -25,10 +25,11 @@
 	difff = diff --name-only
 	lg = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph # Log of current branch
 	lga = !"git lg --all" # Log of all branches
-	lgd = log -u
-	lgs = log --oneline --shortstat # with stats
-	lgf = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat # with files
-	lgt = tag --sort=-v:refname -n1
+	lgc = !"git log --date=short --pretty=format:%ad | sort | uniq -c" # Commit count per day
+	lgd = log -u # Log differences
+	lgs = log --oneline --shortstat # Log with stats
+	lgf = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat # Log with files
+	lgt = tag --sort=-v:refname -n1 # Log of tags
 	ls = ls-files
 	sl = stash list
 	sp = stash pop
