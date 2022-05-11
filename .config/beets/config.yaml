@@ -19,12 +19,12 @@ replace:
   '\s+': _
   '[\\/]': _
   '^\.': _
+  '[\x00-\x1f]': _
+  '[<>:"\?\*\|]': _
   '\.$': _
   '\s+$': ''
-#     '[\x00-\x1f]': _
-#     '[<>"\*\|]': _
-#     '^\s+': ''
-#     '[“”]': '"'
+  '^\s+': ''
+  '^-': _
 plugins: inline missing chroma mbsync scrub zero fetchart smartplaylist info missing
 item_fields:
   multidisc: 1 if disctotal > 1 else 0
@@ -42,12 +42,14 @@ smartplaylist:
   playlists:
     - name: '{$original_year[:2]}0s.m3u'
       query: ['original_year::(1|2)\d{3}']
-    - name: 'NeedsUpdating.m3u'
-      query: ['mb_albumid::^$', 'format:MP3', 'rg_track_gain::^$', 'original_year::^[^12]']
     - name: '%left{$year,3}0s.m3u'
       query: 'year::^(1|2)'
-    - name: 'Danceable.m3u'
-      query: 'bpm:120..140'
+    - name: 'TODOFormat.m3u'
+      query: ['format:MP3']
+    - name: 'TODOGain.m3u'
+      query: ['rg_track_gain::^$ format:FLAC']
+    - name: 'TODOMeta.m3u'
+      query: ['mb_albumid::^$', 'original_year::^[^12]']
 zero:
   fields: images
   comments: [EAC, LAME, from.+collection, 'ripped by']
