@@ -142,6 +142,7 @@ scan() {
 		infile="$INBASE/$infile"
 		outfile="${infile%.*}.$TYPE"
 		outfile=$OUTBASE/${outfile#${INBASE}/}
+		outfile="$(printf '%s' "$outfile" |tr ':?' '_')"
 
 		if [ ! -f "$infile" ]; then
 			[ -n "$VERBOSE" ] && echo "Missing: $infile"
