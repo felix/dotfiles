@@ -11,8 +11,8 @@ selection:
   save_to_clipboard: true
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
-key_bindings:
-  - { key: N, mods: Command, action: CreateNewWindow }
+# key_bindings:
+#   - { key: N, mods: Command, action: CreateNewWindow }
 bell:
   duration: 0
 colors:
