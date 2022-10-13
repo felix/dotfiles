@@ -36,14 +36,12 @@ if has('persistent_undo')
 	set undofile
 endif
 
-" Restore file position
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
 nnoremap <F2> :set nonumber<CR>:set nofoldenable<CR>:set nolist<CR>:set paste<CR>
 nnoremap <F3> :set number<CR>:set foldenable<CR>:set list<CR>:set nopaste<CR>
 "nnoremap <leader>s :call StripTrailingWhitespace()<cr>
 nnoremap <leader>s :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 nnoremap <leader>f gqap
+nnoremap <leader>r :Rg <c-r><c-w><cr>
 
 call plug#begin('~/.vim/plugged')
 Plug 'overcache/NeoSolarized'
@@ -57,6 +55,8 @@ Plug 'ledger/vim-ledger'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 if has('nvim')
 Plug 'L3MON4D3/LuaSnip'
 Plug 'hrsh7th/cmp-buffer'
@@ -73,6 +73,7 @@ if (has("termguicolors"))
 	colorscheme NeoSolarized
 endif
 
+" vim-go config
 let g:ansible_unindent_after_newline=1
 let g:go_auto_type_info = 1
 let g:go_metalinter_command='golangci-lint'
@@ -93,3 +94,7 @@ autocmd Filetype json setlocal ts=2 sw=2 et nowrap
 autocmd Filetype mail setlocal nohlsearch spell nobackup noswapfile nowritebackup noautoindent
 autocmd Filetype markdown setlocal spell
 autocmd Filetype yaml setlocal ts=2 sw=2
+autocmd Filetype typescript setlocal et tw=2 sw=2
+autocmd Filetype typescriptreact setlocal et tw=2 sw=2
+" Restore file position
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
