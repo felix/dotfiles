@@ -49,6 +49,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'godlygeek/tabular'
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "Plug 'preservim/vim-markdown'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'ledger/vim-ledger'
@@ -74,6 +75,12 @@ if (has("termguicolors"))
 endif
 
 " vim-go config
+if executable("rg")
+	set grepprg=rg\ --vimgrep\ --smart-case\ --no-heading
+	set grepformat=%f:%l:%c:%m
+	set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
 let g:ansible_unindent_after_newline=1
 let g:go_auto_type_info = 1
 let g:go_metalinter_command='golangci-lint'
