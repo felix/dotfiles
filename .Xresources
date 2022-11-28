@@ -51,76 +51,59 @@ urxvt.perl-ext-common: selection-to-clipboard
 ! xcalc
 xcalc*geometry: 300x375
 
-! color man pages
-*VT100*colorMode: on
-*VT100*boldColors: on
-*VT100*dynamicColors: on
-*VT100*colorULMode:on
-*VT100*underLine: off
-*VT100*colorBDMode: on
-*VT100*colorUL: #b58900
-*VT100*colorBD: #859900
-
-! colours --------------------------------------------------------------------
-
-! Solarized color scheme for the X Window System
+!---------------------------------------------------------------------------
+! Selenized white color palette for urxvt and X Window System
 !
-! http://ethanschoonover.com/solarized
+#define    bg_0        #ffffff
+#define    bg_1        #ebebeb
+#define    bg_2        #cdcdcd
+#define    dim_0       #878787
+#define    fg_0        #474747
+#define    fg_1        #282828
 
-#define S_base03        #002b36
-#define S_base02        #073642
-#define S_base01        #586e75
-#define S_base00        #657b83
-#define S_base0         #839496
-#define S_base1         #93a1a1
-#define S_base2         #eee8d5
-#define S_base3         #fdf6e3
+#define    red         #d6000c
+#define    green       #1d9700
+#define    yellow      #c49700
+#define    blue        #0064e4
+#define    magenta     #dd0f9d
+#define    cyan        #00ad9c
+#define    orange      #d04a00
+#define    violet      #7f51d6
 
-*background:            S_base03
-*foreground:            S_base0
-*fadeColor:             S_base03
-*cursorColor:           S_base1
-*pointerColorBackground:S_base01
-*pointerColorForeground:S_base1
+#define    br_red      #bf0000
+#define    br_green    #008400
+#define    br_yellow   #af8500
+#define    br_blue     #0054cf
+#define    br_magenta  #c7008b
+#define    br_cyan     #009a8a
+#define    br_orange   #ba3700
+#define    br_violet   #6b40c3
 
-#define S_yellow        #b58900
-#define S_orange        #cb4b16
-#define S_red           #dc322f
-#define S_magenta       #d33682
-#define S_violet        #6c71c4
-#define S_blue          #268bd2
-#define S_cyan          #2aa198
-#define S_green         #859900
+*background:              bg_0
+*foreground:              fg_0
+*fading:                  40
+*fadeColor:               bg_0
+*cursorColor:             fg_1
+*pointerColorBackground:  bg_2
+*pointerColorForeground:  fg_1
 
-!! black dark/light
-*color0:                S_base02
-!xterm*color8:                S_base03
-*color8:                S_base01
+! normal colors: "black", red, green, yellow, blue, magenta, cyan, "white"
+*color0:     bg_1
+*color1:     red
+*color2:     green
+*color3:     yellow
+*color4:     blue
+*color5:     magenta
+*color6:     cyan
+*color7:     dim_0
 
-!! red dark/light
-*color1:                S_red
-*color9:                S_orange
+! bright/bold versions of colors (in the same order)
+*color8:     bg_2
+*color9:     br_red
+*color10:    br_green
+*color11:    br_yellow
+*color12:    br_blue
+*color13:    br_magenta
+*color14:    br_cyan
+*color15:    fg_1
 
-!! green dark/light
-*color2:                S_green
-*color10:               S_base01
-
-!! yellow dark/light
-*color3:                S_yellow
-*color11:               S_base00
-
-!! blue dark/light
-*color4:                S_blue
-*color12:               S_base0
-
-!! magenta dark/light
-*color5:                S_magenta
-*color13:               S_violet
-
-!! cyan dark/light
-*color6:                S_cyan
-*color14:               S_base1
-
-!! white dark/light
-*color7:                S_base2
-*color15:               S_base3

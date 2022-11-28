@@ -10,7 +10,7 @@ set smartcase
 set spelllang=en_au
 set statusline=%F%m%r%h%w[%{&ff}]%y[%p%%][%l/%L,%v]
 set whichwrap+=<,>,h,l,[,]
-colorscheme desert
+colorscheme selenized
 
 if has('nvim')
 	set clipboard=unnamedplus
@@ -44,12 +44,10 @@ nnoremap <leader>f gqap
 nnoremap <leader>r :Rg <c-r><c-w><cr>
 
 call plug#begin('~/.vim/plugged')
-Plug 'overcache/NeoSolarized'
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'godlygeek/tabular'
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "Plug 'preservim/vim-markdown'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'ledger/vim-ledger'
@@ -68,11 +66,6 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'saadparwaiz1/cmp_luasnip'
 endif
 call plug#end()
-
-if (has("termguicolors"))
-	set termguicolors
-	colorscheme NeoSolarized
-endif
 
 " vim-go config
 if executable("rg")
