@@ -64,7 +64,7 @@ export HISTFILE=~/.history
 export COLORTERM=true
 export ENV=$HOME/.kshrc
 #export MOZ_ENABLE_WAYLAND=1
-export GOPRIVATE=gitlab.com/toennjes
+export GOPRIVATE=gitlab.com/toennjes,src.userspace.com.au
 
 #umask 022
 
