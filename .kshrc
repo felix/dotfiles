@@ -1,15 +1,6 @@
 # Load defaults
 [ -e /etc/ksh.kshrc ] && . /etc/ksh.kshrc
 
-red='\[\e[0;31m\]'
-green='\[\e[0;32m\]'
-yellow='\[\e[0;33m\]'
-#blue='\[\e[0;34m\]'
-purple='\[\e[0;35m\]'
-cyan='\[\e[0;36m\]'
-white='\[\e[0;37m\]' # not really white
-reset='\[\e[m\]'
-
 __exit_status() {
 	case $1 in
 		0) return ;;
@@ -31,8 +22,17 @@ __branch_status() {
 
 set -o vi
 
-PS1='${green}(${white}\A${green})[${yellow}\u${green}@${cyan}\h${green}]${purple}$(__branch_status $?)${red} ${errcode}${white}\w\n${red}$(__exit_status $?)${reset}\$ '
-#PS1="${green}(${white}\A${green})[${yellow}\u${green}@${cyan}\h${green}]${red} ${errcode}${white}\w\n${reset}$ "
+red='\[\e[0;31m\]'
+green='\[\e[0;32m\]'
+yellow='\[\e[0;33m\]'
+#blue='\[\e[0;34m\]'
+purple='\[\e[0;35m\]'
+cyan='\[\e[0;36m\]'
+grey='\[\e[0;37m\]'
+white='\[\e[0m\]'
+reset='\[\e[m\]'
+
+PS1='${grey}\A ${yellow}\u${green}@${cyan}\h${purple}$(__branch_status $?) ${grey}\w\n${red}$(__exit_status $?)${white}\$ '
 
 # Completions
 # When we need to force tab completion
