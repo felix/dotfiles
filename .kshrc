@@ -29,8 +29,8 @@ yellow='\[\e[0;33m\]'
 purple='\[\e[0;35m\]'
 cyan='\[\e[0;36m\]'
 grey='\[\e[0;37m\]'
-white='\[\e[0m\]'
-reset='\[\e[m\]'
+white='\[\e[97m\]'
+reset='\[\e[0;0m\]'
 
 PS1='${grey}\A ${yellow}\u${green}@${cyan}\h${purple}$(__branch_status $?) ${grey}\w\n${red}$(__exit_status $?)${white}\$ '
 
