@@ -33,6 +33,7 @@ white='\[\e[97m\]'
 reset='\[\e[0;0m\]'
 
 PS1='${grey}\A ${yellow}\u${green}@${cyan}\h${purple}$(__branch_status $?) ${grey}\w\n${red}$(__exit_status $?)${white}\$ '
+#PS1='\A \u@\h$(__branch_status $?) \w\n$(__exit_status $?)\$ '
 
 # Completions
 # When we need to force tab completion
