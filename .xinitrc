@@ -1,8 +1,7 @@
 #!/bin/sh
 
-
-case $(hostname |cut -d. -f1) in
-	C02Y3077JG5J)
+case $(uname |cut -f1) in
+	Darwin)
 		exit
 		;;
 	*)
