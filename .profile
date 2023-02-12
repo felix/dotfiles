@@ -65,6 +65,7 @@ export COLORTERM=true
 export ENV=$HOME/.kshrc
 #export MOZ_ENABLE_WAYLAND=1
 export GOPRIVATE=gitlab.com/toennjes,src.userspace.com.au
+export GOTELEMETRY=off
 
 #umask 022
 
