@@ -17,6 +17,7 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 bindsym $mod+d exec "$HOME/bin/dmenu-recent"
 bindsym $mod+p exec "$HOME/bin/dmenu-passwords"
+#bindsym $mod+p exec "passmenu"
 
 #bindcode $mod+Ctrl+107 exec xautolock -locknow
 bindsym $mod+Ctrl+Delete exec xautolock -locknow
