@@ -1,37 +1,9 @@
 
-hostname=$(hostname |cut -d. -f1)
-os=$(uname -s)
-
 # Build my path
-PATH=$HOME/bin
-
-for bindir in $HOME/go/bin \
-	$HOME/.local/bin \
-	$HOME/.node/bin \
-	$HOME/.cabal/bin \
-	$HOME/.cargo/bin \
-	$HOME/.yarn/bin \
-	$HOME/perl5/bin \
-	/opt/local/bin \
-	$HOME/Library/Python/3.10/bin \
-	$HOME/Library/Python/3.8/bin \
-	$HOME/Library/Python/3.7/bin \
-	/Library/TeX/texbin \
-	/usr/local/opt/perl/bin \
-	/usr/local/go/bin \
-	/usr/local/bin \
-	/usr/local/sbin \
-	/sbin \
-	/bin \
-	/usr/sbin \
-	/usr/bin \
-	/usr/local/plan9/bin \
-	; do
-		[ -d "$bindir" ] && PATH=$PATH:$bindir
-done
-
-# Should not need to export but just in case
-export PATH
+[ -d $HOME/bin ] && PATH=$PATH:$HOME/bin
+[ -d $HOME/go/bin ] && PATH=$PATH:$HOME/go/bin
+[ -d /usr/local/plan9/bin ] && PATH=$PATH:/usr/local/plan9/bin
+#export PATH
 
 if [ -d "$HOME/perl5/bin" ]; then
     export PERL5LIB="{$HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
@@ -39,8 +11,6 @@ if [ -d "$HOME/perl5/bin" ]; then
     export PERL_MB_OPT="--install_base \"$HOME/perl5\""
     export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
 fi
-
-[ -d /opt/local/share/man ] && MANPATH=/opt/local/share/man:$MANPATH
 
 if [ -z "$XDG_RUNTIME_DIR" ]; then
 	export XDG_RUNTIME_DIR="/tmp/$USER-xdg-runtime"
