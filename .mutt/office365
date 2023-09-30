@@ -1,8 +1,0 @@
-set smtp_url         = smtp://$imap_user:$imap_pass@smtp.office365.com:587
-set ssl_starttls     = yes
-mailboxes =INBOX =Deleted Items =Sent Items =Drafts =Junk Email =Outbox
-set folder           = 'imaps://outlook.office365.com'
-set spoolfile        = '+INBOX'
-set postponed        = '+Drafts'
-set record           = '+Sent Items'
-set trash            = '+Deleted Items'

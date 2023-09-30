@@ -62,14 +62,6 @@
 	insteadOf = https://github.com/
 [url "git@gitlab.com:"]
 	insteadOf = https://gitlab.com/
-[includeIf "gitdir:MYOB-Technology/"]
-	path = ~/.gitconfig.myob
-[includeIf "gitdir:myob-api/"]
-	path = ~/.gitconfig.myob
-[includeIf "gitdir:myob-ops/"]
-	path = ~/.gitconfig.myob
-[includeIf "gitdir:myob-sme/"]
-	path = ~/.gitconfig.myob
 #[includeIf "gitdir:src.userspace.com.au/"]
 #        path = ~/.gitconfig.userspace
 [credential "https://github.com"]

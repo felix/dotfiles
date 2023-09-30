@@ -83,4 +83,51 @@ fi
 
 . $HOME/bin/dirstack.ksh
 
-[ -e "$HOME/bin/common.sh" ] && . $HOME/bin/common.sh
+alias ls='ls --color=auto'
+alias ll='ls -l'
+alias la='ls -A'
+alias lh='ls -lh'
+alias l='ls -CF'
+alias h='history |grep'
+alias rm='rm -v'
+alias cp='cp -v'
+alias mv='mv -v'
+alias k='kubectl'
+alias wget="wget --timeout 10 -c"
+alias setclip="xclip -selection c"
+alias getclip="xclip -selection c -o"
+alias fsl="fossil"
+if [ -n "$(command -v nvim)" ]; then
+	alias vim="nvim"
+	alias vimdiff="nvim -d"
+fi
+# alias vimf="vimfzf"
+alias ap="ansible-playbook"
+alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
+alias mutt-myob='neomutt -F ~/.mutt/muttrc.myob'
+alias mutt-yelnah='neomutt -F ~/.mutt/muttrc.yelnah'
+alias dockerm='docker-machine'
+alias dockerc='docker-compose'
+alias dcl='docker-compose logs -t -f --tail=100'
+
+calc(){ printf 'scale=2;%s\n' "$*" |bc; }
+
+if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+  eval `ssh-agent`
+  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+  ssh-add
+fi
+export SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
+
+GPG_TTY=$(tty)
+export GPG_TTY
+
+TMUX_PATH=$(command -v tmux)
+
+if [ -x "$TMUX_PATH" ]; then
+	if [ "$SHOWED_MUX_MESSAGE" != "true" ]; then
+		detached_tmux=$(tmux ls 2> /dev/null)
+		[ ! -z "$detached_tmux" ] && printf '\nDetached Tmux: %s\n' "$detached_tmux"
+	fi
+	export SHOWED_MUX_MESSAGE="true"
+fi

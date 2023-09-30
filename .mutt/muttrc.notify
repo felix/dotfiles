@@ -1,1 +1,0 @@
-set new_mail_command="notify-send 'New email' '%n new messages, %u unread.' &"

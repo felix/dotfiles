@@ -71,9 +71,20 @@ set tmpdir="/tmp"
 set followup_to
 set honor_followup_to=yes
 
-source ~/.mutt/muttrc.notify
 source ~/.mutt/colour
-source ~/.mutt/lists
+
+set new_mail_command="notify-send 'New email' '%n new messages, %u unread.' &"
+
+subscribe \
+		  lists.opennicproject.org \
+		  .github.com \
+		  misc.opensmtpd.org \
+		  .googlegroups.com \
+		  securityfocus.com \
+		  lobste.rs
+
+subscribe -group bsd @openbsd freebsd.org  @dragonflybsd.org
+
 source $alias_file
 
 ignore *
