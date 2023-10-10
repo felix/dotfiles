@@ -1,0 +1,26 @@
+source ~/.mutt/muttrc.common
+
+set imap_user        = 'f.hanley@toennjes.com'
+set imap_pass        = `pass toennjes/imap.ch.exg7.exghost.com`
+set smtp_pass        = $imap_pass
+set smtp_url         = smtp://$imap_user@smtp.ch.exg7.exghost.com:587
+#set ssl_starttls     = yes
+set ssl_force_tls    = yes
+set ssl_use_sslv3    = yes
+
+set from             = 'Felix Hanley <f.hanley@toennjes.com>'
+set folder           = imaps://imap.ch.exg7.exghost.com/
+set spoolfile        = '+INBOX'
+set postponed        = '+Drafts'
+set record           = '+Sent Items'
+set trash            = '+Deleted Items'
+set header_cache     = '~/.cache/mutt-toennjes-headers'
+set message_cachedir = '~/.cache/mutt-toennjes-bodies'
+set status_format    = '-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-toennjes%>-(%P)---'
+send-hook . 'set signature=~/.mutt/signature.toennjes'
+color status brightwhite blue
+
+mailboxes = +INBOX '+Junk Email' +Drafts
+unmailboxes = '+Deleted Items'
+
+# vim: set ft=muttrc:

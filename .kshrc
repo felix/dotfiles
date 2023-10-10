@@ -104,7 +104,7 @@ fi
 # alias vimf="vimfzf"
 alias ap="ansible-playbook"
 alias mutt-userspace='neomutt -F ~/.mutt/muttrc.userspace'
-alias mutt-myob='neomutt -F ~/.mutt/muttrc.myob'
+alias mutt-toennjes='neomutt -F ~/.mutt/muttrc.toennjes'
 alias mutt-yelnah='neomutt -F ~/.mutt/muttrc.yelnah'
 alias dockerm='docker-machine'
 alias dockerc='docker-compose'
