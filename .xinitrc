@@ -12,13 +12,17 @@ xsetroot -solid "#000000"
 # Source local fonts too
 [ -d ~/.fonts ] && xset +fp ~/.fonts/
 
-# Add thai and lahu keyboards
-#setxkbmap -I"$HOME/.xkb -option grp:shifts_toggle,grp_led:scroll" "us,th,lhu" -print |xkbcomp -I"$HOME/.xkb" - "$DISPLAY"
+# Use both shift to toggle English, Thai and Lahu keyboards
+setxkbmap -I"$HOME/.xkb -option grp:shifts_toggle,grp_led:scroll" "us,th,lhu" -print |xkbcomp -I"$HOME/.xkb" - "$DISPLAY"
+
+# Use the left Windows key as compose
+setxkbmap -option compose:lwin
 
 # XDG setup
 if [ -z "$XDG_RUNTIME_DIR" ]; then
 	export XDG_RUNTIME_DIR="/tmp/$USER-xdg-runtime"
 	mkdir -p "$XDG_RUNTIME_DIR"
+	chmod 700 "$XDG_RUNTIME_DIR"
 fi
 
 # Qt theming
