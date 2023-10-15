@@ -23,4 +23,6 @@ color status brightwhite blue
 mailboxes = +INBOX '+Junk Email' +Drafts
 unmailboxes = '+Deleted Items'
 
+macro index,pager S "<save-message>'+Junk Email'<enter>y" "Mark as spam"
+
 # vim: set ft=muttrc:
