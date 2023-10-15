@@ -48,6 +48,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'godlygeek/tabular'
+Plug 'jamessan/vim-gnupg'
 "Plug 'preservim/vim-markdown'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'ledger/vim-ledger'
