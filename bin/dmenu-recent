@@ -1,36 +1,50 @@
 #!/bin/sh
 
-history=10
-MENU=dmenu
-[ -n "$WAYLAND_DISPLAY" ] && MENU=bemenu
-
 cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
 if [ -d "$cachedir" ]; then
-    cache=$cachedir/dmenu_cache
-    recent=$cachedir/dmenu_recent
-else   # if no xdg dir, fall back to dotfiles in ~
-    cache=$HOME/.dmenu_cache
-    recent=$HOME/.dmenu_recent
+	cache=$cachedir/dmenu_run
+	historyfile=$cachedir/dmenu_history
+else			# if no xdg dir, fall back to dotfiles in ~
+	cache=$HOME/.dmenu_cache
+	historyfile=$HOME/.dmenu_history
 fi
 
 IFS=:
 if stest -dqr -n "$cache" $PATH; then
-    stest -flx $PATH |sort -u >"$cache"
+	stest -flx $PATH | sort -u > "$cache"
 fi
 unset IFS
 
-# Combine the recent with cache and pass to dmenu
-run=$(cat "$recent" "$cache" |uniq |$MENU -l $history -p Run: "$@") || exit
+awk -v histfile=$historyfile '
+	BEGIN {
+		while( (getline < histfile) > 0 ) {
+			sub("^[0-9]+\t","")
+			print
+			x[$0]=1
+		}
+	} !x[$0]++ ' "$cache" \
+	| dmenu "$@" \
+	| awk -v histfile=$historyfile '
+		BEGIN {
+			FS=OFS="\t"
+			while ( (getline < histfile) > 0 ) {
+				count=$1
+				sub("^[0-9]+\t","")
+				fname=$0
+				history[fname]=count
+			}
+			close(histfile)
+		}
 
-# Run with shell if terminated with semi-colon
-case "$run" in
-    *\;) "${SHELL:-"/bin/sh"}" "${run%%;}" &
-        ;;
-    *)   "$run" &
-        ;;
-esac
+		{
+			history[$0]++
+			print
+		}
 
-# Clean recent keeping last 10 entries
-(echo "$run"; cat "$recent" |sort -u |head -n $history 2>/dev/null) > "$recent.$$" && mv "$recent.$$" "$recent"
-
-exit 0
+		END {
+			if(!NR) exit
+			for (f in history)
+				print history[f],f | "sort -t '\t' -k1rn >" histfile
+		}
+	' \
+	| while read cmd; do ${SHELL:-"/bin/sh"} -c "$cmd" & done
