@@ -20,9 +20,9 @@ set status_format    = '-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d
 send-hook . 'set signature=~/.mutt/signature.toennjes'
 color status brightwhite blue
 
-mailboxes = +INBOX '+Junk Email' +Drafts
-unmailboxes = '+Deleted Items'
+mailboxes = +INBOX +Junk%20Email
+unmailboxes = +Deleted%20Items
 
-macro index,pager S "<save-message>'+Junk Email'<enter>y" "Mark as spam"
+macro index,pager S "<save-message>+Junk%20Email<enter>y" "Mark as spam"
 
 # vim: set ft=muttrc:
