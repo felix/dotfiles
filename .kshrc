@@ -131,3 +131,7 @@ if [ -x "$TMUX_PATH" ]; then
 	fi
 	export SHOWED_MUX_MESSAGE="true"
 fi
+
+if [ -z "${DISPLAY}" ] && [ "$(tty)" == "/dev/tty1" ]; then
+	exec startx
+fi

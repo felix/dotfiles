@@ -14,7 +14,6 @@ if [ -d "$HOME/perl5/bin" ]; then
     export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
 fi
 
-#export GOPATH=$HOME
 export SAVEHIST=9000
 export LC_ALL=en_AU.UTF-8
 export LC_CTYPE=en_AU.UTF-8
@@ -22,7 +21,6 @@ export EDITOR=nvim
 export VISUAL=$EDITOR
 export PAGER=less
 export GIT_EDITOR=$EDITOR
-export XML_CATALOG_FILES="$HOME/src/XMLCatalog/catalog.xml"
 export PASSWORD_STORE_X_SELECTION=primary
 export HISTSIZE=9000
 export HISTCONTROL=ignorespace:ignoredups
@@ -33,7 +31,7 @@ export ENV=$HOME/.kshrc
 export GOPRIVATE=github.com/toennjes,gitlab.com/toennjes,src.userspace.com.au
 export GOTELEMETRY=off
 
-#umask 022
+umask 022
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

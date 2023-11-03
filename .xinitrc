@@ -30,9 +30,6 @@ fi
 
 [ -x "$(command -v redshift)" ] && redshift -m randr -t 5500:3500 -l -37.8023217:145.1144633 &
 
-# Setup screens
-xrandr --output eDP1 --primary --mode 1920x1200 --pos 0x1200 --output HDMI1 --mode 1920x1200 --pos 0x0
-
 # Screen control
 if [ -x "$(command -v xautolock)" ]; then
 	if [ -x "$(command -v xlock)" ]; then
@@ -45,6 +42,6 @@ fi
 [ -x "$(command -v alacritty)" ] && export TERMINAL=alacritty
 [ -x "$(command -v firefox)" ] && export BROWSER=firefox
 
-dbus-run-session pipewire &
+[ -x "$(command -v pipewire)" ] && dbus-run-session pipewire &
 
 exec dbus-launch --sh-syntax --exit-with-session i3
