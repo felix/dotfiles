@@ -30,6 +30,7 @@ export ENV=$HOME/.kshrc
 #export MOZ_ENABLE_WAYLAND=1
 export GOPRIVATE=github.com/toennjes,gitlab.com/toennjes,src.userspace.com.au
 export GOTELEMETRY=off
+export ANDROID_NDK_HOME=/home/felix/Android/Sdk/ndk/26.1.10909125
 
 umask 022
 
