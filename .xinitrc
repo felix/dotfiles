@@ -18,6 +18,9 @@ setxkbmap -I"$HOME/.xkb -option grp:shifts_toggle,grp_led:scroll" "us,th,lhu" -p
 # Use the left Windows key as compose
 setxkbmap -option compose:lwin
 
+# Disable touchscreen on X1
+xinput disable "ELAN901C:00 04F3:2C71"
+
 # XDG setup
 if [ -z "$XDG_RUNTIME_DIR" ]; then
 	export XDG_RUNTIME_DIR="/tmp/$USER-xdg-runtime"
