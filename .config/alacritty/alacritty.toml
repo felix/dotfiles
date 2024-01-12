@@ -1,0 +1,12 @@
+[bell]
+duration = 0
+
+[env]
+TERM = "xterm-256color"
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Middle"
+
+[selection]
+save_to_clipboard = true
