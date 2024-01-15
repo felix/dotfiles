@@ -4,24 +4,12 @@ set $mod Mod1
 # Windows
 #set $mod Mod4
 
-# input "0:0:System_mouse" {
-# 	tap enabled
-# }
-input type:touchpad {
-	tap enabled
-	natural_scroll enabled
-}
-
-
-
-font pango:monospace 8
+font pango:monospace 10
 #font pango:DejaVu Sans Mono 8
 #font -*-fixed-medium-r-normal-*-12-*-*-*-*-*-iso10646-1
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
-default_border pixel 2
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -30,7 +18,6 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec "$HOME/bin/dmenu-recent"
 bindsym $mod+p exec "$HOME/bin/dmenu-passwords"
 
-#bindsym $mod+Ctrl+Delete exec xautolock -locknow
 bindsym $mod+Ctrl+Delete exec swaylock -c 000000
 
 # change focus
@@ -108,19 +95,14 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-#output eDP-1 pos 0 360 res --custom 1280x720
-#output HDMI-1 pos 1280 0 res 1920x1080
-output * bg #000000 solid_color
-#focus output HDMI-1
-
 bindsym $mod+Ctrl+h move workspace to output left
 bindsym $mod+Ctrl+l move workspace to output right
 bindsym $mod+Ctrl+k move workspace to output up
 bindsym $mod+Ctrl+j move workspace to output down
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r reload
+# restart sway inplace (preserves your layout/session, can be used to upgrade i3)
 #bindsym $mod+Shift+r restart
 # exit sway (logs you out of your session)
 bindsym $mod+Shift+e exec swaynag -t warning -m 'This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
@@ -151,30 +133,16 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-#  default to tabbed layout
-#workspace_layout stacking
-
-assign [class="mail"] 3: mail
-assign [class="hrom"] 2: www
-assign [class="irefox"] 2: www
-assign [class="ceweasel"] 2: www
-
 force_display_urgency_hint 1000 ms
 
 # Terminal
-#bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec alacritty
 
 # Volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id mixer +10
-bindsym Mod4+Up exec --no-startup-id mixer vol +10
-bindsym XF86AudioLowerVolume exec --no-startup-id mixer -10
-bindsym Mod4+Down exec --no-startup-id mixer vol -10
-bindsym XF86AudioMute exec --no-startup-id mixer pcm toggle
-# ALSA
-#bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set 'Master' 5%+
-#bindsym XF86AudioLowerVolume exec --no-startup-id  amixer -q set 'Master' 5%-
-#bindsym XF86AudioMute exec --no-startup-id amixer -q set 'Master' toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
 # Playback
 bindsym XF86AudioNext exec --no-startup-id mpc next
@@ -197,26 +165,20 @@ bar {
         colors {
             #background #002b36
             statusline #93a1a1
-            #focused_workspace  #b58900 #002b36
-            #active_workspace   #859900 #073642
-            #inactive_workspace #657b83 #002b36
-            #urgent_workspace   #dc322f #073642
         }
 }
 
 # custom rules
+assign [class="mail"] 3: mail
+assign [class="irefox"] 2: www
+
 # width x height
 floating_minimum_size 100 x 100
 floating_maximum_size 1024 x 1024
-for_window [class="Dia" window_role="toolbox_window"] floating enable
+for_window [app_id="Firefox"] border pixel <5 px|none>
 for_window [class="Pinentry"] floating enable
 for_window [class="Qjackctl"] floating enable
-for_window [class="Qjackctl"] floating enable
 for_window [class="Wine"] floating enable
-for_window [class="XCalc"] floating enable
-for_window [class="ksysguard"] floating enable
-for_window [class="ksysguard"] sticky enable
-for_window [class="xdg-desktop-portal-kde"] floating enable
 for_window [window_role="About"] floating enable
 for_window [window_role="Preferences"] floating enable
 for_window [window_role="bubble"] floating enable
@@ -225,10 +187,17 @@ for_window [window_role="task_dialog"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
-exec xrdb -load ~/.Xresources
+input 1267:11377:ELAN901C:00_04F3:2C71 events disabled
+input * xkb_options compose:lwin
+output "Dell Inc. DELL P2421 FZSM773" pos 2150 0 res 1920x1200 transform 270
+output eDP-1 pos 2150 1920 res 1920x1200
+output "Dell Inc. DELL P2421 JDSM773" pos 3350 720 res 1920x1200
+output eDP-1 scale 1.2
+output * bg #000000 solid_color
+
+exec swayidle -w timeout 300 'swaylock -f -c 000000'
+exec mako
+#exec xrdb -load ~/.Xresources
 exec wlsunset -l -33.8 -L 151.2
-exec wl-paste -t text --watch clipman store
-exec swayidle -w \
-	timeout 1800 'swaylock -c 000000' \
-	timeout 1805 'swaymsg "output * dpms off"' \
-	resume 'swaymsg "output * dpms on"'
+exec wl-paste -t text --watch clipman store --no-persist
+#exec_always --no-startup-id /usr/bin/autorunner
