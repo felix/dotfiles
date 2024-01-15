@@ -133,5 +133,5 @@ if [ -x "$TMUX_PATH" ]; then
 fi
 
 if [ -z "${DISPLAY}" ] && [ "$(tty)" == "/dev/tty1" ]; then
-	exec startx
+	exec $HOME/bin/start-wm.sh
 fi

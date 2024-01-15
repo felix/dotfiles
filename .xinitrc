@@ -21,16 +21,6 @@ setxkbmap -option compose:lwin
 # Disable touchscreen on X1
 xinput disable "ELAN901C:00 04F3:2C71"
 
-# XDG setup
-if [ -z "$XDG_RUNTIME_DIR" ]; then
-	export XDG_RUNTIME_DIR="/tmp/$USER-xdg-runtime"
-	mkdir -p "$XDG_RUNTIME_DIR"
-	chmod 700 "$XDG_RUNTIME_DIR"
-fi
-
-# Qt theming
-[ "$XDG_CURRENT_DESKTOP" = "KDE" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] || export QT_QPA_PLATFORMTHEME="qt5ct"
-
 [ -x "$(command -v redshift)" ] && redshift -m randr -t 5500:3500 -l -37.8023217:145.1144633 &
 
 # Screen control
@@ -41,10 +31,5 @@ if [ -x "$(command -v xautolock)" ]; then
 		xautolock -time 5 -locker "i3lock -f -e -d -c 000000" &
 	fi
 fi
-
-[ -x "$(command -v alacritty)" ] && export TERMINAL=alacritty
-[ -x "$(command -v firefox)" ] && export BROWSER=firefox
-
-[ -x "$(command -v pipewire)" ] && dbus-run-session pipewire &
 
 exec dbus-launch --sh-syntax --exit-with-session i3
