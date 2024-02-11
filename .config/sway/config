@@ -53,6 +53,8 @@ bindsym $mod+Ctrl+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
+bindsym $mod+Shift+s sticky toggle
+
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -173,19 +175,20 @@ assign [class="mail"] 3: mail
 assign [class="irefox"] 2: www
 
 # width x height
-floating_minimum_size 100 x 100
+#floating_minimum_size 200 x 300
 floating_maximum_size 1024 x 1024
-for_window [app_id="Firefox"] border pixel <5 px|none>
-for_window [class="Pinentry"] floating enable
 for_window [class="Qjackctl"] floating enable
 for_window [class="Wine"] floating enable
 for_window [window_role="About"] floating enable
 for_window [window_role="Preferences"] floating enable
 for_window [window_role="bubble"] floating enable
+for_window [window_role="dialog"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
+for_window [title="^Opening"] floating enable
+
 
 input 1267:11377:ELAN901C:00_04F3:2C71 events disabled
 input * xkb_options compose:lwin
