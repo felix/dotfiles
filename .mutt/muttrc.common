@@ -22,6 +22,7 @@ set mailcap_path="~/.mailcap"  # mime types and apps
 set mbox_type=Maildir
 set menu_context=5       # lines of context
 set menu_scroll          # scroll line by line when reaching end of page.
+set sleep_time = 0
 
 set certificate_file=~/.mutt/certificates
 set ssl_starttls=yes
