@@ -32,6 +32,7 @@
 	lgt = tag --sort=-v:refname -n1 # Log of tags
 	ls = ls-files
 	lsc = diff --name-only --diff-filter=U --relative
+	pushf = push --force-if-includes
 	sl = stash list
 	sp = stash pop
 	st = status --short
