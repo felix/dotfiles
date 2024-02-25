@@ -12,7 +12,6 @@ fi
 [ -x "$(command -v alacritty)" ] && export TERMINAL=alacritty
 [ -x "$(command -v firefox)" ] && export BROWSER=firefox
 [ -x "$(command -v pipewire)" ] && dbus-run-session pipewire &
-[ -x /usr/libexec/xdg-desktop-portal ] && dbus-run-session /usr/libexec/xdg-desktop-portal &
 
 export PASSWORD_STORE_X_SELECTION=primary
 export MOZ_ENABLE_WAYLAND=1

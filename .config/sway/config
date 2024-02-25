@@ -203,4 +203,6 @@ exec mako
 #exec xrdb -load ~/.Xresources
 exec wlsunset -l -33.8 -L 151.2
 exec wl-paste -t text --watch clipman store --no-persist
+exec /usr/libexec/xdg-desktop-portal -r
+exec /usr/libexec/xdg-desktop-portal-wlr
 #exec_always --no-startup-id /usr/bin/autorunner
