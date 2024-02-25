@@ -46,6 +46,7 @@
 	untracked = cyan
 [branch]
 	autosetupmerge = true
+	sort = -committerdate
 [gui]
 	spellingdictionary = none
 [mergetool "vimdiff3"]
@@ -72,3 +73,5 @@
 	helper = pass-store
 [receive]
 	advertisePushOptions = true
+[fetch]
+	writeCommitGraph = true
