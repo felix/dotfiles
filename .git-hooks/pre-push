@@ -1,0 +1,33 @@
+#!/usr/bin/awk -f
+
+BEGIN {
+	if (ARGC < 3) {
+		exit 1
+	}
+	remote = ARGV[1]
+	ARGC--
+	url = ARGV[2]
+	ARGC--
+
+	tag = ""
+	changelog = 0
+}
+
+# <local ref> <local oid> <remote ref> <remote oid>
+
+/refs\/tags/ {
+	n = split($1,local,"/")
+	tag = local[n]
+	clCmd = "git status -s |grep -qi 'M CHANGELOG'"
+	if (( clCmd | getline) != "") {
+		changelog = 1
+	}
+	close(clCmd)
+}
+
+END {
+	if (changelog != 0) {
+		printf "CHANGELOG not updated for tag %s, not pushing\n", tag
+		exit 1
+	}
+}
