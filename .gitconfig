@@ -45,10 +45,6 @@
 	writeCommitGraph = true
 [github]
 	user = felix
-[includeIf "gitdir:github.com/toennjes/"]
-        path = ~/.gitconfig.toennjes
-[includeIf "gitdir:src.userspace.com.au/"]
-        path = ~/.gitconfig.userspace
 [init]
 	defaultBranch = master
 [gc]
@@ -77,3 +73,9 @@
 [user]
 	name = Felix Hanley
 	email = felix@userspace.com.au
+
+# These go last to provide overrides
+[includeIf "gitdir:github.com/toennjes/"]
+        path = ~/.gitconfig.toennjes
+[includeIf "gitdir:src.userspace.com.au/"]
+        path = ~/.gitconfig.userspace
