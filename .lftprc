@@ -1,6 +1,10 @@
 set ssl:verify-certificate no
 set ftp:list-options "-a"
+set net:timeout 20
+set net:max-retries 30
+set net:reconnect-interval-base 5
+set ftp:ssl-protect-data true
 #set ftp:ssl-allow no
-set ftp:passive-mode no
+#set ftp:passive-mode no
 set xfer:log 1
 #set xfer:log-file //to/transfer_log

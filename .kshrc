@@ -93,6 +93,7 @@ alias rm='rm -v'
 alias cp='cp -v'
 alias mv='mv -v'
 alias k='kubectl'
+alias t='timew'
 alias wget="wget --timeout 10 -c"
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
