@@ -10,7 +10,6 @@ set smartcase
 set spelllang=en_au
 set statusline=%F%m%r%h%w[%{&ff}]%y[%p%%][%l/%L,%v]
 set whichwrap+=<,>,h,l,[,]
-colorscheme selenized
 
 if has('nvim')
 	set clipboard=unnamedplus
@@ -44,6 +43,7 @@ nnoremap <leader>f gqap
 nnoremap <leader>r :Rg <c-r><c-w><cr>
 
 call plug#begin('~/.vim/plugged')
+Plug 'calind/selenized.nvim'
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -63,8 +63,13 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'windwp/nvim-autopairs'
 endif
 call plug#end()
+
+colorscheme selenized
 
 " vim-go config
 if executable("rg")
