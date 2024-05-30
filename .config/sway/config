@@ -187,7 +187,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
-for_window [title="^Opening"] floating enable
+#for_window [title="^Opening"] floating enable
 
 
 input 1267:11377:ELAN901C:00_04F3:2C71 events disabled
