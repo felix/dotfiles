@@ -69,6 +69,7 @@ Plug 'windwp/nvim-autopairs'
 endif
 call plug#end()
 
+set termguicolors
 colorscheme selenized
 
 " vim-go config
@@ -83,9 +84,15 @@ let g:go_auto_type_info = 1
 let g:go_metalinter_command='golangci-lint'
 let g:ledger_date_format='%Y-%m-%d'
 
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 autocmd BufRead,BufNewFile *.m4 setlocal ft=m4
 autocmd BufRead,BufNewFile *.tmpl setlocal ft=gohtmltmpl
 autocmd BufRead,BufNewFile *mutt* setlocal ft=mail.markdown
+autocmd BufRead,BufNewFile *.ddd setlocal ft=json
 autocmd FileType ledger inoremap <silent> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
 autocmd FileType ledger noremap { ?^\d<CR>
 autocmd FileType ledger noremap } /^\d<CR>
@@ -93,6 +100,7 @@ autocmd FileType ledger setlocal ts=4 sw=4 et
 autocmd FileType ledger vnoremap <silent> <Tab> :LedgerAlign<CR>
 autocmd FileType php setlocal ts=4 sw=4 et
 autocmd Filetype html setlocal ts=2 sw=2 et
+autocmd Filetype gohtmltmpl setlocal ts=4 sw=4
 autocmd Filetype javascript setlocal ts=2 sw=2 et nowrap
 autocmd Filetype json setlocal ts=2 sw=2 et nowrap
 autocmd Filetype mail setlocal nohlsearch spell nobackup noswapfile nowritebackup noautoindent
