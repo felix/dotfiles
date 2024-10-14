@@ -2,7 +2,7 @@
 
 case "$1" in
 	instances)
-		aws ec2 describe-instances --filters "Name=instance-state-name,Values=running"  | jq -r '.Reservations[].Instances[] | .InstanceId, (.Tags[] |select(.Key=="Name").Value)'
+		aws ec2 describe-instances --filters "Name=instance-state-name,Values=running"  | jq -r '.Reservations[].Instances[] | [.InstanceId, (.Tags[] |select(.Key=="Name").Value)] |@tsv'
 		;;
 	ssh-id)
 		aws ssm start-session --target "$2"
