@@ -91,7 +91,7 @@ require('nvim-treesitter.configs').setup {
 -- Enable additional completion capabilities offered by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-local servers = { 'gopls', 'tsserver', 'lua_ls' }
+local servers = { 'gopls', 'ts_ls', 'lua_ls' }
 local opts = { noremap=true, silent=true }
 local on_attach = function(client, buf)
 	-- Mappings.
