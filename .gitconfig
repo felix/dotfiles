@@ -30,6 +30,8 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+[column]
+	ui = auto
 [commit]
 	verbose = true
 [core]
@@ -41,16 +43,24 @@
 	helper = pass-store
 [diff]
 	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
 [fetch]
+	all = true
+	prune = true
+	pruneTags = true
 	writeCommitGraph = true
-[github]
-	user = felix
-[init]
-	defaultBranch = master
 [gc]
 	writecommitGraph = true
+[github]
+	user = felix
 [gui]
 	spellingdictionary = none
+[help]
+	autocorrect = prompt
+[init]
+	defaultBranch = master
 [mergetool "vimdiff3"]
 	cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [merge]
@@ -58,12 +68,20 @@
 [pull]
 	ff = only
 [push]
-	followTags = true
 	autoSetupRemote = true
+	default = simple
+	followTags = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
 [receive]
 	advertisePushOptions = true
 [rerere]
+	autoupdate = true
 	enabled = true
+[tag]
+	sort = version:refname
 [url "git@src.userspace.com.au:"]
 	insteadOf = https://src.userspace.com.au/
 [url "git@github.com:"]
