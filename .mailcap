@@ -1,7 +1,7 @@
 text/calendar; ~/bin/icalview.rb; copiousoutput
 text/html; w3m -o display_link_number=1 -I %{charset} -T text/html; copiousoutput
 message/*; w3m -I %{charset} -T text/html; copiousoutput
-image/svg+xml; inkscape %s; copiousoutput
+image/svg+xml; inkscape %s &; copiousoutput
 image/*; imv -f -s shrink %s; copiousoutput
 application/x-gunzip; gzcat; copiousoutput
 application/x-tar-gz; gunzip -c %s | tar -tf -; copiousoutput

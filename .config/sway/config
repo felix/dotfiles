@@ -172,7 +172,7 @@ bar {
 
 # custom rules
 assign [class="mail"] 3: mail
-assign [class="Firefox"] 2: www
+assign [app_id="Firefox"] 2: www
 
 # width x height
 #floating_minimum_size 200 x 300
@@ -187,23 +187,27 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
+for_window [class="Chromium"] inhibit_idle
 #for_window [title="^Opening"] floating enable
-
 
 input 1267:11377:ELAN901C:00_04F3:2C71 events disabled
 input * xkb_options compose:lwin
-output "Dell Inc. DELL P2421 FZSM773" pos 2820 0 res 1920x1200 transform 90
-output eDP-1 pos 2270 1920 res 1920x1200
-output "Dell Inc. DELL P2421 JDSM773" pos 900 720 res 1920x1200
+output "Dell Inc. DELL P2421 FZSM773" pos 1600 0 res 1920x1200
+output eDP-1 pos 0 200 res 1920x1200
 output eDP-1 scale 1.2
 output * bg #000000 solid_color
 
+# For xdg capture etc.
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+# Screen lock
 exec swayidle -w timeout 300 'swaylock -f -c 000000'
+# Notification daemon
 exec mako
-#exec xrdb -load ~/.Xresources
+# Dimming and gamma
 exec wlsunset -l -33.8 -L 151.2
+# Clipboard sync
 exec wl-paste -t text --watch clipman store --no-persist
-exec /usr/libexec/xdg-desktop-portal -r
-exec /usr/libexec/xdg-desktop-portal-wlr
-#exec_always --no-startup-id /usr/bin/autorunner
-exec /usr/bin/spotifyd
+# Bluetooth
+exec /usr/bin/blueman-applet
+#exec xrdb -load ~/.Xresources
+#exec /usr/bin/spotifyd
