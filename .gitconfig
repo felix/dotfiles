@@ -2,7 +2,7 @@
 	br = branch
 	bra = for-each-ref --sort='-authordate' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' 'refs/remotes' # Branch ages
 	ci = commit
-	co = checkout
+	co = deprecated-start-using-switch
 	cp = cherry-pick
 	diff = diff --word-diff
 	difff = diff --name-only
