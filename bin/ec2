@@ -1,13 +1,15 @@
 #!/bin/sh
 
 case "$1" in
-	instances)
-		aws ec2 describe-instances --filters "Name=instance-state-name,Values=running"  | jq -r '.Reservations[].Instances[] | [.InstanceId, (.Tags[] |select(.Key=="Name").Value)] |@tsv'
+	list)
+		aws ec2 describe-instances --filters "Name=instance-state-name,Values=running"  | \
+			jq -r '.Reservations[].Instances[] | [(.Tags[] |select(.Key=="Name").Value), .InstanceId, .LaunchTime] |@tsv' | \
+			sort -r -k 3
 		;;
-	ssh-id)
+	ssh)
 		aws ssm start-session --target "$2"
 		;;
-	ssh-name)
-		aws ssm start-session --target "$(aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=tag:Name,Values=$2" | jq -r '.Reservations[].Instances[].InstanceId')"
-		;;
+	# ssh-name)
+	# 	aws ssm start-session --target "$(aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=tag:Name,Values=$2" | jq -r '.Reservations[].Instances[].InstanceId')"
+	# 	;;
 esac
