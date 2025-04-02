@@ -43,7 +43,7 @@
 	helper = pass-store
 [diff]
 	algorithm = histogram
-	colorMoved = plain
+;	colorMoved = plain
 	mnemonicPrefix = true
 	renames = true
 [fetch]

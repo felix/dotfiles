@@ -4,6 +4,7 @@
 # Build my path
 [ -d $HOME/bin ] && PATH=$HOME/bin:$PATH
 [ -d $HOME/go/bin ] && PATH=$HOME/go/bin:$PATH
+[ -d $HOME/.cabal/bin ] && PATH=$HOME/.cabal/bin:$PATH
 [ -d /usr/local/plan9/bin ] && PATH=$PATH:/usr/local/plan9/bin
 #export PATH
 

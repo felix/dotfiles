@@ -102,6 +102,7 @@ local on_attach = function(client, buf)
 	vim.api.nvim_buf_set_keymap(buf, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 	vim.api.nvim_buf_set_keymap(buf, 'n', '<leader>e', '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>', opts)
 end
+
 for _, lsp in pairs(servers) do
 	require('lspconfig')[lsp].setup {
 		on_attach = on_attach,
