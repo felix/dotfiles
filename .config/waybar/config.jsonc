@@ -13,22 +13,22 @@
 		"clock#germany",
 		"clock#utc",
 		"tray",
-		"clock"
+		"clock#local"
 	],
 	"sway/window": {
 		"max-length": 50
 	},
 	"battery": {
-		"format": "bat {capacity}%"
+		"format": "B {capacity}%"
 	},
 	"load": {
 		"interval": 5,
-		"format": "load {load1}/{load5}",
+		"format": "L {load5}",
 		"max-length": 12
 	},
 	"memory": {
 		"interval": 30,
-		"format": "mem {used}GB",
+		"format": "M {used}GB",
 		"max-length": 10
 	},
 	"network": {
@@ -44,18 +44,18 @@
 	},
 	"temperature": {
 		"thermal-zone": 5,
-		"critical-threshold": 55,
-		"format": "temp {temperatureC}°C"
+		"critical-threshold": 65,
+		"format": "T {temperatureC}°C"
 	},
 	"wireplumber": {
-		"format": "vol {volume}%",
+		"format": "V {volume}%",
 		"on-click": "qpwgraph",
 		"max-volume": 120,
 		"scroll-step": 0.2
 	},
 	"clock#peru": {
 		"timezone": "America/Lima",
-		"format": "PU {:%H:%M}"
+		"format": "PE {:%H:%M}"
 	},
 	"clock#germany": {
 		"timezone": "Europe/Berlin",
@@ -68,7 +68,7 @@
 	"tray": {
 		"spacing": 10
 	},
-	"clock": {
+	"clock#local": {
 		"format": "{:%a, %d %b  %H:%M}",
 		"tooltip-format": "<tt><small>{calendar}</small></tt>",
 		"calendar": {
