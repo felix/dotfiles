@@ -29,10 +29,8 @@ mailboxes = +INBOX +Spam \
 	    +status \
 	    +news \
 	    +lists \
-	    +lists.openbsd \
 	    +lists.freebsd-ports \
-	    +lists.freebsd-stable \
-	    +lists.opensmtpd
+	    +lists.freebsd-stable
 unmailboxes = +Bin +Drafts
 
 source ~/.mutt/gpg

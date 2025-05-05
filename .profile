@@ -6,6 +6,7 @@
 [ -d $HOME/go/bin ] && PATH=$HOME/go/bin:$PATH
 [ -d $HOME/.cabal/bin ] && PATH=$HOME/.cabal/bin:$PATH
 [ -d /usr/local/plan9/bin ] && PATH=$PATH:/usr/local/plan9/bin
+[ -d $HOME/.dotnet/tools ] && PATH=$PATH:$HOME/.dotnet/tools
 #export PATH
 
 if [ -d "$HOME/perl5/bin" ]; then
@@ -40,3 +41,4 @@ umask 022
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+. "$HOME/.cargo/env"

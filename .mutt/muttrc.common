@@ -111,24 +111,11 @@ auto_view text/html application/x-gunzip application/postscript application/x-ta
 
 bind  index <space> next-unread-mailbox
 bind  index   <right>  display-message
-#macro index   <left>   "c?"
-#bind  index,pager <F5> sync-mailbox
-#macro index,pager $    <change-folder>!<enter>
 bind  index   <up>     previous-entry
 bind  index   <down>   next-entry
 bind  browser <right>  select-entry
 bind  browser <left>   exit
-#macro index 'c' '<change-folder>?<change-dir><home>^K=<enter>'
-#bind  editor  <Tab>    complete-query
 macro index,pager \cB |w3m<enter> "call w3m to extract URLs out of a message"
-
-# 'L' performs a notmuch query, showing only the results
-macro index L "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
-# 'a' shows all messages again (supersedes default <alias> binding)
-#macro index a "<limit>all\n" "show all messages (undo limit)"
-
-# shows all messages again
-#macro index <F9> "<limit>all\n" "show all messages (undo limit)"
 
 macro index,pager S "<save-message>=Spam<enter>y" "Mark as spam"
 macro index,pager H "<save-message>=Inbox<enter>y" "Mark as ham"
