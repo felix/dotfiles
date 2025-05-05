@@ -37,6 +37,7 @@ usage() {
 	printf 'Manage your dotfiles\n'
 	printf 'usage: dm [opts] [check|add|clean]\n'
 	printf '\n'
+	printf '  link\t\tadd a file to your dotfile repo\n'
 	printf '  add\t\tadd a file to your dotfile repo\n'
 	printf '  check\t\tlist files needing linking (same is -n flag)\n'
 	printf '  clean\t\tlist and prompt to delete broken symlinks\n'
@@ -252,7 +253,8 @@ main() {
 		add) shift;	cmd_add "$@" ;;
 		clean) shift;	cmd_clean "$@" ;;
 		git) shift;	cmd_git "$@" ;;
-		*) shift;	cmd_scan ;;
+		link) shift;	cmd_scan ;;
+		*) 		cmd_scan ;;
 	esac
 	return $?
 }
