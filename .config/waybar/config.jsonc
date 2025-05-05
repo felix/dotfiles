@@ -1,0 +1,93 @@
+{
+	"layer": "top",
+	"modules-left": ["sway/workspaces", "sway/mode"],
+	//"modules-center": ["sway/window"],
+	"modules-right": [
+		"wireplumber",
+		"network",
+		"load",
+		"memory",
+		"battery",
+		"temperature",
+		"clock#peru",
+		"clock#germany",
+		"clock#utc",
+		"tray",
+		"clock"
+	],
+	"sway/window": {
+		"max-length": 50
+	},
+	"battery": {
+		"format": "bat {capacity}%"
+	},
+	"load": {
+		"interval": 5,
+		"format": "load {load1}/{load5}",
+		"max-length": 12
+	},
+	"memory": {
+		"interval": 30,
+		"format": "mem {used}GB",
+		"max-length": 10
+	},
+	"network": {
+		"format": "{ifname}",
+		"format-wifi": "{essid} ({signalStrength}%)",
+		// "format-ethernet": "{ipaddr}/{cidr}",
+		"format-disconnected": "", //An empty format will hide the module.
+		"tooltip-format": "{ipaddr}/{cidr} via {gwaddr}",
+		//"tooltip-format-wifi": "{essid} ({signalStrength}%)",
+		//"tooltip-format-ethernet": "{ifname} via {gwaddr}",
+		"tooltip-format-disconnected": "Disconnected",
+		"max-length": 50
+	},
+	"temperature": {
+		"thermal-zone": 5,
+		"critical-threshold": 55,
+		"format": "temp {temperatureC}°C"
+	},
+	"wireplumber": {
+		"format": "vol {volume}%",
+		"on-click": "qpwgraph",
+		"max-volume": 120,
+		"scroll-step": 0.2
+	},
+	"clock#peru": {
+		"timezone": "America/Lima",
+		"format": "PU {:%H:%M}"
+	},
+	"clock#germany": {
+		"timezone": "Europe/Berlin",
+		"format": "DE {:%H:%M}"
+	},
+	"clock#utc": {
+		"timezone": "UTC",
+		"format": "UTC {:%H:%M}"
+	},
+	"tray": {
+		"spacing": 10
+	},
+	"clock": {
+		"format": "{:%a, %d %b  %H:%M}",
+		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"mode"          : "month",
+			"mode-mon-col"  : 3,
+			"weeks-pos"     : "left",
+			"on-scroll"     : 1,
+			"format": {
+				"months":     "<span color='#ffead3'><b>{}</b></span>",
+				"days":       "<span color='#ecc6d9'><b>{}</b></span>",
+				"weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+				"weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+				"today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+			}
+		},
+		"actions":  {
+			"on-click-right": "mode",
+			"on-scroll-up": "shift_up",
+			"on-scroll-down": "shift_down"
+		}
+	}
+}
