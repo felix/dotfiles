@@ -5,12 +5,14 @@
 	"modules-right": [
 		"wireplumber",
 		"network",
+		"custom/vpn",
 		"load",
 		"memory",
 		"battery",
 		"temperature",
 		"clock#peru",
 		"clock#germany",
+		//"clock#australia",
 		"clock#utc",
 		"tray",
 		"clock#local"
@@ -61,6 +63,10 @@
 		"timezone": "Europe/Berlin",
 		"format": "DE {:%H:%M}"
 	},
+	"clock#australia": {
+		"timezone": "Australia/Sydney",
+		"format": "AU {:%H:%M}"
+	},
 	"clock#utc": {
 		"timezone": "UTC",
 		"format": "UTC {:%H:%M}"
@@ -69,7 +75,7 @@
 		"spacing": 10
 	},
 	"clock#local": {
-		"format": "{:%a, %d %b  %H:%M}",
+		"format": "{:%F %H:%M}",
 		"tooltip-format": "<tt><small>{calendar}</small></tt>",
 		"calendar": {
 			"mode"          : "month",
@@ -89,5 +95,12 @@
 			"on-scroll-up": "shift_up",
 			"on-scroll-down": "shift_down"
 		}
+	},
+	"custom/vpn": {
+		"interval": 3,
+		"format": "{}",
+		//"exec": "ip add show | grep -qF yelnah && echo 🔒",
+		"exec": "ip add show | grep -qF POINTOPOINT && echo 🔒",
+		"max-length": "100"
 	}
 }
