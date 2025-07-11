@@ -136,12 +136,15 @@ cmd_git() {
 }
 
 cmd_add() {
+	while getopts ":f" opt; do
+		case $opt in
+			f) FORCE=true ;;
+		esac
+	done
+	shift $((OPTIND - 1))
 	file=$1; shift
-	if [ "$file" = "." ] || [ "$file" = ".." ]; then
-		return
-	fi
-	if [ -z "$2" ]; then
-		printf 'Missing file %s\n' "$file"
+	if [ -z "$file" ] || [ "$file" = "." ] || [ "$file" = ".." ]; then
+		printf 'Invalid file %s\n' "$file"
 		return 1
 	fi
 	relative=${file#${DOTFILES}/}
@@ -155,8 +158,8 @@ cmd_add() {
 		return 1
 	fi
 	# Dotfile exists
-	if [ -f "$src" ]; then
-		printf '%s is already managed\n' "$dest"
+	if [ -z "$FORCE" ] && [ -f "$src" ]; then
+		printf '%s is already managed. Add -f to force\n' "$dest"
 		return 1
 	fi
 	# De-reference home version
