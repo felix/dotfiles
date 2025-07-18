@@ -110,5 +110,4 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "
 " For mail, jump past headers and insert
 autocmd BufRead *mutt-* execute "normal /^$/\n"
 autocmd BufRead *mutt-* execute ":startinsert"
-autocmd BufWritePre *.go execute ":call GoImports()"
-autocmd BufWritePre *.go execute ":call GoFmt()"
+"autocmd BufWritePre *.go execute ":call GoImports()" | execute ":call GoFmt()"
