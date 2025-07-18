@@ -4,10 +4,21 @@
 
 # Author: Felix Hanley <felix@userspace.com.au>
 
+set -u
+
+M3U="${1:-"$HOME/Music/playlists/Favourites.m3u"}"
+INBASE="${INBASE:-"$HOME/Music"}"
+OUTBASE=$(realpath "${2:-"./"}")
+QUALITY=${QUALITY:-7}
+FORCE=
+DRYRUN=
+VERBOSE=
+TYPE="${TYPE:-ogg}"
+
 dirname=$(command -v dirname)
-[ -z "$dirname" ] && echo "Missing dirname, cannot continue." && exit 1
+[ -z "$dirname" ] && printf "Missing dirname, cannot continue." && exit 1
 readlink=$(command -v readlink)
-[ -z "$readlink" ] && echo "Missing readlink, cannot continue." && exit 1
+[ -z "$readlink" ] && printf "Missing readlink, cannot continue." && exit 1
 realpath=$(command -v realpath)
 if [ -z "$realpath" ]; then
 	# Provide a realpath implementation
@@ -16,13 +27,13 @@ if [ -z "$realpath" ]; then
 	}
 fi
 flac=$(command -v flac)
-[ -z "$flac" ] && echo "Missing flac, cannot continue."
+[ -z "$flac" ] && printf "Missing flac, cannot continue."
 oggenc=$(command -v oggenc)
-[ -z "$oggenc" ] && echo "Missing oggenc, cannot continue."
+[ -z "$oggenc" ] && printf "Missing oggenc, cannot continue."
 lame=$(command -v lame)
-[ -z "$lame" ] && echo "Missing lame, cannot continue."
+[ -z "$lame" ] && printf "Missing lame, cannot continue."
 ffmpeg=$(command -v ffmpeg)
-[ -z "$ffmpeg" ] && echo "Missing ffmpeg, cannot continue."
+[ -z "$ffmpeg" ] && printf "Missing ffmpeg, cannot continue."
 
 usage() {
 	printf 'Export files in an M3U playlist\n'
@@ -32,7 +43,6 @@ usage() {
 	printf '\t-q\tQuality (0-10)\n'
 	printf '\t-f\tForce overwriting existing files\n'
 	printf '\t-r\trelative base path\n'
-	printf '\t-l\tCreate symlink instead of copying\n'
 	printf '\t-t\tOutput type ogg (default), mp3, flac\n'
 	printf '\t-n\tDry run\n'
 	printf '\t-h\tThis help\n'
@@ -66,115 +76,87 @@ canonicalize_path() {
 }
 
 flac2ogg() {
-	src=$1; shift
-	dst=$1; shift
-	cmd="$oggenc --quiet --utf8 -q $QUALITY -o $dst $src"
-	[ -n "$VERBOSE" ] && echo "Running $cmd"
-	[ -z "$DRYRUN" ] && $cmd
+	rm -f "$2.partial"
+	# prevent ffmpeg from readin stdin
+	< /dev/null $ffmpeg -i "$1" -c:a libvorbis -q:a "$QUALITY" -loglevel quiet -f ogg "$2.partial"
+	# $oggenc --quiet --utf8 -q "$QUALITY" -o "$2.partial" "$1"
+	[ -f "$2.partial" ] && mv -f "$2.partial" "$2"
 }
-
+flac2flac() {
+	cp -f "$1" "$2"
+}
 m4a2ogg() {
-	src=$1; shift
-	dst=$1; shift
-	cmd="$ffmpeg -i $src -c:a libvorbis -q:a $QUALITY -loglevel -8 $dst"
-	[ -n "$VERBOSE" ] && echo "Running $cmd"
-	[ -z "$DRYRUN" ] && $cmd
+	$ffmpeg -i "$1" -c:a libvorbis -q:a "$QUALITY" -loglevel quiet "$2.partial" \
+		&& mv -f "$2.partial" "$2"
+	}
+ogg2ogg() {
+	cp -f "$1" "$2"
 }
-
-copy() {
-	src=$1; shift
-	dst=$1; shift
-	if [ -n "$LINK" ]; then
-		[ -n "$VERBOSE" ] && echo "Copying $src"
-		create_link "$src" "$dst"
-	else
-		[ -n "$VERBOSE" ] && echo "Linking $src"
-		[ -z "$DRYRUN" ] && cp "$src" "$dst"
-	fi
-}
-
 mp32ogg() {
-	src=$1; shift
-	dst=$1; shift
 	# TODO
+	cp -f "$1" "$2"
 }
 
 ensure_path() {
-	path=$1
-	directory=$($dirname -- "$path")
-	if [ ! -d "$directory" ]; then
-		[ -n "$VERBOSE" ] && printf "Creating path %s\n" "$directory"
-		[ -z "$DRYRUN" ] && mkdir -p "$directory" > /dev/null
-	fi
+	mkdir -p "$($dirname -- "$1")" > /dev/null
 }
 
-create_link() {
-	src=$1; shift;
-	dst=$1; shift;
-
-	if [ -h "$src" ]; then
-		# The dotfile itself is a link, copy it
-		src="$HOME/$($readlink -n "$src")"
-	fi
-	# Symbolic link command
-	linkcmd="ln -s"
-	if [ -n "$FORCE" ]; then
-		linkcmd="$linkcmd -f"
-	fi
-	[ -z "$DRYRUN" ] && $linkcmd "$src" "$dst"
+normalise_filename() {
+	outfile="$(printf '%s' "$1" |iconv -f utf-8 -t ascii//translit |tr --squeeze-repeats ':&?*<>|; " ' '_')"
+	printf '%s' "$outfile"
 }
 
 scan() {
 	count=0
-	#intype infile outfile
-	total=$(wc -l <"$M3U")
+	while IFS= read -r inFileName; do
 
-	while IFS= read -r infile; do
-		count=$((count+1))
-		if [ -n "$VERBOSE" ]; then
-			echo "File $count: $infile"
-		else
-			printf "\r%d/%d" "$count" "$total"
-		fi
+		intype=${inFileName##*.}
 
-		intype=${infile##*.}
-
-		infile="$INBASE/$infile"
+		infile="$INBASE/$inFileName"
 		outfile="${infile%.*}.$TYPE"
-		outfile=$OUTBASE/${outfile#${INBASE}/}
-		outfile="$(printf '%s' "$outfile" |tr ':?' '_')"
+		outfile=$OUTBASE/${outfile#"${INBASE}"/}
+		outfile="$(normalise_filename "$outfile")"
+
+		count=$((count+1))
+		action="SKIPPING"
 
 		if [ ! -f "$infile" ]; then
-			[ -n "$VERBOSE" ] && echo "Missing: $infile"
-			continue
-		fi
-
-		# Copy cover image
-		incover="$($dirname -- "$infile")/cover.jpg"
-		if [ -e "$incover" ]; then
-			outcover="$($dirname -- "$outfile")/cover.jpg"
-			ensure_path "$outcover"
-			copy "$incover" "$outcover"
-		fi
-
-		if [ -z "$FORCE" ]; then
-			if [ -f "$outfile" ]; then
-				[ -n "$VERBOSE" ] && echo "Exists: $outfile"
-				continue
+			# No source file, nothing to do
+			action="MISSING"
+		else
+			if [ ! -f "$outfile" ]; then
+				# No output
+				action="WRITING"
+			else
+				if find "$infile" -prune -newer "$outfile" | grep -q '^'; then
+					#if [ "$infile" -nt "$outfile" ]; then
+					# Output is old
+					action="WRITING"
+				fi
+			fi
+			if [ -n "$FORCE" ]; then
+				action="WRITING"
 			fi
 		fi
 
-		if [ ! -f "$outfile" ] || [ -z "$FORCE" ] || [ "$infile" -nt "$outfile" ]; then
-			ensure_path "$outfile"
-			if [ "$intype" = "$TYPE" ]; then
-				copy "$infile" "$outfile"
-			else
+		printf "[%s] %s" "$action" "$inFileName"
+
+		if [ "$action" = "WRITING" ]; then
+			if [ -z "$DRYRUN" ]; then
+				ensure_path "$outfile"
 				"${intype}2${TYPE}" "$infile" "$outfile"
 			fi
+			#touch -r "$infile" "$outfile"
 		fi
-		touch -r "$infile" "$outfile"
+
+		if [ "$action" != "SKIPPING" ] || [ -n "$VERBOSE" ]; then
+			printf '\n'
+		else
+			printf '\33[2K\r'
+		fi
+
 	done < "$M3U"
-	printf '\rProcessed %s lines\n' "$count"
+	printf '\33[2K\rProcessed %s files\n' "$count"
 }
 
 main() {
@@ -185,8 +167,6 @@ main() {
 			n) DRYRUN=true
 				;;
 			v) VERBOSE=true
-				;;
-			l) LINK=true
 				;;
 			q) QUALITY=$OPTARG
 				;;
@@ -199,22 +179,16 @@ main() {
 		esac
 	done
 
-    # Shift the rest
-    shift $((OPTIND - 1))
+	# Shift the rest
+	shift $((OPTIND - 1))
 
-    M3U=$1; shift
-    INBASE="${INBASE:-"/"}"
-    OUTBASE=$(realpath "${1:-"./"}")
-    QUALITY=${QUALITY:-7}
-    TYPE=${TYPE:-ogg}
+	if [ ! -f "$M3U" ]; then
+		printf 'Missing M3U file\n'
+		usage
+	fi
 
-    if [ -z "$M3U" ]; then
-	    echo "Missing M3U file"
-	    usage
-	    exit 1
-    fi
-
-    scan
+	scan
+	find "$OUTBASE" -name '*.partial' -delete
 }
 
 main "$@"
