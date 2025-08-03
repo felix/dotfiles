@@ -138,7 +138,7 @@ bindsym $mod+r mode "resize"
 force_display_urgency_hint 1000 ms
 
 # Terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec foot
 
 # Volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
