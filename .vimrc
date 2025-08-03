@@ -37,6 +37,12 @@ if has('persistent_undo')
 	set undofile
 endif
 
+if executable("rg")
+	set grepprg=rg\ --vimgrep\ --smart-case\ --no-heading\ -g!vendor
+	set grepformat=%f:%l:%c:%m
+	set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
 " Common typos
 cnoreabbrev W  w
 cnoreabbrev Wq wq
@@ -103,7 +109,7 @@ autocmd BufRead,BufNewFile *.tmpl setlocal ft=gohtmltmpl
 autocmd BufRead,BufNewFile *mutt-* setlocal ft=mail.markdown
 autocmd BufRead,BufNewFile *.ddd setlocal ft=json
 autocmd Filetype mail setlocal nohlsearch spell nobackup noswapfile nowritebackup noautoindent
-autocmd Filetype markdown setlocal spell formatoptions=aw
+autocmd Filetype markdown setlocal spell formatoptions=awn
 
 " Restore file position
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
