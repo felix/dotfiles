@@ -15,17 +15,33 @@ vim.lsp.config('gopls', {
 })
 vim.lsp.enable('gopls')
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  desc = 'Enable inlay hints',
-  callback = function(event)
-    local id = vim.tbl_get(event, 'data', 'client_id')
-    local client = id and vim.lsp.get_client_by_id(id)
-    if client == nil or not client.supports_method('textDocument/inlayHint') then
-      return
-    end
+vim.lsp.config('zls', {
+	filetypes = { 'zig' },
+	cmd = { 'zls' },
+})
+vim.lsp.enable('zls')
 
-    vim.lsp.inlay_hint.enable(true, {bufnr = event.buf})
-  end,
+vim.lsp.config('terraform-ls', {
+	filetypes = { 'terraform' },
+	cmd = { 'terraform-ls serve' },
+})
+vim.lsp.enable('terraform-ls')
+
+vim.api.nvim_create_autocmd('LspAttach', {
+	desc = 'Configure Lsp',
+	callback = function(event)
+		local id = vim.tbl_get(event, 'data', 'client_id')
+		local client = id and vim.lsp.get_client_by_id(id)
+		if client == nil then
+			return
+		end
+		if client.supports_method('textDocument/inlayHint') then
+			vim.lsp.inlay_hint.enable(true, {bufnr = event.buf})
+		end
+		if client.supports_method('textDocument/completion') then
+			vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+		end
+	end,
 })
 
 -- Neovim keybindings by default:

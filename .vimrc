@@ -105,7 +105,7 @@ nnoremap <Leader>l :make lint \| cwindow<CR>
 " Grep current word
 nnoremap <Leader>r :grep <cword> \| cwindow<CR>
 
-autocmd BufRead,BufNewFile *.tmpl setlocal ft=gohtmltmpl
+autocmd BufRead,BufNewFile *.tmpl setlocal ft=html.gohtmltmpl
 autocmd BufRead,BufNewFile *mutt-* setlocal ft=mail.markdown
 autocmd BufRead,BufNewFile *.ddd setlocal ft=json
 autocmd Filetype mail setlocal nohlsearch spell nobackup noswapfile nowritebackup noautoindent
