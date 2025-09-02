@@ -22,11 +22,12 @@ vim.lsp.config('zls', {
 })
 vim.lsp.enable('zls')
 
-vim.lsp.config('terraform-ls', {
-	filetypes = { 'terraform' },
-	cmd = { 'terraform-ls serve' },
+vim.lsp.config('terraform', {
+	filetypes = { 'terraform', 'terraform-vars' },
+	cmd = { 'terraform-ls', 'serve' },
+	root_markers = { '.terraform' }
 })
-vim.lsp.enable('terraform-ls')
+vim.lsp.enable('terraform')
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	desc = 'Configure Lsp',
@@ -42,6 +43,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		if client.supports_method('textDocument/completion') then
 			vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
 		end
+	end,
+})
+
+vim.api.nvim_create_autocmd({"BufWritePre"}, {
+	pattern = {"*.tf", "*.tfvars"},
+	callback = function()
+		vim.lsp.buf.format()
 	end,
 })
 
