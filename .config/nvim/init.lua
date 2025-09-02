@@ -7,6 +7,7 @@ vim.diagnostic.config({
 	-- Show diagnostic text inline
 	virtual_text = true,
 })
+vim.opt.completeopt = { "menuone", "noselect", "popup" }
 
 vim.lsp.config('gopls', {
 	filetypes = { 'go' },
